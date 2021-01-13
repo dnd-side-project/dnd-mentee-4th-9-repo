@@ -23,14 +23,11 @@ jobs:
       - name: Display the path
         run: pwd && ls
 
-      - name: change directory # 디렉터리 이동
-        run: cd frontend
-
       - name: Install Dependencies    # 의존 파일 설치
-        run: cd frontend && npm install
+        run: cd frontend/ && npm install
 
       - name: Build                   # React Build
-        run: cd frontend && npm run build
+        run: cd frontend/ && npm run build
 
       - name: Deploy                  # S3에 배포하기
         env:

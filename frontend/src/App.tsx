@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import logo from './static/logo.svg';
+import logo from './logo.svg';
 
 const App = () => {
   return (

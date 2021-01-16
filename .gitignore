@@ -53,3 +53,8 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
+
+/backend/node_modules
+
+.env
+

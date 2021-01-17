@@ -6,13 +6,22 @@ const session = require("express-session");
 const path = require('path');
 const dotenv = require("dotenv");
 const passport = require("passport");
-
+const {sequelize} = require('./models');
+const passportConfig = require('./passport');
 
 dotenv.config();
-const app = express();
+sequelize.sync({force:false})
+.then(()=>{
+  console.log('데이터베이스 연결 성공');
+})
+.catch((err)=>{
+  console.error(err);
+});
+passportConfig();
 
-const indexRouter = require("./routes");
-const authRouter = require('./routes/auth');
+const app = express();
+const indexRouter = require("./routes/index.route");
+const authRouter = require('./routes/auth.route');
 
 app.use(morgan('dev'));
 app.use(express.json());
@@ -31,6 +40,8 @@ app.use(
     },
   })
 );
+app.use(passport.initialize());
+app.use(passport.session());
 
 app.use("/", indexRouter);
 app.use("/auth", authRouter);

@@ -1,0 +1,61 @@
+service: dnd-4th-9-seeat-image
+
+provider:
+  name: aws
+  stage: ${opt:stage, self:custom.defaultStage}
+  stackName: ${self:service}-${self:provider.stage}
+  imageBucket: ${self:service}-${self:provider.stage}-image-bucket
+
+custom:
+  custom.defaultStage: dev
+
+resources:
+  Description: "seeat image bucket stack"
+  Resources:
+    imageBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:provider.imageBucket}
+        AccessControl: Private
+        CorsConfiguration:
+          CorsRules:
+            - AllowedOrigins:
+                - '*'
+              AllowedHeaders:
+                - '*'
+              AllowedMethods:
+                - GET
+                - PUT
+                - POST
+                - DELETE
+                - HEAD
+              MaxAge: 3000
+        #크로스 오리진 정책 설정. 모든 아이피에서 접근  가능.
+    imageBucketAllowPublicPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket: ${self:provider.imageBucket}
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - "s3:DeleteObject"
+                - "s3:GetObject"
+                - "s3:ListBucket"
+                - "s3:PutObject"
+                #버킷에 객체를 삽입, 삭제, 리스트 가능한 권한 설정.
+              Resource:
+                - arn:aws:s3:::${self:provider.imageBucket}
+                - arn:aws:s3:::${self:provider.imageBucket}/*
+                #버킷내 모든 리소스를 누구나 접근 가능
+              Principal: "*" #모든 사용자가 접근 가능하도록 정의
+          
+
+Outputs:
+  imageBucket:
+    Value:
+      Ref: imageBucket
+
+#이미지 업로드 및 이미지를 내려받을 s3 resource 정의하고 배포하는 파일입니다.
+# sls deploy --region ap-northeast-2 --stage dev 명령어로 배포 가능하며, 자세한 내용은 추후 공유드리겠습니다.

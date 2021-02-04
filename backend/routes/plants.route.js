@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router()
 
-router.get('/curating',(req,res)=>{
+router.post('/curating',(req,res)=>{
     switch(req.body.plant){
         case '몬스테라':
             return res.json({

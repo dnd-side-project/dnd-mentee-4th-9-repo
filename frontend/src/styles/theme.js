@@ -1,7 +1,7 @@
 const colors = {
-  GREEN: '#2A845D',
-  LIGHT_GREEN: '#8CD29C',
-  SKY_BLUE: '#5CACC5',
+  green: '#2A845D',
+  lightGreen: '#8CD29C',
+  skyBlue: '#5CACC5',
 };
 
 const theme = {

@@ -9,13 +9,11 @@ const getListPlants = async (queryString) => {
                 include: Tag,
                 order : [['createdAt', 'DESC']]
             })
-            break;
         case "like":
             return await Plant.findAll({
                 include: Tag,
                 order: [['likes', 'DESC']]
             })
-            break;
         case "view":
             return await Plant.findAll({
                 include: Tag,
@@ -26,7 +24,6 @@ const getListPlants = async (queryString) => {
                 include: Tag,
                 order : [['createdAt', 'DESC']]
             })
-            break;
         //default action is same as recently order
     }
 }

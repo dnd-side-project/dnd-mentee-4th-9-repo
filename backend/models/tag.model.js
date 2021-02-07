@@ -19,7 +19,7 @@ module.exports = class Tag extends Sequelize.Model{
         });
     }
     static associate(db){
-        Tag.belongsToMany(models.Plant, {
+        Tag.belongsToMany(db.Plant, {
             through: 'PlantTags'
         });
     }

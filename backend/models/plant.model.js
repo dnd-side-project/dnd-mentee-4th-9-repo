@@ -68,7 +68,7 @@ module.exports = class Plant extends Sequelize.Model{
         });
     }
     static associate(db){
-        Plant.belongsToMany(models.Tag, {
+        Plant.belongsToMany(db.Tag, {
             through: 'PlantTags'
         });
         //N:M 관게를 PlantTags라는 Junction Table을 만들어 관리합니다.

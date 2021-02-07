@@ -42,11 +42,11 @@ module.exports = class Plant extends Sequelize.Model{
             },
             views : { //추후 조회수 기반 정렬을 위해 구현
                 type : Sequelize.INTEGER,
-                default: 0
+                defaultValue: 0
             },
             likes : { //추후 인기순 기반 정렬을 위해 구현
                 type: Sequelize.INTEGER,
-                default: 0
+                defaultValue: 0
             },
             imagePath:{ // 디테일 화면 메인 이미지
                 type: Sequelize.STRING(500),

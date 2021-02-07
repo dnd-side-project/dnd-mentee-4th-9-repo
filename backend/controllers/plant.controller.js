@@ -6,17 +6,22 @@ const getListPlants = async (queryString) => {
     switch (queryString) {
         case "recent":
             return await Plant.findAll({
-                include: Tag,
+                include : [{
+                    model: Tag,
+                    through: {
+                        attributes: [] // junction Table (PlantTags)로부터 쓸데없는 정보를 받지 않기 위한 옵션
+                    }
+                }],
                 order : [['createdAt', 'DESC']]
-            })
-        case "like":
-            return await Plant.findAll({
-                include: Tag,
-                order: [['likes', 'DESC']]
             })
         case "view":
             return await Plant.findAll({
-                include: Tag,
+                include : [{
+                    model: Tag,
+                    through: {
+                        attributes: []
+                    }
+                }],
                 order: [['views', 'DESC']]
             })
         default:
@@ -30,7 +35,12 @@ const getListPlants = async (queryString) => {
 
 const getDetailPlant = async (plantId) => {
     const response = await Plant.findByPk((plantId), {
-        include : Tag
+        include : [{
+            model: Tag,
+            through: {
+                attributes: []
+            }
+        }]
     });
     const views = response["views"];
     //조회수 업데이트

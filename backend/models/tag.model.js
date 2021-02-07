@@ -14,8 +14,8 @@ module.exports = class Tag extends Sequelize.Model{
             modelName: 'Tag',
             tableName: 'tags',
             paranoid:false,
-            charset:'utf8',
-            collate:'utf8_general_ci',
+            charset:'utf8mb4',
+            collate:'utf8mb4_general_ci',
         });
     }
     static associate(db){

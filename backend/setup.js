@@ -32,6 +32,18 @@ const reset = async () => {
         { name: "#열매" },
         { name : "#그늘에서" }
     ])
+    const monstra = await db.Plant.findOne({
+        where : {name : '몬스테라'}
+    });
+    const tag1 = await db.Tag.findOne({
+        where : {name : '💧💧💧'}
+    });
+    const tag2 = await db.Tag.findOne({
+        where : {name : '#그늘에서'}
+    });
+    await monstra.addTag(tag1);
+    await monstra.addTag(tag2);
+
     console.log("done");
 }
 

@@ -14,16 +14,6 @@ const getListPlants = async (queryString) => {
                 }],
                 order : [['createdAt', 'DESC']]
             })
-        case "like":
-            return await Plant.findAll({
-                include : [{
-                    model: Tag,
-                    through: {
-                        attributes: []
-                    }
-                }],
-                order: [['likes', 'DESC']]
-            })
         case "view":
             return await Plant.findAll({
                 include : [{

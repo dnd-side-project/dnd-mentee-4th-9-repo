@@ -1,5 +1,5 @@
 const express = require('express');
-const { getListPlants, getDetailPlant,quratingResult} = require('../controllers/plant.controller');
+const { getListPlants, getDetailPlant,quratingResult,keywordSearch} = require('../controllers/plant.controller');
 const router = express.Router()
 
 
@@ -19,6 +19,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/curating',quratingResult);
+router.post('/encyclopedia/keyword',keywordSearch);
 
 router.get('/:plantId', async (req, res) => {
     try {

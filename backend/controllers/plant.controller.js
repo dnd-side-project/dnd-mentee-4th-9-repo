@@ -1,8 +1,7 @@
 const path = require('path');
 const Plant = require('../models/plant.model');
 const Tag = require('../models/tag.model');
-const { route } = require('../routes/plants.route');
-
+const sequelize = require('sequelize');
 const getListPlants = async (queryString) => {
     switch (queryString) {
         case "recent":
@@ -10,7 +9,7 @@ const getListPlants = async (queryString) => {
                 include : [{
                     model: Tag,
                     through: {
-                        attributes: [] // junction Table (PlantTags)로부터 쓸데없는 정보를 받지 않기 위한 옵션
+                        attributes: [] 
                     }
                 }],
                 order : [['createdAt', 'DESC']]
@@ -30,7 +29,6 @@ const getListPlants = async (queryString) => {
                 include: Tag,
                 order : [['createdAt', 'DESC']]
             })
-        //default action is same as recently order
     }
 }
 
@@ -43,10 +41,8 @@ const getDetailPlant = async (plantId) => {
             }
         }]
     });
-    const views = response["views"];
-    //조회수 업데이트
     await Plant.update({
-        views: views + 1
+        views: sequelize.literal('views + 1')
     }, {
         where: { id : plantId }
     });
@@ -72,5 +68,29 @@ const quratingResult = async (req,res,next)=>{
     }
 }
 
+const keywordSearch = async(req,res,next)=>{
+    try{
+        const searchResult = await Plant.findOne({
+            attributes:['id','name','description','thumbnailPath'],
+            where:{name:req.body.keyword},
+            include:[{
+                model:Tag,
+                attributes:['id','name'],
+                through:{
+                    attributes:[]
+                }
+            }]
+        });
+        await Plant.update({
+            views:sequelize.literal('views + 1')
+        },{
+            where:{name:req.body.keyword}
+        })
+        res.json(searchResult);
+    }catch(error){
+        next(error);
+    }
+}
 
-module.exports = { getListPlants , getDetailPlant, quratingResult};
+
+module.exports = { getListPlants , getDetailPlant, quratingResult,keywordSearch};

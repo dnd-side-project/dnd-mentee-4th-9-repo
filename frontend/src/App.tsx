@@ -1,5 +1,6 @@
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Home from './views/Home';
+import TestStart from './views/TestStart';
 import Test from './views/Test';
 import TestResult from './views/TestResult';
 import Subscription from './views/Subscription';
@@ -14,6 +15,7 @@ const App = () => {
       <Nav />
       <Switch>
         <Route exact path={'/'} component={Home} />
+        <Route exact path={'/test-start'} component={TestStart} />
         <Route exact path={'/test'} component={Test} />
         <Route exact path={'/test/result/:id'} component={TestResult} />
         <Route exact path={'/plants'} component={Plants} />

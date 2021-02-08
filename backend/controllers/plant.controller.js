@@ -1,6 +1,7 @@
 const path = require('path');
 const Plant = require('../models/plant.model');
 const Tag = require('../models/tag.model');
+const { route } = require('../routes/plants.route');
 
 const getListPlants = async (queryString) => {
     switch (queryString) {
@@ -52,5 +53,24 @@ const getDetailPlant = async (plantId) => {
     return response;
 }
 
+const quratingResult = async (req,res,next)=>{
+    try{
+        const resultPlant = await Plant.findOne({
+            attributes:['id','name','description','ment','imagePath'],
+            where:{name:req.body.plant},
+            include:[{
+                model:Tag,
+                attributes:['id','name'],
+                through:{
+                    attributes:[]
+                }
+            }]
+        });
+        res.json(resultPlant);
+    }catch(error){
+        next(error);
+    }
+}
 
-module.exports = { getListPlants , getDetailPlant };
+
+module.exports = { getListPlants , getDetailPlant, quratingResult};

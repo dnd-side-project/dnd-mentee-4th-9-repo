@@ -17,7 +17,7 @@ const width = {
 };
 
 const size = {
-  sm: 360,
+  sm: 500,
   md: width.content - 1 + width.padding * 2,
 };
 

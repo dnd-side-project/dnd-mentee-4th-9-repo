@@ -1,10 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import Item from './Item';
+import {TEST_RESULT} from './Footer';
 
-function Corp() {
+/*
+path: string
+*/
+function Corp({path}) {
   return (
-    <Wrapper>
+    <Wrapper path={path}>
       <Item title="See-at">
         <p>© 2021. SeeAt Corp. all right reserved.</p>
       </Item>
@@ -24,7 +28,7 @@ const Wrapper = styled.li`
   }
 
   @media ${({theme}) => theme.devices.md} {
-    margin-top: 38px;
+    margin-top: ${({path}) => (path.includes(TEST_RESULT) ? 0 : 38)}px;
     .item-title {
       margin-bottom: 6px !important;
     }

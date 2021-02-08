@@ -1,14 +1,21 @@
 import React from 'react';
-import styled from 'styled-components';
+import {withRouter} from 'react-router-dom';
+import styled, {css} from 'styled-components';
 import Contact from './Contact';
 import Corp from './Corp';
 
-function Footer() {
+export const TEST_RESULT = 'result';
+
+/*
+location: object
+*/
+function Footer({location}) {
+  const {pathname} = location;
   return (
-    <Wrapper>
+    <Wrapper path={pathname}>
       <Items>
-        <Contact />
-        <Corp />
+        <Contact path={pathname} />
+        <Corp path={pathname} />
       </Items>
     </Wrapper>
   );
@@ -25,9 +32,22 @@ const Wrapper = styled.footer`
 
   background-color: #f2f2f2;
 
-  @media ${({theme}) => theme.devices.md} {
-    height: 431px;
-  }
+  ${({path}) => {
+    if (path.includes(TEST_RESULT)) {
+      return css`
+        height: 200px;
+        @media ${({theme}) => theme.devices.md} {
+          height: 100px;
+        }
+      `;
+    } else {
+      return css`
+        @media ${({theme}) => theme.devices.md} {
+          height: 431px;
+        }
+      `;
+    }
+  }}
 `;
 
 const Items = styled.ul`
@@ -41,4 +61,4 @@ const Items = styled.ul`
   }
 `;
 
-export default Footer;
+export default withRouter(Footer);

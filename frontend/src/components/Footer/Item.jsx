@@ -1,6 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
 
+/*
+title: string
+*/
 function Item({title = '', children}) {
   return (
     <Wrapper>

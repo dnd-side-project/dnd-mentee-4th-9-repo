@@ -1,11 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
 import Item from './Item';
+import {TEST_RESULT} from './Footer';
 
-function Contact() {
+/*
+path: string
+*/
+function Contact({path}) {
   return (
     <>
-      <Wrapper>
+      <Wrapper path={path}>
         <Item title="Contact">
           <p>
             02-999-9999
@@ -16,13 +20,14 @@ function Contact() {
           </p>
         </Item>
       </Wrapper>
-      <WrapperInfo>
+      <WrapperInfo path={path}>
         <Item>
           <p>
             대표이사 : 김구조
             <br />
             서울특별시 강남구 씨앗로 씨앗타워 9F 90
-            <br />사업자 등록번호 : 999-999-9999
+            <br />
+            사업자 등록번호 : 999-999-9999
           </p>
         </Item>
       </WrapperInfo>
@@ -31,6 +36,8 @@ function Contact() {
 }
 
 const Wrapper = styled.li`
+  display: ${({path}) => (path.includes(TEST_RESULT) ? 'none' : 'block')};
+
   .item-title {
     font-size: 16px;
     font-weight: ${({theme}) => theme.fontWeights.bold};

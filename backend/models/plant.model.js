@@ -42,7 +42,7 @@ module.exports = class Plant extends Sequelize.Model{
             },
             views : { //추후 인기순 기반 정렬을 위해 구현
                 type : Sequelize.INTEGER,
-                default: 0
+                defaultValue: 0
             },
             imagePath:{ // 디테일 화면 메인 이미지
                 type: Sequelize.STRING(500),
@@ -59,12 +59,12 @@ module.exports = class Plant extends Sequelize.Model{
             modelName: 'Plant',
             tableName: 'plants',
             paranoid:false,
-            charset:'utf8',
-            collate:'utf8_general_ci',
+            charset:'utf8mb4',
+            collate:'utf8mb4_general_ci',
         });
     }
     static associate(db){
-        Plant.belongsToMany(models.Tag, {
+        Plant.belongsToMany(db.Tag, {
             through: 'PlantTags'
         });
         //N:M 관게를 PlantTags라는 Junction Table을 만들어 관리합니다.

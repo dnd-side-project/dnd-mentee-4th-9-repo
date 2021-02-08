@@ -3,36 +3,10 @@ const { getListPlants, getDetailPlant,quratingResult} = require('../controllers/
 const router = express.Router()
 
 
-router.get('/', async (req, res) => {
-    try {
-        const result = await getListPlants(req.query.order); //쿼리스트링. /plants?order=recent
-        res.json({
-            success: true,
-            message : result
-        });
-    } catch (err) {
-        res.json({
-            success: false,
-            message: err
-        });
-    }
-});
+router.get('/', getListPlants) //쿼리스트링. /plants?order=recent});
 
 router.post('/curating',quratingResult);
 
-router.get('/:plantId', async (req, res) => {
-    try {
-        const result = await getDetailPlant(req.params.plantId);
-        res.json({
-            success: true,
-            message : result
-        })
-    } catch (err) {
-        res.json({
-            success: false,
-            message: err
-        })
-    }
-})
+router.get('/:plantId', getDetailPlant) //for detail
 
 module.exports = router;

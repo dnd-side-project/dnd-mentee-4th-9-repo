@@ -11,6 +11,12 @@ const GlobalStyle = createGlobalStyle`
   h2, h3, p {
     font-family: 'Noto Sans KR', sans-serif;
   }
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
   
   button {
     cursor: pointer;

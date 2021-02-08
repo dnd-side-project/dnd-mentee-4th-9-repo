@@ -29,6 +29,7 @@ const devices = {
 const theme = {
   colors,
   fontWeights,
+  width,
   size,
   devices,
 };

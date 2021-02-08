@@ -13,26 +13,26 @@ services:
       context: .
     container_name: express1
     expose:
-      - "3000" #첫번쨰 노드 서버는 3000번
+      - "4000"
     restart: "unless-stopped"
   express_2:
     build:
       context: .
     container_name: express2
     expose:
-      - "3000"
+      - "4000"
     restart: "unless-stopped"
   express_3:
     build:
       context: .
     container_name: express3
     expose:
-      - "3000"
+      - "4000"
     restart: "unless-stopped"
   express_4:
     build:
       context: .
     container_name: express4
     expose:
-      - "3000"
+      - "4000"
     restart: "unless-stopped"

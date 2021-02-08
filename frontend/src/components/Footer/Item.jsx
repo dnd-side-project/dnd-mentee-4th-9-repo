@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+const LOGO = 'See-at';
+
 /*
 title: string
 */
@@ -8,6 +10,11 @@ function Item({title = '', children}) {
   return (
     <Wrapper>
       <div className="item-title">
+        {title === LOGO && (
+          <span className="logo">
+            <img src="/images/logo_footer.png" alt="See-at logo" />
+          </span>
+        )}
         <h3>{title}</h3>
       </div>
       <div>{children}</div>
@@ -30,6 +37,12 @@ const Wrapper = styled.div`
   .item-title {
     margin-bottom: 16px;
     height: 21px;
+    display: flex;
+
+    .logo {
+      margin-right: 6px;
+      width: 21px;
+    }
 
     @media ${({theme}) => theme.devices.md} {
       margin-bottom: 18px;

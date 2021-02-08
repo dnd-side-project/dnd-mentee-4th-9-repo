@@ -8,7 +8,7 @@ const searchTag = async (req, res, next) => {
         const result = await Tag.findAll({
             where: {
                 name: {
-                    [Op.like]: '%' + req.query.keyword + '%'
+                    [Op.like]: `%${req.query.keyword ? req.query.keyword : ''}%` //키워드 인자를 주지 않을경우 전체 검색
                 }
             },
             include: [{

@@ -24,6 +24,10 @@ const Wrapper = styled.footer`
   align-items: center;
 
   background-color: #f2f2f2;
+
+  @media ${({theme}) => theme.devices.md} {
+    height: 431px;
+  }
 `;
 
 const Items = styled.ul`
@@ -31,6 +35,10 @@ const Items = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+
+  @media ${({theme}) => theme.devices.md} {
+    flex-direction: column;
+  }
 `;
 
 export default Footer;

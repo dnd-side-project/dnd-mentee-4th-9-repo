@@ -12,7 +12,7 @@ function Item({title = '', children}) {
   );
 }
 
-const Wrapper = styled.ul`
+const Wrapper = styled.div`
   h3,
   p {
     margin: 0;
@@ -27,6 +27,10 @@ const Wrapper = styled.ul`
   .item-title {
     margin-bottom: 16px;
     height: 21px;
+
+    @media ${({theme}) => theme.devices.md} {
+      margin-bottom: 18px;
+    }
   }
 `;
 

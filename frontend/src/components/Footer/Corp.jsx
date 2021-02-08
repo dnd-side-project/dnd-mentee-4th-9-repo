@@ -22,6 +22,13 @@ const Wrapper = styled.li`
   p {
     font-size: 12px;
   }
+
+  @media ${({theme}) => theme.devices.md} {
+    margin-top: 38px;
+    .item-title {
+      margin-bottom: 6px !important;
+    }
+  }
 `;
 
 export default Corp;

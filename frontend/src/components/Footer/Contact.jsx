@@ -16,17 +16,16 @@ function Contact() {
           </p>
         </Item>
       </Wrapper>
-      <Wrapper>
+      <WrapperInfo>
         <Item>
           <p>
             대표이사 : 김구조
             <br />
             서울특별시 강남구 씨앗로 씨앗타워 9F 90
-            <br />
-            사업자 등록번호 : 999-999-9999
+            <br />사업자 등록번호 : 999-999-9999
           </p>
         </Item>
-      </Wrapper>
+      </WrapperInfo>
     </>
   );
 }
@@ -44,6 +43,14 @@ const Wrapper = styled.li`
   p {
     font-size: 14px;
     line-height: 21px;
+  }
+`;
+
+const WrapperInfo = styled(Wrapper)`
+  @media ${({theme}) => theme.devices.md} {
+    .item-title {
+      height: 0;
+    }
   }
 `;
 

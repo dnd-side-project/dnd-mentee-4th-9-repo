@@ -1,7 +1,8 @@
 import React from 'react';
+import TestMain from '../components/TestMain';
 
 function TestStart() {
-  return <div>테스트 시작 페이지</div>;
+  return <TestMain />;
 }
 
 export default TestStart;

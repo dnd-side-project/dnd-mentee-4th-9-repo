@@ -1,37 +1,45 @@
 import React from 'react';
 import styled from 'styled-components';
-import Item from './Item';
-import {TEST_RESULT} from './Footer';
+import FooterItem from '../../styles/FooterItem';
 
-/*
-path: string
-*/
-function Corp({path}) {
+function Corp() {
   return (
-    <Wrapper path={path}>
-      <Item title="See-at">
-        <p>© 2021. SeeAt Corp. all right reserved.</p>
-      </Item>
+    <Wrapper marginRight={100}>
+      <LogoWrapper className="item-corp">
+        <span className="logo">
+          <img src="/images/logo_footer.png" alt="See-at logo" />
+        </span>
+        <h3>See-at</h3>
+      </LogoWrapper>
+      <p>© 2021. SeeAt Corp. all right reserved.</p>
     </Wrapper>
   );
 }
 
-const Wrapper = styled.li`
+const Wrapper = styled(FooterItem)`
+  p {
+    font-size: 12px;
+  }
+`;
+
+const LogoWrapper = styled.div`
+  margin-bottom: 16px;
+  height: 21px;
+  display: flex;
+
+  span {
+    margin-right: 6px;
+    width: 21px;
+  }
+
   h3 {
     font-family: 'Fredoka One', cursive;
     font-size: 21px;
     color: ${({theme}) => theme.colors.lightGreen} !important;
   }
 
-  p {
-    font-size: 12px;
-  }
-
-  @media ${({theme}) => theme.devices.md} {
-    margin-top: ${({path}) => (path.includes(TEST_RESULT) ? 0 : 38)}px;
-    .item-title {
-      margin-bottom: 6px !important;
-    }
+  @media ${({theme}) => theme.devices.footer} {
+    margin-bottom: 6px !important;
   }
 `;
 

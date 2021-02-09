@@ -18,6 +18,7 @@ const width = {
   sm: 400,
   lg: 1230,
   md: 640,
+  footer: 920,
   padding: 20,
 };
 
@@ -25,11 +26,14 @@ const size = {
   sm: getScreenSize(width.sm, width.padding),
   md: getScreenSize(width.md, width.padding),
   lg: getScreenSize(width.lg, width.padding),
+  footer: getScreenSize(width.footer, width.padding),
 };
 
 const devices = {
   sm: `(max-width: ${size.sm}px)`,
   md: `(max-width: ${size.md}px)`,
+  lg: `(max-width: ${size.lg}px)`,
+  footer: `(max-width: ${size.footer}px)`,
 };
 
 const theme = {

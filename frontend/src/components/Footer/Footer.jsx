@@ -1,10 +1,9 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
 import styled from 'styled-components';
+
 import Contact from './Contact';
 import Corp from './Corp';
-
-export const TEST_RESULT = 'result';
 
 /*
 location: object
@@ -14,7 +13,7 @@ function Footer({location}) {
   return (
     <Wrapper>
       <Items path={pathname}>
-        <Corp path={pathname} />
+        <Corp />
         <Contact path={pathname} />
       </Items>
     </Wrapper>
@@ -32,13 +31,19 @@ const Wrapper = styled.footer`
 
 const Items = styled.ul`
   margin: 100px 0;
-  width: min(${({theme: {width}, path}) => (path.includes(TEST_RESULT) ? width.md : width.lg)}px, 100%);
+  width: min(${({theme: {width}, path}) => (path.includes('result') ? width.md : width.lg)}px, 100%);
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 
-  @media ${({theme}) => theme.devices.md} {
-    margin: ${({path}) => (path.includes(TEST_RESULT) ? 35 : 70)}px 0;
+  h3,
+  p {
+    margin: 0;
+    opacity: 0.8;
+    color: rgba(0, 0, 0, 0.9);
+  }
+
+  @media ${({theme}) => theme.devices.footer} {
+    margin: ${({path}) => (path.includes('result') ? 35 : 70)}px 0;
     flex-direction: column;
   }
 `;

@@ -1,5 +1,6 @@
 const Plant = require('../models/plant.model');
 const Tag = require('../models/tag.model');
+const sequelize = require('sequelize');
 
 const getListPlants = async (req, res, next) => {
     if (req.query.order === "recent") {

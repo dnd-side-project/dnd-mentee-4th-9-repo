@@ -1,31 +1,56 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
-const FULL_SCREEN = 'full';
+export const [FULL_SCREEN, SECTION] = ['full', 'section'];
 
-function Section({width = 'lg', height = FULL_SCREEN, bgColor = 'white', children}) {
+/*
+type: string ("full", "section")
+margin: number
+width: string ("lg", "md", "sm")
+bgColor: string
+*/
+function Section({type, margin, width, bgColor, children}) {
   return (
-    <Container height={height} bgColor={bgColor}>
-      <Wrapper width={width}>{children}</Wrapper>
+    <Container type={type} bgColor={bgColor}>
+      <Wrapper type={type} margin={margin} width={width}>
+        {children}
+      </Wrapper>
     </Container>
   );
 }
 
+Section.defaultProps = {
+  type: SECTION,
+  margin: 200,
+  width: 'md',
+  bgColor: 'white',
+};
+
 export const Container = styled.section`
-  margin: ${({height}) => (height === FULL_SCREEN ? 0 : '0 200px')};
   width: 100%;
-  height: ${({height}) => (height === FULL_SCREEN ? '100vh' : 'initial')};
+  height: ${({type}) => (type === FULL_SCREEN ? '100vh' : 'initial')};
   padding: 0 ${({theme}) => theme.width.padding}px;
 
   display: flex;
   justify-content: center;
   align-items: center;
 
-  background-color: ${({bgColor}) => bgColor};
+  background-color: ${({theme, bgColor}) => theme.colors[bgColor]};
 `;
 
 const Wrapper = styled.div`
   width: min(${({theme, width}) => theme.width[width]}px, 100%);
+
+  ${({type, margin}) => {
+    if (type === SECTION) {
+      return css`
+        margin: ${margin}px 0;
+        @media ${({theme}) => theme.devices.md} {
+          margin: ${margin / 2}px 0;
+        }
+      `;
+    }
+  }}
 `;
 
 export default Section;

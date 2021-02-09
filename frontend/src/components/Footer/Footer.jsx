@@ -13,7 +13,7 @@ function Footer({location}) {
   return (
     <Wrapper>
       <Items path={pathname}>
-        <Corp />
+        <Corp path={pathname} />
         <Contact path={pathname} />
       </Items>
     </Wrapper>

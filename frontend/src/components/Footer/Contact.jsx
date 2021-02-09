@@ -8,10 +8,10 @@ path: string
 function Contact({path}) {
   return (
     <>
-      <Wrapper path={path} marginRight={100}>
+      <Wrapper path={path} marginRight={100} marginBottom={18}>
         <h3>Contact</h3>
       </Wrapper>
-      <Wrapper path={path} marginRight={62}>
+      <Wrapper path={path} marginRight={62} marginBottom={18}>
         <p>
           02-999-9999
           <br />
@@ -38,12 +38,21 @@ const Wrapper = styled(FooterItem)`
 
   h3 {
     font-size: 16px;
+    font-weight: ${({theme}) => theme.fontWeights.medium};
   }
 
   p {
     font-size: 14px;
     line-height: 21px;
   }
+
+  @media ${({theme}) => theme.devices.footer} {
+    margin-bottom: ${({marginBottom}) => marginBottom}px;
+  }
 `;
+
+Wrapper.defaultProps = {
+  marginBottom: 0,
+};
 
 export default Contact;

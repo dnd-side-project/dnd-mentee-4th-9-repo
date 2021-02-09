@@ -16,8 +16,8 @@ const fontWeights = {
 
 const width = {
   sm: 400,
-  lg: 1230,
   md: 640,
+  lg: 1230,
   footer: 920,
   padding: 20,
 };

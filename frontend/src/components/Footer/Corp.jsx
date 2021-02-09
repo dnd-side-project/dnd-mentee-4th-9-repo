@@ -2,9 +2,9 @@ import React from 'react';
 import styled from 'styled-components';
 import FooterItem from '../../styles/FooterItem';
 
-function Corp() {
+function Corp({path}) {
   return (
-    <Wrapper marginRight={100}>
+    <Wrapper marginRight={100} path={path}>
       <LogoWrapper className="item-corp">
         <span className="logo">
           <img src="/images/logo_footer.png" alt="See-at logo" />
@@ -19,6 +19,10 @@ function Corp() {
 const Wrapper = styled(FooterItem)`
   p {
     font-size: 12px;
+  }
+
+  @media ${({theme}) => theme.devices.footer} {
+    margin-bottom: ${({path}) => (!path.includes('result') ? 58 : 0)}px;
   }
 `;
 

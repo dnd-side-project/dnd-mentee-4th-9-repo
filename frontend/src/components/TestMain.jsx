@@ -1,4 +1,5 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../styles/Button';
 import {FULL_SCREEN, SECTION} from './Section';
@@ -15,6 +16,13 @@ type: string ("full", "section")
 */
 function TestMain({type = FULL_SCREEN}) {
   const [btnTextColor, mt, minWidth] = styles[type];
+  const history = useHistory();
+
+  const onClick = () => {
+    const pathname = type === FULL_SCREEN ? '/test' : 'test-start';
+    history.push(pathname);
+  };
+
   return (
     <Wrapper>
       <p>테스트로 알아보는 나의 반려식물 찾기</p>
@@ -22,7 +30,7 @@ function TestMain({type = FULL_SCREEN}) {
       <ImgWrapper type={type} mt={mt} min={minWidth}>
         <img src="/images/test_start.png" alt="test start" />
       </ImgWrapper>
-      <Button borderRadius={5} fontWeight="bold" color={btnTextColor}>
+      <Button onClick={onClick} borderRadius={5} fontWeight="bold" color={btnTextColor}>
         테스트 GO!
       </Button>
     </Wrapper>

@@ -20,8 +20,8 @@ fs
   })
   .forEach(file => {
       const model = require(path.join(__dirname, file));
-    db[model.name] = model;
-      db[model.name].init(sequelize);
+      db[model.name] = model;
+      model.init(sequelize);
   });
 
 Object.keys(db).forEach(modelName => {

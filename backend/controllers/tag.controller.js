@@ -24,4 +24,15 @@ const searchTag = async (req, res, next) => {
     }
 }
 
-module.exports = { searchTag }
+const getListTags = async(req, res, next) => {
+    try {
+        const result = await Tag.findAll({
+            attributes: ['name']
+        });
+        res.json(result);
+    } catch (error) {
+        next(error);
+    }
+}
+
+module.exports = { searchTag, getListTags }

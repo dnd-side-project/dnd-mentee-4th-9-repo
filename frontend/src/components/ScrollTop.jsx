@@ -12,7 +12,7 @@ function ScrollTop() {
 
   return (
     <Button onClick={onScrollTop}>
-      <img src="../images/top_button.png" alt="scroll top" />
+      <img src={`${process.env.PUBLIC_URL}/images/top_button.png`} alt="scroll top" />
     </Button>
   );
 }

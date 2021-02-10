@@ -21,7 +21,7 @@ function Section({type, margin, width, bgColor, children}) {
 
 Section.defaultProps = {
   type: SECTION,
-  margin: 200,
+  margin: 0,
   width: 'md',
   bgColor: 'white',
 };
@@ -42,7 +42,7 @@ const Wrapper = styled.div`
   width: min(${({theme, width}) => theme.width[width]}px, 100%);
 
   ${({type, margin}) => {
-    if (type === SECTION) {
+    if (type === SECTION && margin > 0) {
       return css`
         margin: ${margin}px 0;
         @media ${({theme}) => theme.devices.md} {

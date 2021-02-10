@@ -6,7 +6,7 @@ import TestMain from '../components/TestMain';
 function Home() {
   return (
     <>
-      <Section bgColor="green">
+      <Section bgColor="green" margin={200}>
         <TestMain type={SECTION} />
       </Section>
       <Footer />

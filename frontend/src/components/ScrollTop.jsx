@@ -3,8 +3,15 @@ import styled from 'styled-components';
 import {getVW} from '../lib/calculate';
 
 function ScrollTop() {
+  const onScrollTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+  };
+  
   return (
-    <Button>
+    <Button onClick={onScrollTop}>
       <img src="../images/top_button.png" alt="scroll top" />
     </Button>
   );

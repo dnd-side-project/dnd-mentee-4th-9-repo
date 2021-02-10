@@ -1,10 +1,9 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom';
-import styled, {css} from 'styled-components';
+import styled from 'styled-components';
+
 import Contact from './Contact';
 import Corp from './Corp';
-
-export const TEST_RESULT = 'result';
 
 /*
 location: object
@@ -12,10 +11,10 @@ location: object
 function Footer({location}) {
   const {pathname} = location;
   return (
-    <Wrapper path={pathname}>
-      <Items>
-        <Contact path={pathname} />
+    <Wrapper>
+      <Items path={pathname}>
         <Corp path={pathname} />
+        <Contact path={pathname} />
       </Items>
     </Wrapper>
   );
@@ -23,40 +22,28 @@ function Footer({location}) {
 
 const Wrapper = styled.footer`
   width: 100%;
-  height: 304px;
   padding: 0 20px;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   background-color: #f2f2f2;
-
-  ${({path}) => {
-    if (path.includes(TEST_RESULT)) {
-      return css`
-        height: 200px;
-        @media ${({theme}) => theme.devices.md} {
-          height: 100px;
-        }
-      `;
-    } else {
-      return css`
-        @media ${({theme}) => theme.devices.md} {
-          height: 431px;
-        }
-      `;
-    }
-  }}
 `;
 
 const Items = styled.ul`
-  width: min(${({theme}) => theme.width.content}px, 100%);
+  margin: 100px 0;
+  width: min(${({theme: {width}, path}) => (path.includes('result') ? width.md : width.lg)}px, 100%);
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
 
-  @media ${({theme}) => theme.devices.md} {
+  h3,
+  p {
+    margin: 0;
+    opacity: 0.8;
+    color: rgba(0, 0, 0, 0.9);
+  }
+
+  @media ${({theme}) => theme.devices.footer} {
+    margin: ${({path}) => (path.includes('result') ? 35 : 70)}px 0;
     flex-direction: column;
   }
 `;

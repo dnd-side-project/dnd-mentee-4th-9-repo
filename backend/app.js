@@ -27,7 +27,7 @@ const tagsRouter = require('./routes/tags.route');
 
 app.use(morgan('dev'));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname,'public')));
 app.use(cors({ origin: true, credentials: true }));
 app.use(cookieParser(process.env.SECRET_KEY));

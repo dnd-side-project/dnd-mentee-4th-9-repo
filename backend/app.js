@@ -23,6 +23,7 @@ const app = express();
 const indexRouter = require("./routes/index.route");
 const authRouter = require('./routes/auth.route');
 const plantsRouter = require('./routes/plants.route');
+const tagsRouter = require('./routes/tags.route');
 
 app.use(morgan('dev'));
 app.use(express.json());
@@ -47,5 +48,6 @@ app.use(passport.session());
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/plants",plantsRouter);
+app.use("/tags", tagsRouter);
 
 module.exports = app;

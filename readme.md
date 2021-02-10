@@ -1,5 +1,11 @@
 # 🌱 9조
 
+## 🛠 빌드 현황
+
+[![Build Status](http://3.34.87.77:8080/job/Deploying%20Backend%20-%20express%20REST%20API/badge/icon?subject=Backend%20Build)](http://sehwanzzang.com:8080/job/Deploying%20Backend%20-%20express%20REST%20API/)
+
+[![Build Status](http://3.34.87.77:8080/job/Deploying%20Front-end%20REACT%20APP/badge/icon?subject=Front%20Build)](http://sehwanzzang.com:8080/job/Deploying%20Front-end%20REACT%20APP/)
+
 ## 🤓 팀원 소개
 
 | Part     	| GitHub                                   	|

@@ -1,3 +1,5 @@
+import {getScreenSize} from '../lib/calculate';
+
 const colors = {
   white: 'white',
   green: '#2A845D',
@@ -12,13 +14,16 @@ const fontWeights = {
 };
 
 const width = {
-  content: 841,
+  sm: 400,
+  lg: 1230,
+  md: 640,
   padding: 20,
 };
 
 const size = {
-  sm: 500,
-  md: width.content - 1 + width.padding * 2,
+  sm: getScreenSize(width.sm, width.padding),
+  md: getScreenSize(width.md, width.padding),
+  lg: getScreenSize(width.lg, width.padding),
 };
 
 const devices = {

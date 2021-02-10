@@ -19,9 +19,9 @@ const Button = styled.button`
   color: ${({theme, color}) => theme.colors[color]};
 
   @media ${({theme}) => theme.devices.md} {
-    width: max(320px, ${getVW(640)});
-    height: max(50px, ${getVW(100)});
-    font-size: max(16px, ${({fontSize}) => getVW(fontSizes[fontSize])});
+    width: max(320px, ${({theme}) => getVW(640, theme.size.md)});
+    height: max(50px, ${({theme}) => getVW(100, theme.size.md)});
+    font-size: max(16px, ${({theme, fontSize}) => getVW(fontSizes[fontSize], theme.size.md)});
   }
 
   @media ${({theme}) => theme.devices.sm} {

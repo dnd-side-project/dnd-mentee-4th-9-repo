@@ -14,6 +14,10 @@ const fontWeights = {
   regular: 400,
 };
 
+const zIndex = {
+  top: 100,
+};
+
 const width = {
   sm: 400,
   md: 640,
@@ -39,6 +43,7 @@ const devices = {
 const theme = {
   colors,
   fontWeights,
+  zIndex,
   width,
   size,
   devices,

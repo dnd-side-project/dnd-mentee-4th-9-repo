@@ -133,5 +133,4 @@ const tagSearch = async(req,res,next)=>{
     }
 }
 
-
 module.exports = { getListPlants , getDetailPlant, quratingResult,keywordSearch,tagSearch};

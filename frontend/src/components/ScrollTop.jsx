@@ -9,7 +9,7 @@ function ScrollTop() {
       behavior: 'smooth',
     });
   };
-  
+
   return (
     <Button onClick={onScrollTop}>
       <img src="../images/top_button.png" alt="scroll top" />
@@ -21,6 +21,8 @@ const Button = styled.button`
   position: fixed;
   bottom: 100px;
   right: 100px;
+  z-index: ${({theme}) => theme.zIndex.top};
+
   padding: 0;
   background: none;
   border: none;

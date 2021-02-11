@@ -110,17 +110,10 @@ const MenuList = styled.li`
 `;
 
 const Menu = styled(Link)`
-  font-weight: 500;
+  font-weight: ${({$isCurrentMenu}) => ($isCurrentMenu ? 900 : 500)};
   font-size: 16px;
   line-height: 24px;
   color: ${({theme}) => theme.colors.white};
-
-  ${({$isCurrentMenu}) => {
-    if (!$isCurrentMenu) return;
-    return css`
-      font-weight: 900;
-    `;
-  }}
 `;
 
 const MenuBar = styled.a`

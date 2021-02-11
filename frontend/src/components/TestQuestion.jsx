@@ -41,7 +41,7 @@ function TestQuestion() {
       </ButtonWrapper>
 
       <Navigation>
-        <Progress percent={(currentId + 1) * 10}>
+        <Progress percent={currentId + 1}>
           <Path src={`${process.env.PUBLIC_URL}/images/test_path.svg`} />
           <PathId>{currentId + 1}</PathId>
         </Progress>
@@ -51,6 +51,7 @@ function TestQuestion() {
 }
 
 const marginBottom = getReactiveSize(10);
+const width = getReactiveSize(640);
 
 const Wrapper = styled.div`
   width: 100%;
@@ -99,18 +100,21 @@ const ButtonWrapper = styled.div`
 const Navigation = styled.div`
   margin-top: 149px;
   height: ${() => getReactiveSize(20).lg}px;
-  width: 100%;
+  width: min(${width.lg}px, 100%);
   background-color: rgba(255, 255, 255, 0.3);
   border-radius: 20px;
 
   @media ${({theme}) => theme.devices.md} {
     margin-top: 71px;
     height: ${() => getReactiveSize(20).md}px;
+    width: ${width.md - 40}px;
   }
 `;
 
 const Path = styled.img`
   position: absolute;
+  width: ${() => getReactiveSize(40).lg}px;
+  height: ${() => getReactiveSize(60).lg}px;
   top: -${() => getReactiveSize(60).lg}px;
   right: -${() => getReactiveSize(20).lg}px;
 
@@ -139,13 +143,14 @@ const PathId = styled.span`
 
 const Progress = styled.span`
   position: absolute;
-  width: ${({percent}) => percent}%;
+  width: ${({percent}) => (width.lg * percent) / 7}px;
   background-color: ${({theme}) => theme.colors.white};
   border-radius: 20px 0px 0px 20px;
   height: ${() => getReactiveSize(20).lg}px;
 
   @media ${({theme}) => theme.devices.md} {
     height: ${() => getReactiveSize(20).md}px;
+    width: ${({percent}) => ((width.md - 40) * percent) / 7}px;
   }
 `;
 

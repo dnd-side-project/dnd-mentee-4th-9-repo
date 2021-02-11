@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import {getReactiveSize} from '../../lib/calculate';
 import Button from '../../styles/Button';
 import SubHead from '../../styles/SubHead';
 import Section from '../Section';
 import TagList from '../TagList';
+import {getReactiveSize} from '../../lib/calculate';
 
 const margins = {
   '14': getReactiveSize(14),

@@ -40,12 +40,22 @@ const Wrapper = styled.div`
     margin-bottom: ${margins['22'].lg}px;
     color: ${({theme}) => theme.colors.darkGray};
     font-size: ${({theme}) => theme.fontSizes['32'].lg}px;
+
+    @media ${({theme}) => theme.devices.md} {
+      margin-bottom: ${margins['22'].md}px;
+      font-size: ${({theme}) => theme.fontSizes['32'].md}px;
+    }
   }
 `;
 
 const TagsWrapper = styled.div`
   margin-top: ${margins['48'].lg}px;
   margin-bottom: 64px;
+
+  @media ${({theme}) => theme.devices.md} {
+    margin-top: ${margins['48'].md}px;
+    margin-bottom: 13px;
+  }
 `;
 
 const SearchBtn = styled(Button)`

@@ -55,8 +55,14 @@ const getListPlants = async (req, res, next) => {
 const getDetailPlant = async (req, res, next) => {
     try {
         const result = await Plant.findByPk((req.params.plantId), {
+            attributes : {
+                exclude: ['createdAt', 'updatedAt']
+            },
             include: [{
                 model: Tag,
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
+                },
                 through: {
                     where: { //PlantTags 에 있는 내용, 즉 태그의 특성이 없는 경우 (null) 제외하고 리턴
                         imagePath: {
@@ -66,9 +72,9 @@ const getDetailPlant = async (req, res, next) => {
                             [Op.ne]: null
                         }
                     },
-                    attributes: ['type', 'imagePath', 'description']
+                    attributes: ['type', 'imagePath', 'description'] //junction table(PlantTags 에서 받아올 내용)
                 }
-            }]
+            }],
         });
 
         await Plant.update({

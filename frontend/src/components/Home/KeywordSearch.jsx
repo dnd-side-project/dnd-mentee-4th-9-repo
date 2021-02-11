@@ -45,7 +45,7 @@ const Wrapper = styled.div`
 
 const TagsWrapper = styled.div`
   margin-top: ${margins['48'].lg}px;
-  margin-bottom: 80px; // md 23px
+  margin-bottom: 64px;
 `;
 
 const SearchBtn = styled(Button)`

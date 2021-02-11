@@ -1,56 +1,65 @@
 import React from 'react';
 import styled from 'styled-components';
-import {getVW} from '../lib/calculate';
+
+const margins = {
+  xl: 16,
+  xs: 8,
+};
+
+const paddings = {
+  xl: '14px 28px',
+  xs: '7px 14px',
+};
+
+const fontSizes = {
+  xl: 28,
+  xs: 14,
+};
 
 /*
 tagData: string[]
+desk: string (xl, lg, sm, xs, xxs)
+mobile: string
 */
-function TagList({tagData}) {
+
+function TagList({tagData, desk = 'xl', mobile = 'xs'}) {
   return (
-    <Wrapper>
+    <ul>
       {tagData.map((data) => (
-        <Tag key={data}>
-          <Text>{data}</Text>
+        <Tag key={data} desk={desk} mobile={mobile}>
+          <Text desk={desk} mobile={mobile}>
+            {data}
+          </Text>
         </Tag>
       ))}
-    </Wrapper>
+    </ul>
   );
 }
 
-const Wrapper = styled.ul`
-  margin: 0 24px;
-
-  @media ${({theme}) => theme.devices.md} {
-    margin: 0 max(16px, ${getVW(24)});
-  }
-`;
-
 const Tag = styled.li`
+  margin-right: ${({desk}) => margins[desk]}px;
+  margin-bottom: ${({desk}) => margins[desk] + 2}px;
+  padding: ${({desk}) => paddings[desk]};
+
+  border-radius: 74.2px;
   border: 1px solid rgba(0, 0, 0, 0.15);
   display: inline-block;
+
+  color: ${({theme}) => theme.colors.gray};
   background: ${({theme}) => theme.colors.white};
-  border-radius: 74.2px;
-  height: 49.5px;
-  margin: 5px 4px 5px 0;
-  padding: 9.5px 20px;
 
   @media ${({theme}) => theme.devices.md} {
-    border-radius: max(50px, ${getVW(74.2)});
-    height: max(33px, ${getVW(49.5)});
-    padding: max(6px, ${getVW(9.5)}) max(14px, ${getVW(20)});
+    margin-right: ${({mobile}) => margins[mobile]}px;
+    margin-bottom: ${({mobile}) => margins[mobile] + 2}px;
+    padding: ${({mobile}) => paddings[mobile]};
   }
 `;
 
 const Text = styled.span`
-  font-style: normal;
-  font-weight: normal;
-  font-size: 21px;
-  line-height: 30px;
-  color: rgba(0, 0, 0, 0.6);
+  font-size: ${({desk}) => fontSizes[desk]}px;
 
   @media ${({theme}) => theme.devices.md} {
-    font-size: max(14px, ${getVW(21)});
-    line-height: max(20px, ${getVW(30)});
+    font-size: ${({mobile}) => fontSizes[mobile]}px;
   }
 `;
 

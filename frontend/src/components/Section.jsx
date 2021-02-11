@@ -1,10 +1,10 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
 
-export const [FULL_SCREEN, SECTION] = ['full', 'section'];
+export const [FULL_SCREEN, MAIN, SECTION] = ['full', 'main', 'section'];
 
 /*
-type: string ("full", "section")
+type: string ("full", "main", "section")
 margin: number
 width: string ("lg", "md", "sm")
 bgColor: string
@@ -27,8 +27,13 @@ Section.defaultProps = {
 };
 
 export const Container = styled.section`
+  background: ${({type}) => type === MAIN && `url(${process.env.PUBLIC_URL}/images/bg_home.png)`};
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+
   width: 100%;
-  height: ${({type}) => (type === FULL_SCREEN ? '100vh' : 'initial')};
+  height: ${({type}) => (type !== SECTION ? '100vh' : 'initial')};
   padding: 0 ${({theme}) => theme.width.padding}px;
 
   display: flex;
@@ -40,9 +45,8 @@ export const Container = styled.section`
 
 const Wrapper = styled.div`
   width: min(${({theme, width}) => theme.width[width]}px, 100%);
-
   ${({type, margin}) => {
-    if (type === SECTION && margin > 0) {
+    if (type !== FULL_SCREEN && margin > 0) {
       return css`
         margin: ${margin}px 0;
         @media ${({theme}) => theme.devices.md} {

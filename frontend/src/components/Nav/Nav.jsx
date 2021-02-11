@@ -27,7 +27,9 @@ function Nav() {
         <MenuWrapper isActive={isActive}>
           {menuList.map(({name, path}) => (
             <MenuList isActive={isActive} key={name}>
-              <Menu to={path}>{name}</Menu>
+              <Menu to={path} onClick={toggleMenuList}>
+                {name}
+              </Menu>
             </MenuList>
           ))}
         </MenuWrapper>
@@ -99,7 +101,7 @@ const MenuList = styled.li`
         padding: 10px;
         margin: 0;
         line-height: 36px;
-        background-color: rgba(140, 210, 156, 0.5);
+        background-color: ${({theme}) => theme.colors.lightGreen};
         &:hover {
           background-color: rgba(140, 210, 156, 0.7);
         }

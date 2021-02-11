@@ -12,9 +12,9 @@ const menuList = [
 
 function Nav() {
   const location = useLocation();
-  const [isActive, setIsActive] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenuList = () => setIsActive(!isActive);
+  const toggleMenuList = () => setIsOpen(!isOpen);
   const bgColor = location.pathname === '/' || location.pathname === '/test-start' ? 'rgba(140, 210, 156, 0.5)' : 'lightGreen';
 
   return (
@@ -23,10 +23,10 @@ function Nav() {
         <LogoImage src={`${process.env.PUBLIC_URL}/images/logo_nav.svg`} alt="See-at logo" />
       </LeftWrapper>
       <RightWrapper>
-        <MenuWrapper isActive={isActive}>
+        <MenuWrapper isOpen={isOpen}>
           {menuList.map(({name, path}) => (
-            <MenuList isActive={isActive} key={name}>
-              <Menu to={path} onClick={toggleMenuList}>
+            <MenuList isOpen={isOpen} key={name} onClick={toggleMenuList}>
+              <Menu to={path} $isCurrentMenu={path === location.pathname}>
                 {name}
               </Menu>
             </MenuList>
@@ -58,8 +58,8 @@ const RightWrapper = styled.ul`
   display: flex;
   align-items: center;
   @media ${({theme}) => theme.devices.md} {
-    ${({isActive}) => {
-      if (!isActive) return;
+    ${({isOpen}) => {
+      if (!isOpen) return;
       return css`
         position: absolute;
       `;
@@ -71,8 +71,8 @@ const MenuWrapper = styled.div`
   display: flex;
   flex-direction: row;
   @media ${({theme}) => theme.devices.md} {
-    ${({isActive}) => {
-      if (!isActive) return;
+    ${({isOpen}) => {
+      if (!isOpen) return;
       return css`
         flex-direction: column;
         width: 100px;
@@ -92,8 +92,8 @@ const MenuList = styled.li`
 
   @media ${({theme}) => theme.devices.md} {
     display: none;
-    ${({isActive}) => {
-      if (!isActive) return;
+    ${({isOpen}) => {
+      if (!isOpen) return;
       return css`
         display: block;
         height: 56px;
@@ -114,6 +114,13 @@ const Menu = styled(Link)`
   font-size: 16px;
   line-height: 24px;
   color: ${({theme}) => theme.colors.white};
+
+  ${({$isCurrentMenu}) => {
+    if (!$isCurrentMenu) return;
+    return css`
+      font-weight: 900;
+    `;
+  }}
 `;
 
 const MenuBar = styled.a`

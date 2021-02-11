@@ -6,3 +6,8 @@ export const getVW = (element, origin) => {
 export const getScreenSize = (width, padding) => {
   return width - 1 + padding * 2;
 };
+
+export const getReactiveSize = (size) => ({
+  lg: Number(size),
+  md: size / 2,
+});

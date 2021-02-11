@@ -8,11 +8,13 @@ import Plants from './views/Plants';
 import PlantsDetail from './views/PlantsDetail';
 import Error from './views/Error';
 import Nav from './components/Nav/Nav';
+import ScrollTop from './components/ScrollTop';
 
 const App = () => {
   return (
     <BrowserRouter>
       <Nav />
+      <ScrollTop />
       <Switch>
         <Route exact path={'/'} component={Home} />
         <Route exact path={'/test-start'} component={TestStart} />

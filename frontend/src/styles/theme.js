@@ -1,4 +1,4 @@
-import {getScreenSize} from '../lib/calculate';
+import {getScreenSize, getReactiveSize} from '../lib/calculate';
 
 const colors = {
   white: 'white',
@@ -8,10 +8,21 @@ const colors = {
   lightGray: '#f2f2f2',
 };
 
+const fontSizes = {
+  '24': getReactiveSize(24),
+  '30': getReactiveSize(30),
+  '32': getReactiveSize(32),
+  '40': getReactiveSize(40),
+};
+
 const fontWeights = {
   bold: 700,
   medium: 500,
   regular: 400,
+};
+
+const zIndex = {
+  top: 100,
 };
 
 const width = {
@@ -38,7 +49,9 @@ const devices = {
 
 const theme = {
   colors,
+  fontSizes,
   fontWeights,
+  zIndex,
   width,
   size,
   devices,

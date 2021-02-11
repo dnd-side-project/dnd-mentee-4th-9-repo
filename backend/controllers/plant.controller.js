@@ -114,16 +114,32 @@ const keywordSearch = async (req, res, next) => {
                 }
             }]
         });
-        await Plant.update({
-            views: sequelize.literal('views + 1')
-        }, {
-            where: {name: req.body.keyword}
-        })
         res.json(searchResult);
     } catch (error) {
         next(error);
     }
 }
 
+const tagSearch = async(req,res,next)=>{
+    try{
+        const tags = req.body.tags.split(',');
+        console.log(tags);
+        const tagSearchResult = await Plant.findAll({
+            attributes:['id','name','description','thumbnailPath'],
+            include:[{
+                model:Tag,
+                where:{name:{[Op.or]:tags}},
+                attributes:['id','name'],
+                through:{
+                    attributes:[]
+                }
+            }]
+        });
+        res.json(tagSearchResult);
+    }catch(error){
+        next(error);
+    }
+}
 
-module.exports = { getListPlants, getDetailPlant, quratingResult, keywordSearch };
+
+module.exports = { getListPlants , getDetailPlant, quratingResult,keywordSearch,tagSearch};

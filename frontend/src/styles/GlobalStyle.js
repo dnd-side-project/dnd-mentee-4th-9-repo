@@ -22,6 +22,11 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
     outline: none;
   }
+
+  .flex-column {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export default GlobalStyle;

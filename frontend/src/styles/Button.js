@@ -2,14 +2,13 @@ import styled from 'styled-components';
 import {getReactiveSize} from '../lib/calculate';
 
 const width = getReactiveSize(640);
-const height = getReactiveSize(100);
 
 /*
 borderRadius: string (theme.fontSies)
 */
 const Button = styled.button`
   width: min(${width.lg}px, 100%);
-  height: ${height.lg}px;
+  height: ${({height}) => height.lg}px;
   border-radius: 20px;
   border: 2px solid ${({theme, borderColor}) => theme.colors[borderColor]};
   background-color: ${({theme, bgColor}) => theme.colors[bgColor]};
@@ -20,10 +19,11 @@ const Button = styled.button`
   @media ${({theme}) => theme.devices.md} {
     border-radius: ${({borderRadius}) => borderRadius}px;
     border-width: 1px;
-    width: ${width.md}px;
-    height: ${height.md}px;
+    width: ${width.md - 40}px;
+    height: ${({height}) => height.md}px;
     font-size: 16px;
     font-weight: ${({theme}) => theme.fontWeights.medium};
+    margin: 0 20px;
   }
 `;
 
@@ -34,6 +34,7 @@ Button.defaultProps = {
   color: 'green',
   fontSize: '30', // desktop ver, mobile default 16
   fontWeight: 'medium', // desktop ver, mobile default medium
+  height: getReactiveSize(100),
 };
 
 export default Button;

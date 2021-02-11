@@ -1,10 +1,18 @@
 import React from 'react';
+import {useLocation} from 'react-router-dom';
 import Footer from '../components/Footer/Footer';
 
 function TestResult() {
+  const location = useLocation();
+
+  const getResultPlant = () => {
+    const result = location.state;
+    return Object.keys(result).reduce((a, b) => (result[a] > result[b] ? a : b));
+  };
+
   return (
     <div>
-      테스트 결과 페이지
+      {getResultPlant()}
       <Footer />
     </div>
   );

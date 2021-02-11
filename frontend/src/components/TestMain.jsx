@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 import Button from '../styles/Button';
 import {FULL_SCREEN, SECTION} from './Section';
-import {getVW} from '../lib/calculate';
+import {getReactiveSize} from '../lib/calculate';
 
 const styles = {
   // btn text color, ima margin top, img min width(only main page)
@@ -37,6 +37,8 @@ function TestMain({type = FULL_SCREEN}) {
   );
 }
 
+const marginBottom = getReactiveSize(20);
+
 const Wrapper = styled.div`
   width: 100%;
   display: flex;
@@ -50,30 +52,24 @@ const Wrapper = styled.div`
   }
 
   p {
-    margin-bottom: 20px;
-    font-size: 32px;
+    margin-bottom: ${marginBottom.lg}px;
+    font-size: ${({theme}) => theme.fontSizes['32'].lg}px;
     font-weight: ${({theme}) => theme.fontWeights.regular};
   }
+
   h2 {
-    font-size: 40px;
+    font-size: ${({theme}) => theme.fontSizes['40'].lg}px;
     font-weight: ${({theme}) => theme.fontWeights.bold};
   }
 
   @media ${({theme}) => theme.devices.md} {
     p {
-      font-size: max(16px, ${({theme}) => getVW(32, theme.size.md)});
-    }
-    h2 {
-      font-size: max(16px, ${({theme}) => getVW(40, theme.size.md)});
-    }
-  }
-
-  @media ${({theme}) => theme.devices.sm} {
-    p {
-      margin-bottom: 10px;
+      margin-bottom: ${marginBottom.md}px;
+      font-size: ${({theme}) => theme.fontSizes['32'].md}px;
       font-weight: ${({theme}) => theme.fontWeights.regular};
     }
     h2 {
+      font-size: ${({theme}) => theme.fontSizes['40'].md}px;
       font-weight: ${({theme}) => theme.fontWeights.medium};
     }
   }
@@ -81,18 +77,15 @@ const Wrapper = styled.div`
 
 const ImgWrapper = styled.div`
   margin-top: ${({mt}) => mt}px;
-  width: ${({type}) => (type === FULL_SCREEN ? 92 : 75)}%;
+  width: ${({type}) => (type === FULL_SCREEN ? 594 : 482)}px;
 
   img {
     width: 100%;
   }
 
   @media ${({theme}) => theme.devices.md} {
-    margin-top: max(${({mt}) => mt - 40}px, ${({theme, mt}) => getVW(mt, theme.size.md)});
-  }
-
-  @media ${({theme}) => theme.devices.sm} {
-    ${({min}) => min && `width: ${min}px`};
+    margin-top: ${({mt}) => mt - 40}px;
+    width: ${({min}) => (min ? min : 278)}px;
   }
 `;
 

@@ -23,6 +23,10 @@ const GlobalStyle = createGlobalStyle`
     outline: none;
   }
 
+  a {
+    text-decoration: none;
+  }
+
   .flex-column {
     display: flex;
     flex-direction: column;

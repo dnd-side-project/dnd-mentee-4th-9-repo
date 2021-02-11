@@ -44,7 +44,7 @@ export const Container = styled.section`
   ${({type}) => {
     if (type !== NAV) return;
     return css`
-      position: ${({bgColor}) => bgColor.includes('rgba') && 'absolute'};
+      position: absolute;
     `;
   }}
 `;

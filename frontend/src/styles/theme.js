@@ -1,4 +1,4 @@
-import {getScreenSize} from '../lib/calculate';
+import {getScreenSize, getReactiveSize} from '../lib/calculate';
 
 const colors = {
   white: 'white',
@@ -6,6 +6,13 @@ const colors = {
   lightGreen: '#8CD29C',
   skyBlue: '#5CACC5',
   lightGray: '#f2f2f2',
+};
+
+const fontSizes = {
+  '24': getReactiveSize(24),
+  '30': getReactiveSize(30),
+  '32': getReactiveSize(32),
+  '40': getReactiveSize(40),
 };
 
 const fontWeights = {
@@ -42,6 +49,7 @@ const devices = {
 
 const theme = {
   colors,
+  fontSizes,
   fontWeights,
   zIndex,
   width,

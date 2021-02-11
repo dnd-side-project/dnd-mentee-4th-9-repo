@@ -92,6 +92,10 @@ const QuestionWrapper = styled.div`
 `;
 
 const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
   ${Button} + ${Button} {
     margin-top: 20px;
   }

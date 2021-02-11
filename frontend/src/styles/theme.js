@@ -5,6 +5,7 @@ const colors = {
   green: '#2A845D',
   lightGreen: '#8CD29C',
   skyBlue: '#5CACC5',
+  darkGray: 'rgba(0, 0, 0, 0.9)',
   lightGray: '#f2f2f2',
 };
 

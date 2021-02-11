@@ -10,7 +10,7 @@ const getListPlants = async (req, res, next) => {
                 include: [{
                     model: Tag,
                     through: {
-                        attributes: [] 
+                        attributes: []
                     }
                 }],
                 order: [['createdAt', 'DESC']]
@@ -55,14 +55,28 @@ const getListPlants = async (req, res, next) => {
 const getDetailPlant = async (req, res, next) => {
     try {
         const result = await Plant.findByPk((req.params.plantId), {
+            attributes : {
+                exclude: ['createdAt', 'updatedAt']
+            },
             include: [{
                 model: Tag,
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
+                },
                 through: {
-                    attributes: []
+                    where: { //PlantTags 에 있는 내용, 즉 태그의 특성이 없는 경우 (null) 제외하고 리턴
+                        imagePath: {
+                            [Op.ne]: null
+                        },
+                        description: {
+                            [Op.ne]: null
+                        }
+                    },
+                    attributes: ['type', 'imagePath', 'description'] //junction table(PlantTags 에서 받아올 내용)
                 }
-            }]
+            }],
         });
-        
+
         await Plant.update({
             views: sequelize.literal('views + 1')
         }, {
@@ -93,21 +107,21 @@ const quratingResult = async (req, res, next) => {
     }
 }
 
-const keywordSearch = async(req,res,next)=>{
-    try{
+const keywordSearch = async (req, res, next) => {
+    try {
         const searchResult = await Plant.findOne({
-            attributes:['id','name','description','thumbnailPath'],
-            where:{name:req.body.keyword},
-            include:[{
-                model:Tag,
-                attributes:['id','name'],
-                through:{
-                    attributes:[]
+            attributes: ['id', 'name', 'description', 'thumbnailPath'],
+            where: {name: req.body.keyword},
+            include: [{
+                model: Tag,
+                attributes: ['id', 'name'],
+                through: {
+                    attributes: []
                 }
             }]
         });
         res.json(searchResult);
-    }catch(error){
+    } catch (error) {
         next(error);
     }
 }
@@ -132,5 +146,6 @@ const tagSearch = async(req,res,next)=>{
         next(error);
     }
 }
+
 
 module.exports = { getListPlants , getDetailPlant, quratingResult,keywordSearch,tagSearch};

@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const PlantTags = require('./plantTag.model')
 
 module.exports = class Plant extends Sequelize.Model{
     static init(sequelize){
@@ -13,32 +14,11 @@ module.exports = class Plant extends Sequelize.Model{
             warning: {//주의할점
                 type: Sequelize.STRING(2000)
             },
-            place : { //장소
-                type: Sequelize.STRING(2000)
-            },
-            grow : { //성장속도
-                type: Sequelize.STRING(2000)
-            },
-            difficulty : { //난이도
-                type: Sequelize.STRING(50)
-            },
-            water : { //물 주기
-                type : Sequelize.STRING(50)
-            },
-            height : { //크기
-                type: Sequelize.STRING(2000)
-            },
             description : { //한문장 요약
                 type: Sequelize.STRING(100)
             },
             ment : { //멘트
                 type: Sequelize.STRING(2000)
-            },
-            flower : { //개화여부
-                type : Sequelize.BOOLEAN
-            },
-            temperature: { //온도
-                type: Sequelize.STRING(50)
             },
             views : { //추후 인기순 기반 정렬을 위해 구현
                 type : Sequelize.INTEGER,
@@ -65,7 +45,7 @@ module.exports = class Plant extends Sequelize.Model{
     }
     static associate(db){
         Plant.belongsToMany(db.Tag, {
-            through: 'PlantTags'
+            through: PlantTags
         });
         //N:M 관게를 PlantTags라는 Junction Table을 만들어 관리합니다.
         //PlantTags라는 테이블은 Plant의 id와 Tag의 id를 외래키로 갖고

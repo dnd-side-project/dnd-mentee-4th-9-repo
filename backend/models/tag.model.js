@@ -1,4 +1,5 @@
 const Sequelize = require('sequelize');
+const PlantTags = require('./plantTag.model')
 
 module.exports = class Tag extends Sequelize.Model{
     static init(sequelize){
@@ -20,7 +21,7 @@ module.exports = class Tag extends Sequelize.Model{
     }
     static associate(db){
         Tag.belongsToMany(db.Plant, {
-            through: 'PlantTags'
+            through: PlantTags
         });
     }
 }

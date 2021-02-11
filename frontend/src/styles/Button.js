@@ -5,7 +5,7 @@ const width = getReactiveSize(640);
 const height = getReactiveSize(100);
 
 /*
-borderRadius: number
+borderRadius: string (theme.fontSies)
 */
 const Button = styled.button`
   width: min(${width.lg}px, 100%);

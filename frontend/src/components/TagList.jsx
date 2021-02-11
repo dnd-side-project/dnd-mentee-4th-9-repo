@@ -2,7 +2,6 @@ import React from 'react';
 import styled from "styled-components";
 import {getVW} from "../lib/calculate";
 
-
 /*
 tagData: string[]
 */

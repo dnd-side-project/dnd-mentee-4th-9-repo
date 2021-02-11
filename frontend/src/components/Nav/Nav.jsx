@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import styled, {css} from 'styled-components';
-import Section from '../Section';
-import {NAV} from '../Section';
+import Section, {NAV} from '../Section';
 import {useLocation, Link} from 'react-router-dom';
 
 const menuList = [

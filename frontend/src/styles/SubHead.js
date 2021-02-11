@@ -11,7 +11,7 @@ const SubHead = styled.h2`
 `;
 
 SubHead.defaultProps = {
-  color: 'darkgray',
+  color: 'darkGray',
 };
 
 export default SubHead;

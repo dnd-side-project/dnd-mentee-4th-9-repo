@@ -1,6 +1,7 @@
 const Plant = require('../models/plant.model');
 const Tag = require('../models/tag.model');
 const sequelize = require('sequelize');
+const Op = sequelize.Op;
 
 const getListPlants = async (req, res, next) => {
     if (req.query.order === "recent") {
@@ -9,7 +10,7 @@ const getListPlants = async (req, res, next) => {
                 include: [{
                     model: Tag,
                     through: {
-                        attributes: [] 
+                        attributes: []
                     }
                 }],
                 order: [['createdAt', 'DESC']]
@@ -57,11 +58,19 @@ const getDetailPlant = async (req, res, next) => {
             include: [{
                 model: Tag,
                 through: {
-                    attributes: []
+                    where: { //PlantTags 에 있는 내용, 즉 태그의 특성이 없는 경우 (null) 제외하고 리턴
+                        imagePath: {
+                            [Op.ne]: null
+                        },
+                        description: {
+                            [Op.ne]: null
+                        }
+                    },
+                    attributes: ['type', 'imagePath', 'description']
                 }
             }]
         });
-        
+
         await Plant.update({
             views: sequelize.literal('views + 1')
         }, {
@@ -92,29 +101,29 @@ const quratingResult = async (req, res, next) => {
     }
 }
 
-const keywordSearch = async(req,res,next)=>{
-    try{
+const keywordSearch = async (req, res, next) => {
+    try {
         const searchResult = await Plant.findOne({
-            attributes:['id','name','description','thumbnailPath'],
-            where:{name:req.body.keyword},
-            include:[{
-                model:Tag,
-                attributes:['id','name'],
-                through:{
-                    attributes:[]
+            attributes: ['id', 'name', 'description', 'thumbnailPath'],
+            where: {name: req.body.keyword},
+            include: [{
+                model: Tag,
+                attributes: ['id', 'name'],
+                through: {
+                    attributes: []
                 }
             }]
         });
         await Plant.update({
-            views:sequelize.literal('views + 1')
-        },{
-            where:{name:req.body.keyword}
+            views: sequelize.literal('views + 1')
+        }, {
+            where: {name: req.body.keyword}
         })
         res.json(searchResult);
-    }catch(error){
+    } catch (error) {
         next(error);
     }
 }
 
 
-module.exports = { getListPlants , getDetailPlant, quratingResult,keywordSearch};
+module.exports = { getListPlants, getDetailPlant, quratingResult, keywordSearch };

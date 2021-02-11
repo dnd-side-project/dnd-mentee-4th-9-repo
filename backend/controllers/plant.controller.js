@@ -54,7 +54,7 @@ const getListPlants = async (req, res, next) => {
 
 const getDetailPlant = async (req, res, next) => {
     try {
-        const result = await Plant.findByPk((req.params.plantId), {
+        const baseResult = await Plant.findByPk((req.params.plantId), {
             attributes : {
                 exclude: ['createdAt', 'updatedAt']
             },
@@ -76,6 +76,21 @@ const getDetailPlant = async (req, res, next) => {
                 }
             }],
         });
+
+        const additonalResult = await Plant.findByPk((req.params.plantId), { //모든 태그를 조회하기 위한 쿼리
+            attributes: [],
+            include: [{
+                    model: Tag,
+                    attributes: ['name'],
+                through: {
+                        attributes: []
+                }
+                }],
+        })
+        const result = {
+            detail : baseResult,
+            allTags : [...additonalResult.Tags]
+        }
 
         await Plant.update({
             views: sequelize.literal('views + 1')

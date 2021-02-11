@@ -4,7 +4,7 @@ provider:
   name: aws
   stage: ${opt:stage, self:custom.defaultStage}
   stackName: ${self:service}-${self:provider.stage}
-  webBucket: ${self:service}-${self:provider.stage}-image-bucket
+  webBucket: ${self:service}-${self:provider.stage}-web-bucket
 
 custom:
   custom.defaultStage: dev

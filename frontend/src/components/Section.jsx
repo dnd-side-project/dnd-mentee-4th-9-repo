@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
 
-export const [FULL_SCREEN, MAIN, SECTION, NAV] = ['full', 'main', 'section', 'nav'];
+export const [FULL_SCREEN, MAIN, SECTION, NAV, MIDDLE, SIDE] = ['full', 'main', 'section', 'nav', 'middle', 'side'];
 
 /*
 type: string ("full", "main", "section", "nav")
@@ -9,10 +9,10 @@ margin: number
 width: string ("lg", "md", "sm")
 bgColor: string
 */
-function Section({type, margin, width, bgColor, children}) {
+function Section({type, margin, width, bgColor, order, children}) {
   return (
     <Container className="container" type={type} bgColor={bgColor}>
-      <Wrapper type={type} margin={margin} width={width}>
+      <Wrapper type={type} margin={margin} width={width} order={order}>
         {children}
       </Wrapper>
     </Container>
@@ -24,6 +24,7 @@ Section.defaultProps = {
   margin: 0,
   width: 'md',
   bgColor: 'white',
+  order: MIDDLE,
 };
 
 export const Container = styled.section`
@@ -61,14 +62,23 @@ export const Wrapper = styled.div`
     `;
   }}
 
-  ${({type, margin}) => {
+  ${({type, margin, order}) => {
     if (type !== FULL_SCREEN && margin > 0) {
-      return css`
-        margin: ${margin}px 0;
-        @media ${({theme}) => theme.devices.md} {
-          margin: ${margin / 2}px 0;
-        }
-      `;
+      if (order === MIDDLE) {
+        return css`
+          margin: ${margin}px 0;
+          @media ${({theme}) => theme.devices.md} {
+            margin: ${margin / 2}px 0;
+          }
+        `;
+      } else {
+        return css`
+          margin-top: ${margin}px;
+          @media ${({theme}) => theme.devices.md} {
+            margin-top: ${margin / 2}px;
+          }
+        `;
+      }
     }
   }}
 `;

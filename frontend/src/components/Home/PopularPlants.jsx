@@ -1,6 +1,6 @@
 import React from 'react';
 import SubHead from '../../styles/SubHead';
-import Section from '../Section';
+import Section, {SIDE} from '../Section';
 import styled from 'styled-components';
 import RecommendPlant from '../RecommentPlant';
 
@@ -34,7 +34,7 @@ const popularPlants = [
 
 function PopularPlants() {
   return (
-    <Section width="lg" margin={200}>
+    <Section width="lg" margin={200} order={SIDE}>
       <Wrapper>
         <SubHead>요즘 뜨는 친구들</SubHead>
         <Plants>

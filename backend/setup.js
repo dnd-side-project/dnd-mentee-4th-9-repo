@@ -81,7 +81,22 @@ const reset = async () => {
             ment: "올리브 나무는 그 잎을 사계절 내내 감상하는 것 만으로 매우 훌륭한 가치를 가지고 있는 반려식물이에요. 해외에서만 만날 수 있던 과거와 달리 요즘에는 일반 꽃집에서도 심심치 않게 볼 수 있을 정도로 친근해졌어요. 풍성한 꽃과 열매를 수확할 수 있는 것도 올리브 나무의 큰 장점이죠. 사계절 다양한 모습 올리브 나무와 함께라면 집에 있는 시간도 더 이상 지루하게 느껴지지 않을 거에요. ",
             imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%84%87%E1%85%B3%E1%84%82%E1%85%A1%E1%84%86%E1%85%AE.png",
             thumbnailPath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%84%87%E1%85%B3%E1%84%82%E1%85%A1%E1%84%86%E1%85%AE.png"
-        }
+        },
+        //행운목 id : 7
+        {
+            name: "행운목",
+            feature: "1. <꽃> 7~10년에 한 번 꽃을 피워요.\n" +
+                "2. <잎> 콘 플랜트(Corn plant)라는 영어 이름처럼 잎이 옥수수 잎과 닮았어요.",
+            warning: "1. 햇빛을 갑자기 많이 받으면 잎이 마르기 때문에 천천히 햇빛에 노출시켜 주세요.\n" +
+                "2. 어두운 곳에 오래 있으면 잎이 연약하고 면역력이 떨어져 노란색으로 변할 수 있어요.\n" +
+                "3. 꽃을 꼭 보고 싶다면 겨울철에 따뜻한 온도를 유지해주세요.\n" +
+                "4. 4~5년에 한 번 여름에 분갈이를 진행해 주세요.",
+            description: "꽃을 기다리는 달콤한 시간",
+            ment: "행운목은 몇 년에 한 번 긴 주기로 꽃을 피우는 식물이에요. 그렇기 때문에 행운목에 꽃이 피는 해는 행운이 가득하다고 해서 행운목이라는 이름이 붙었답니다. 행운목에 꽃이 피면 기분 좋은 달콤한 향을 느낄 수 있어요. 따스하게 행운목을 관리해주며 꽃을 기다려 보는 것도 좋은 추억이 될 거 같아요. 행운목과 함께라면 매일매일 기대감 넘치는 하루를 보낼 수 있지 않을까요? ",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%92%E1%85%A2%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AB%E1%84%86%E1%85%A9%E1%86%A8.png",
+            thumbnailPath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%92%E1%85%A2%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AB%E1%84%86%E1%85%A9%E1%86%A8.png"
+        },
+        //
     ]);
     await db.Tag.bulkCreate([
         {
@@ -447,7 +462,50 @@ const reset = async () => {
             description: "15~28℃"
         },
         // 행운목
-
+        {
+            PlantId: 7,
+            TagId: 16,
+            type: "난이도"
+        },
+        {
+            PlantId: 7,
+            TagId: 1,
+            type: "물주기",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%84%87%E1%85%B3%E1%84%82%E1%85%A1%E1%84%86%E1%85%AE.png",
+            description: "겉흙이 말랐을 때 듬뿍"
+        },
+        {
+            PlantId: 7,
+            TagId: 6,
+            type: "크기"
+        },
+        {
+            PlantId: 7,
+            TagId: 7,
+            type: "꽃/열매"
+        },
+        {
+            PlantId: 7,
+            TagId: 9,
+            type: "장소",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%84%87%E1%85%B3%E1%84%82%E1%85%A1%E1%84%86%E1%85%AE.png",
+            description: "직사광선을 피하고 통풍이 잘 되는 실내"
+        },
+        {
+            PlantId: 7,
+            TagId: 11,
+            type: "속도",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%84%87%E1%85%B3%E1%84%82%E1%85%A1%E1%84%86%E1%85%AE.png",
+            description: "빨리 자라는 편"
+        },
+        {
+            PlantId: 7,
+            TagId: 14,
+            type: "온도",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%84%87%E1%85%B3%E1%84%82%E1%85%A1%E1%84%86%E1%85%AE.png",
+            description: "21~25℃"
+        },
+        //돈나무
     ]);
 
 

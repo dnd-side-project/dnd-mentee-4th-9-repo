@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
 
-export const [FULL_SCREEN, MAIN, SECTION, NAV] = ['full', 'main', 'section', 'nav'];
+export const [FULL_SCREEN, MAIN, SECTION, NAV, MIDDLE, SIDE] = ['full', 'main', 'section', 'nav', 'middle', 'side'];
 
 /*
 type: string ("full", "main", "section", "nav")
@@ -11,13 +11,13 @@ bgColor: string
 column: boolean (true => flex-direction: column)
 bgImage: boolean (true => background-image: bg_home.png)
 */
-function Section({type, margin, width, bgColor, children, column, bgImage}) {
+function Section({type, margin, width, bgColor, children, column, bgImage, order}) {
   bgImage = type === MAIN || bgImage;
   const height = type !== SECTION && type !== NAV ? '100vh' : 'initial';
 
   return (
     <Container className="container" type={type} bgColor={bgColor} bgImage={bgImage} height={height}>
-      <Wrapper type={type} margin={margin} width={width} column={column}>
+      <Wrapper type={type} margin={margin} width={width} column={column} order={order}>
         {children}
       </Wrapper>
     </Container>
@@ -29,6 +29,7 @@ Section.defaultProps = {
   margin: 0,
   width: 'md',
   bgColor: 'white',
+  order: MIDDLE,
   column: false,
 };
 
@@ -76,14 +77,23 @@ export const Wrapper = styled.div`
     `;
   }}
 
-  ${({type, margin}) => {
+  ${({type, margin, order}) => {
     if (type !== FULL_SCREEN && margin > 0) {
-      return css`
-        margin: ${margin}px 0;
-        @media ${({theme}) => theme.devices.md} {
-          margin: ${margin / 2}px 0;
-        }
-      `;
+      if (order === MIDDLE) {
+        return css`
+          margin: ${margin}px 0;
+          @media ${({theme}) => theme.devices.md} {
+            margin: ${margin / 2}px 0;
+          }
+        `;
+      } else {
+        return css`
+          margin-top: ${margin}px;
+          @media ${({theme}) => theme.devices.md} {
+            margin-top: ${margin / 2}px;
+          }
+        `;
+      }
     }
   }}
 `;

@@ -96,7 +96,19 @@ const reset = async () => {
             imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%92%E1%85%A2%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AB%E1%84%86%E1%85%A9%E1%86%A8.png",
             thumbnailPath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%92%E1%85%A2%E1%86%BC%E1%84%8B%E1%85%AE%E1%86%AB%E1%84%86%E1%85%A9%E1%86%A8.png"
         },
-        //
+        //돈나무 id : 8
+        {
+            name: "돈나무",
+            feature: "1. <꽃> 여름에 꽃이 피며, 향기가 매우 강해요. 가을에는 구슬 크기의 끈적끈적한 황색 열매가 열려요.\n" +
+                "2. <기능> 가뭄과 해풍에도 잘 견디는 식물이에요. 한방에서는 종자와 뿌리껍질을 약재로 사용하기도 한답니다.",
+            warning: "1. 물을 너무 많이 주면 잎이 누렇게 변할 수 있어요.\n" +
+                "2. 잎에 독성이 있어 어린아이나 반려동물이 있는 경우 손이 닿지 않도록 주의가 필요해요.\n" +
+                "3. 1년에 한 번 정도 알뿌리에 손상이 가지 않게 분갈이를 진행해주세요.",
+            description: "돈이 들어오는 행운의 나무",
+            ment: "돈나무는 잎의 모양이 동전 모양을 닮아있어요. 그렇기 때문에 돈이 들어오는 나무라고 해서 금전수라고도 불러요. 그래서인지 돈나무는 집들이나 개업 선물로도 아주 인기가 많답니다. 다른 식물들에 비해 생명력이 아주 뛰어나서 직사광선 및 물주기만 조심해준다면 초보자도 충분히 키울 수 있어요. 자주 물을 줄 필요가 없고 꼼꼼한 관리 없이도 잘 자란다는 게 아주 큰 장점이죠. 돈나무와 함께 우리도 오늘부터 황금빛 미래를 그려볼까요? ",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%83%E1%85%A9%E1%86%AB%E1%84%82%E1%85%A1%E1%84%86%E1%85%AE.png",
+            thumbnailPath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%83%E1%85%A9%E1%86%AB%E1%84%82%E1%85%A1%E1%84%86%E1%85%AE.png"
+        }
     ]);
     await db.Tag.bulkCreate([
         {
@@ -506,6 +518,55 @@ const reset = async () => {
             description: "21~25℃"
         },
         //돈나무
+        {
+            PlantId: 8,
+            TagId: 16,
+            type: "난이도"
+        },
+        {
+            PlantId: 8,
+            TagId: 2,
+            type: "물주기",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%83%E1%85%A9%E1%86%AB%E1%84%82%E1%85%A1%E1%84%86%E1%85%AE.png",
+            description: "흙이 마르면 적당히"
+        },
+        {
+            PlantId: 8,
+            TagId: 6,
+            type: "크기"
+        },
+        {
+            PlantId: 8,
+            TagId: 7,
+            type: "꽃/열매"
+        },
+        {
+            PlantId: 8,
+            TagId: 8,
+            type: "꽃/열매"
+        },
+        {
+            PlantId: 8,
+            TagId: 9,
+            type: "장소",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%83%E1%85%A9%E1%86%AB%E1%84%82%E1%85%A1%E1%84%86%E1%85%AE.png",
+            description: "직사광선을 피한 실내의 창가, 베란다"
+        },
+        {
+            PlantId: 8,
+            TagId: 11,
+            type: "속도",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%83%E1%85%A9%E1%86%AB%E1%84%82%E1%85%A1%E1%84%86%E1%85%AE.png",
+            description: "빨리 자라는 편"
+        },
+        {
+            PlantId: 8,
+            TagId: 14,
+            type: "온도",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%83%E1%85%A9%E1%86%AB%E1%84%82%E1%85%A1%E1%84%86%E1%85%AE.png",
+            description: "18~24°C"
+        }
+        //이하 나머지 식물 추가 필요
     ]);
 
 

@@ -9,6 +9,9 @@ const getListPlants = async (req, res, next) => {
             const result = await Plant.findAll({
                 include: [{
                     model: Tag,
+                    attributes: {
+                        exclude: ['createdAt', 'updatedAt']
+                    },
                     through: {
                         attributes: []
                     }
@@ -24,6 +27,9 @@ const getListPlants = async (req, res, next) => {
             const result = await Plant.findAll({
                 include: [{
                     model: Tag,
+                    attributes: {
+                        exclude: ['createdAt', 'updatedAt']
+                    },
                     through: {
                         attributes: []
                     }
@@ -39,6 +45,9 @@ const getListPlants = async (req, res, next) => {
             const result = await Plant.findAll({
                 include: [{
                     model: Tag,
+                    attributes: {
+                        exclude: ['createdAt', 'updatedAt']
+                    },
                     through: {
                         attributes: []
                     }

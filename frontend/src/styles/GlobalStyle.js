@@ -3,6 +3,10 @@ import reset from 'styled-reset';
 
 const GlobalStyle = createGlobalStyle`
   ${reset};
+
+  html {
+    overflow-x: hidden;
+  }
   
   * {
     box-sizing: border-box;

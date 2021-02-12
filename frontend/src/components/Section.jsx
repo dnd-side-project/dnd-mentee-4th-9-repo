@@ -13,7 +13,7 @@ bgImage: boolean (true => background-image: bg_home.png)
 */
 function Section({type, margin, width, bgColor, children, column, bgImage, order}) {
   bgImage = type === MAIN || bgImage;
-  const height = !bgImage && type !== SECTION && type !== NAV ? '100vh' : 'initial';
+  const height = type !== SECTION && type !== NAV ? '100vh' : 'initial';
 
   return (
     <Container className="container" type={type} bgColor={bgColor} bgImage={bgImage} height={height}>

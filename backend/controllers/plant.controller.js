@@ -86,10 +86,30 @@ const getDetailPlant = async (req, res, next) => {
                         attributes: []
                 }
                 }],
+        });
+
+        const tags = [...additonalResult.Tags];
+
+        const recommendResult = await Plant.findAll({
+            attributes: ['name', 'ment'],
+            include: [{
+                model: Tag,
+                attributes: ['name'],
+                through: {
+                    attributes: [],
+                    where: {
+                        TagId: {
+                            [Op.or] : { ...tags.id }
+                        }
+                    }
+                }
+            }]
         })
+
         const result = {
             detail : baseResult,
-            allTags : [...additonalResult.Tags]
+            allTags : tags,
+            recommend: recommendResult
         }
 
         await Plant.update({

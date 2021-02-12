@@ -1,20 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import tagList from '../styles/tagList';
 
-const margins = {
-  xl: 16,
-  xs: 8,
-};
-
-const paddings = {
-  xl: '14px 28px',
-  xs: '7px 14px',
-};
-
-const fontSizes = {
-  xl: 28,
-  xs: 14,
-};
+const {margins, paddings, fontSizes} = tagList;
 
 /*
 tagData: string[]

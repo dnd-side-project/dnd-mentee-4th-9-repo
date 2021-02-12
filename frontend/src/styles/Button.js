@@ -3,7 +3,6 @@ import {getReactiveSize} from '../lib/calculate';
 
 const margins = getReactiveSize(14);
 const width = getReactiveSize(640);
-const height = getReactiveSize(100);
 
 /*
 borderRadius: number
@@ -16,7 +15,7 @@ iconSize: number
 */
 const Button = styled.button`
   width: min(${width.lg}px, 100%);
-  height: ${height.lg}px;
+  height: ${({height}) => height.lg}px;
 
   display: flex;
   justify-content: center;
@@ -35,10 +34,11 @@ const Button = styled.button`
   }
 
   @media ${({theme}) => theme.devices.md} {
+    margin: 0 20px;
     border-radius: ${({borderRadius}) => borderRadius}px;
     border-width: 1px;
-    width: ${width.md}px;
-    height: ${height.md}px;
+    width: ${width.md - 40}px;
+    height: ${({height}) => height.md}px;
     font-size: 16px;
     font-weight: ${({theme}) => theme.fontWeights.medium};
 
@@ -57,6 +57,7 @@ Button.defaultProps = {
   fontSize: '30', // desktop ver, mobile default 16
   fontWeight: 'medium', // desktop ver, mobile default medium
   iconSize: 0,
+  height: getReactiveSize(100),
 };
 
 export default Button;

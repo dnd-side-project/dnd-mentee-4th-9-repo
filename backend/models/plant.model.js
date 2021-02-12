@@ -9,27 +9,27 @@ module.exports = class Plant extends Sequelize.Model{
                 allowNull: false,
             },
             feature:{ //반전매력
-                type: Sequelize.STRING(2000)
+                type: Sequelize.TEXT
             },
             warning: {//주의할점
-                type: Sequelize.STRING(2000)
+                type: Sequelize.TEXT
             },
             description : { //한문장 요약
-                type: Sequelize.STRING(100)
+                type: Sequelize.STRING(200)
             },
             ment : { //멘트
-                type: Sequelize.STRING(2000)
+                type: Sequelize.TEXT
             },
             views : { //추후 인기순 기반 정렬을 위해 구현
                 type : Sequelize.INTEGER,
                 defaultValue: 0
             },
             imagePath:{ // 디테일 화면 메인 이미지
-                type: Sequelize.STRING(500),
+                type: Sequelize.TEXT,
                 allowNull: false
             },
             thumbnailPath:{ //리스트로 볼때의 썸네일 이미지
-                type: Sequelize.STRING(500),
+                type: Sequelize.TEXT,
                 allowNull: false
             }
         }, {

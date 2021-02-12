@@ -88,7 +88,7 @@ const getDetailPlant = async (req, res, next) => {
     }
 }
 
-const quratingResult = async (req, res, next) => {
+const curatingResult = async (req, res, next) => {
     try {
         const resultPlant = await Plant.findOne({
             attributes: ['id', 'name', 'description', 'ment', 'imagePath'],
@@ -129,7 +129,6 @@ const keywordSearch = async (req, res, next) => {
 const tagSearch = async(req,res,next)=>{
     try{
         const tags = req.body.tags.split(',');
-        console.log(tags);
         const tagSearchResult = await Plant.findAll({
             attributes:['id','name','description','thumbnailPath'],
             include:[{
@@ -148,4 +147,4 @@ const tagSearch = async(req,res,next)=>{
 }
 
 
-module.exports = { getListPlants , getDetailPlant, quratingResult,keywordSearch,tagSearch};
+module.exports = { getListPlants , getDetailPlant, curatingResult,keywordSearch,tagSearch};

@@ -106,7 +106,7 @@ const getDetailPlant = async (req, res, next) => {
             plain: true
         });
 
-        detailResult.allTags = tags;
+        detailResult.allTags = tags.Tags;
 
         await Plant.update({
             views: sequelize.literal('views + 1')

@@ -3,7 +3,6 @@ import axios from 'axios';
 import {useLocation, useHistory} from 'react-router-dom';
 import Footer from '../components/Footer/Footer';
 import Section from '../components/Section';
-import {MAIN} from '../components/Section';
 import styled from 'styled-components';
 import TagList from '../components/TagList';
 import Button from '../styles/Button';

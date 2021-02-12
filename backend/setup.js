@@ -41,6 +41,46 @@ const reset = async () => {
             ment: "아이비는 품종이 500종 이상인 대표적인 플랜테리어 식물이에요. 잎이 하트 모양이거나 특이한 색(무늬)을 가져 귀여움을 자랑합니다. 아담한 사이즈로 길이가 길면 벽에 걸어두어 자연의 느낌을, 짧으면 미니 화분에 심을 수 있습니다. 초보자도 키우기 쉬우며 우수한 공기정화 능력은 덤이에요! 단, 햇빛이 잘 드는 장소에서 분무기로 물을 자주 주어야 하고, 수경 재배도 가능합니다.",
             imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B5.png",
             thumbnailPath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B5.png"
+        },
+        // 관음죽 id : 4
+        {
+            name: "관음죽",
+            feature: "1. <꽃> 6월에 꽃이 피고, 황록색 또는 연황색 열매가 열려요.\n" +
+                "2. <기능> 암모니아 가스 제거에 탁월해 화장실에 놓기에 좋아요",
+            warning: "1. 건조에 약해 습도가 낮으면 잎의 끝이 마를 수 있는데, 이 때는 마른 잎의 끝부분을 잘라주세요.\n" +
+                "2.뿌리가 상하게 되면 가지가 늘어지므로 이 때에는 물을 줄이고 통풍이 잘 되는 곳에 두어야 합니다.\n" +
+                "3. 2년에 한 번씩 봄에 큰 화분이나 작은 화분에 포기나누기를 해주세요.",
+            description: "진정한 반려 식물의 의미",
+            ment: "관음죽은 긴 잎에 줄무늬를 가졌어요. 공기 정화와 암모니아 냄새 제거에 탁월하고 낮은 온도(그늘)에서도 잘 자랍니다. 오랜 정성을 들이면 드물게 피우는 꽃을 보며 행운을 느낄 수 있어요. 단, 번식력이 강해 포기를 나누고, 수액이 피부에 닿지 않게 주의하며, 갈변하는 잎 끝을 잘라내야 한답니다. 병충해에도 강해서 초보자도 약간의 관리만 해주면 튼튼하게 자라는 식물이에요.",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%AA%E1%86%AB%E1%84%8B%E1%85%B3%E1%86%B7%E1%84%8C%E1%85%AE%E1%86%A8.png",
+            thumbnailPath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%80%E1%85%AA%E1%86%AB%E1%84%8B%E1%85%B3%E1%86%B7%E1%84%8C%E1%85%AE%E1%86%A8.png"
+        },
+        //스투키 id : 5
+        {
+            name: "스투키",
+            feature: "1. <잎> 다육 식물 중 하나로 길쭉하고 두꺼운 잎을 가졌어요.\n" +
+                "2. <기능> 스투키는 대표적인 공기 정화 식물 중 하나에요.",
+            warning: "1. 상태가 안 좋은 개체가 있다면 다른 개체에 영향 주지 않게 제거해야 해요.\n" +
+                "2. 뿌리가 상하게 되면 가지가 늘어지므로 이 때에는 물을 줄이고 통풍이 잘 되는 곳으로 옮겨주세요.\n" +
+                "3. 번식이 빠르기 때문에 새순이 나오면 바로 분갈이를 해야 해요.",
+            description: "쾌적한 집콕 라이프 추천",
+            ment: "스투키는 NASA에서 추천했을 정도로 탁월한 공기 정화 능력을 가지고 있어요. 스투키는 햇빛에도 강하고 집안 어디에서나 키워도 무리없이 잘 자라기 때문에 초보자가 키우기에 적합한 반려식물이랍니다. 비교적 추위에도 강한 편이지만 겨울엔 실내로 옮겨주시는 게 좋아요.  스투키는 매우 다양한 사이즈와 굵기를 가지고 있어요. 내 취향에 맞는 스투키를 찾아보는 것도 재미있는 여정이 될 거에요.",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%89%E1%85%B3%E1%84%90%E1%85%AE%E1%84%8F%E1%85%B5.png",
+            thumbnailPath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%89%E1%85%B3%E1%84%90%E1%85%AE%E1%84%8F%E1%85%B5.png"
+        },
+        //올리브 나무 id : 6
+        {
+            name: "올리브 나무",
+            feature: "1. <꽃> 잎 근처에 흰 색 꽃이 피고 3~5세 이후부터 여름에 열매를 수확할 수 있어요.\n" +
+                "2. <기능> 올리브 나무는 건강에 좋은 성분이 많아 신이 내린 선물, 평화와 행복을 상징해요. 빛을 좋아하고 건조해도 잘 자라는 식물이에요.",
+            warning: "1. 2개월 정도의 추위를 견딘 후 열매가 검은색이 된 것을 확인한 후 수확해주세요.\n" +
+                "2. 한 그루만으로 열매를 맺지 못하는 품종도 있으니 열매를 보고 싶다면 주의해서 구매해야 해요.\n" +
+                "3. 통풍이 꼭 필요해요.\n" +
+                "4. 2년에 한번 전체적인 분갈이를 진행해주면 적당해요.",
+            description: "몸과 마음이 치유되는 사계절",
+            ment: "올리브 나무는 그 잎을 사계절 내내 감상하는 것 만으로 매우 훌륭한 가치를 가지고 있는 반려식물이에요. 해외에서만 만날 수 있던 과거와 달리 요즘에는 일반 꽃집에서도 심심치 않게 볼 수 있을 정도로 친근해졌어요. 풍성한 꽃과 열매를 수확할 수 있는 것도 올리브 나무의 큰 장점이죠. 사계절 다양한 모습 올리브 나무와 함께라면 집에 있는 시간도 더 이상 지루하게 느껴지지 않을 거에요. ",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%84%87%E1%85%B3%E1%84%82%E1%85%A1%E1%84%86%E1%85%AE.png",
+            thumbnailPath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%84%87%E1%85%B3%E1%84%82%E1%85%A1%E1%84%86%E1%85%AE.png"
         }
     ]);
     await db.Tag.bulkCreate([
@@ -246,7 +286,168 @@ const reset = async () => {
             type: "온도",
             imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B5.png",
             description: "16~20℃"
-        }
+        },
+        // 관음죽
+        {
+            PlantId: 4,
+            TagId: 15,
+            type: "난이도"
+        },
+        {
+            PlantId: 4,
+            TagId: 1,
+            type: "물주기",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B5.png",
+            description: "화분의 겉흙이 말랐을 때 듬뿍"
+        },
+        {
+            PlantId: 4,
+            TagId: 3,
+            type: "물주기",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B5.png",
+            description: "실내공기가 건조한 경우 스프래이로 잎에 분무"
+        },
+        {
+            PlantId: 4,
+            TagId: 5,
+            type: "크기"
+        },
+        {
+            PlantId: 4,
+            TagId: 6,
+            type: "크기"
+        },
+        {
+            PlantId: 4,
+            TagId: 7,
+            type: "꽃/열매"
+        },
+        {
+            PlantId: 4,
+            TagId: 8,
+            type: "꽃/열매"
+        },
+        {
+            PlantId: 4,
+            TagId: 9,
+            type: "장소",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B5.png",
+            description: "직사광선을 피한 실내의 창가, 베란다"
+        },
+        {
+            PlantId: 4,
+            TagId: 12,
+            type: "속도",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B5.png",
+            description: "느리게 자라는 편"
+        },
+        {
+            PlantId: 4,
+            TagId: 13,
+            type: "온도",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B5.png",
+            description: "16~20℃"
+        },
+        //스투키
+        {
+            PlantId: 5,
+            TagId: 16,
+            type: "난이도"
+        },
+        {
+            PlantId: 5,
+            TagId: 2,
+            type: "물주기",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%89%E1%85%B3%E1%84%90%E1%85%AE%E1%84%8F%E1%85%B5.png",
+            description: "한 달에 한 번 정도 잎이 말랑할 때"
+        },
+        {
+            PlantId: 5,
+            TagId: 4,
+            type: "크기"
+        },
+        {
+            PlantId: 5,
+            TagId: 5,
+            type: "크기"
+        },
+        {
+            PlantId: 5,
+            TagId: 6,
+            type: "크기"
+        },
+        {
+            PlantId: 5,
+            TagId: 9,
+            type: "장소",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%89%E1%85%B3%E1%84%90%E1%85%AE%E1%84%8F%E1%85%B5.png",
+            description: "바람이 잘 드는 실내"
+        },
+        {
+            PlantId: 5,
+            TagId: 12,
+            type: "속도",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%89%E1%85%B3%E1%84%90%E1%85%AE%E1%84%8F%E1%85%B5.png",
+            description: "느리게 자라는 편"
+        },
+        {
+            PlantId: 5,
+            TagId: 14,
+            type: "온도",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%89%E1%85%B3%E1%84%90%E1%85%AE%E1%84%8F%E1%85%B5.png",
+            description: "15~30℃"
+        },
+        //올리브 나무
+        {
+            PlantId: 6,
+            TagId: 16,
+            type: "난이도",
+        },
+        {
+            PlantId: 6,
+            TagId: 1,
+            type: "물주기",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%84%87%E1%85%B3%E1%84%82%E1%85%A1%E1%84%86%E1%85%AE.png",
+            description: "물을 좋아하니 흠뻑"
+        },
+        {
+            PlantId: 6,
+            TagId: 6,
+            type: "크기"
+        },
+        {
+            PlantId: 6,
+            TagId: 7,
+            type: "꽃/열매"
+        },
+        {
+            PlantId: 6,
+            TagId: 8,
+            type: "꽃/열매"
+        },
+        {
+            PlantId: 6,
+            TagId: 10,
+            type: "장소",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%84%87%E1%85%B3%E1%84%82%E1%85%A1%E1%84%86%E1%85%AE.png",
+            description: "- 햇빛을 좋아하므로 어두운곳은 부적합해요\n- 반양지를 가장 추천합니다."
+        },
+        {
+            PlantId: 6,
+            TagId: 12,
+            type: "속도",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%84%87%E1%85%B3%E1%84%82%E1%85%A1%E1%84%86%E1%85%AE.png",
+            description: "느리게 자라는 편"
+        },
+        {
+            PlantId: 6,
+            TagId: 14,
+            type: "온도",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A9%E1%86%AF%E1%84%85%E1%85%B5%E1%84%87%E1%85%B3%E1%84%82%E1%85%A1%E1%84%86%E1%85%AE.png",
+            description: "15~28℃"
+        },
+        // 행운목
+
     ]);
 
 

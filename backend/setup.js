@@ -566,7 +566,7 @@ const reset = async () => {
             imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%83%E1%85%A9%E1%86%AB%E1%84%82%E1%85%A1%E1%84%86%E1%85%AE.png",
             description: "18~24°C"
         }
-        //이하 나머지 식물 추가 필요
+        //TODO:이하 나머지 식물 추가 필요
     ]);
 
 

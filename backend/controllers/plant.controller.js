@@ -88,20 +88,23 @@ const getDetailPlant = async (req, res, next) => {
                 }],
         });
 
-        const tags = [...additonalResult.Tags];
+        // Promise<Model>의 응답값을 JSON 오브젝트로 바꾸는 메서드 .get() 사용.
+        const tags = additonalResult.get({
+            plain: true
+        });
 
-        const result = {
-            detail : baseResult,
-            allTags : tags,
-            // recommend: recommendResult
-        }
+        const detailResult = baseResult.get({
+            plain: true
+        });
+
+        detailResult.allTags = tags;
 
         await Plant.update({
             views: sequelize.literal('views + 1')
         }, {
             where: {id: req.params.plantId}
         });
-        res.json(result);
+        res.json(detailResult);
     } catch (error) {
         next(error);
     }

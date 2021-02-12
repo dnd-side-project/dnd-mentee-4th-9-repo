@@ -1,0 +1,52 @@
+service: dnd-4th-9-seeat-web-bucket
+
+provider:
+  name: aws
+  stage: ${opt:stage, self:custom.defaultStage}
+  stackName: ${self:service}-${self:provider.stage}
+  webBucket: ${self:service}-${self:provider.stage}-web-bucket
+
+custom:
+  custom.defaultStage: dev
+
+resources:
+  Description: "seeat web hosting bucket stack"
+  Resources:
+    webBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:provider.webBucket}
+        AccessControl: PublicRead
+        WebsiteConfiguration:
+          IndexDocument: "index.html"
+          ErrorDocument: "index.html"
+        CorsConfiguration:
+          CorsRules:
+            - AllowedOrigins:
+                - '*'
+              AllowedHeaders:
+                - '*'
+              AllowedMethods:
+                - GET
+              MaxAge: 3000
+        #크로스 오리진 정책 설정. 모든 아이피에서 접근  가능.
+    webBucketAllowPublicPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket: ${self:provider.imageBucket}
+        PolicyDocument:
+          Version: "2012-10-17"
+          Statement:
+            - Effect: Allow
+              Action:
+                - "s3:GetObject"
+              Resource:
+                - arn:aws:s3:::${self:provider.webBucket}
+                - arn:aws:s3:::${self:provider.webBucket}/*
+                #버킷내 모든 리소스를 누구나 접근 가능
+              Principal: "*" #모든 사용자가 접근 가능하도록 정의
+Outputs:
+  webBucket:
+    Value:
+      Ref: webBucket
+

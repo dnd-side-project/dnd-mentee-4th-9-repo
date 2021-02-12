@@ -8,7 +8,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  h2, h3, li, p, button {
+  h2, h3, li, p, button, span {
     font-family: 'Noto Sans KR', sans-serif;
   }
 

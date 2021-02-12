@@ -8,11 +8,16 @@ type: string ("full", "main", "section", "nav")
 margin: number
 width: string ("lg", "md", "sm")
 bgColor: string
+column: boolean (true => flex-direction: column)
+bgImage: boolean (true => background-image: bg_home.png)
 */
-function Section({type, margin, width, bgColor, children}) {
+function Section({type, margin, width, bgColor, children, column, bgImage}) {
+  bgImage = type === MAIN || bgImage;
+  const height = !bgImage && type !== SECTION && type !== NAV ? '100vh' : 'initial';
+
   return (
-    <Container className="container" type={type} bgColor={bgColor}>
-      <Wrapper type={type} margin={margin} width={width}>
+    <Container className="container" type={type} bgColor={bgColor} bgImage={bgImage} height={height}>
+      <Wrapper type={type} margin={margin} width={width} column={column}>
         {children}
       </Wrapper>
     </Container>
@@ -24,16 +29,17 @@ Section.defaultProps = {
   margin: 0,
   width: 'md',
   bgColor: 'white',
+  column: false,
 };
 
 export const Container = styled.section`
-  background: ${({type}) => type === MAIN && `url(${process.env.PUBLIC_URL}/images/bg_home.png)`};
+  background: ${({bgImage}) => bgImage && `url(${process.env.PUBLIC_URL}/images/bg_home.png)`};
   background-repeat: no-repeat;
   background-position: center;
-  background-size: cover;
+  background-size: ${({bgImage}) => bgImage && 'cover'};
 
   width: 100%;
-  height: ${({type}) => (type !== SECTION && type !== NAV ? '100vh' : 'initial')};
+  height: ${({height}) => height};
   padding: 0 ${({theme}) => theme.width.padding}px;
 
   display: flex;
@@ -58,6 +64,15 @@ export const Wrapper = styled.div`
       display: flex;
       justify-content: space-between;
       height: 56px;
+    `;
+  }}
+
+  ${({column}) => {
+    if (!column) return;
+    return css`
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     `;
   }}
 

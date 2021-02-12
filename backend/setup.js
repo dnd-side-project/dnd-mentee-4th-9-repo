@@ -30,7 +30,18 @@ const reset = async () => {
             imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A1%E1%84%85%E1%85%A6%E1%84%8F%E1%85%A1%E1%84%8B%E1%85%A3%E1%84%8C%E1%85%A1.png",
             thumbnailPath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A1%E1%84%85%E1%85%A6%E1%84%8F%E1%85%A1%E1%84%8B%E1%85%A3%E1%84%8C%E1%85%A1.png"
         },
-
+        // 아이비 id : 3
+        {
+            name: "아이비",
+            feature: "1. <꽃> 실내에서는 거의 꽃이 피지 않지만, 만약 핀다면 별 모양의 노란 꽃을 피워요.\n" +
+                "2. <잎> 벽을 타고 오르거나 땅을 기는 덩굴 식물이에요.",
+            warning: "1. 갑작스럽게 햇빛에 놓으면 잎이 타들어가므로 서서히 적응시켜주어야 해요!\n" +
+                "2. 1년 주기로 봄, 가을에 배양토로 분갈이를 해주세요.",
+            description: "작고 귀여운 덩굴 식물",
+            ment: "아이비는 품종이 500종 이상인 대표적인 플랜테리어 식물이에요. 잎이 하트 모양이거나 특이한 색(무늬)을 가져 귀여움을 자랑합니다. 아담한 사이즈로 길이가 길면 벽에 걸어두어 자연의 느낌을, 짧으면 미니 화분에 심을 수 있습니다. 초보자도 키우기 쉬우며 우수한 공기정화 능력은 덤이에요! 단, 햇빛이 잘 드는 장소에서 분무기로 물을 자주 주어야 하고, 수경 재배도 가능합니다.",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B5.png",
+            thumbnailPath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B5.png"
+        }
     ]);
     await db.Tag.bulkCreate([
         {
@@ -184,8 +195,58 @@ const reset = async () => {
             PlantId: 2,
             TagId: 15,
             type: "난이도"
+        },
+        //아이비
+        {
+            PlantId: 3,
+            TagId: 15,
+            type: "난이도"
+        },
+        {
+            PlantId: 3,
+            TagId: 1,
+            type: "물주기",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B5.png",
+            description: "흙이 완전히 마르면 적당히"
+        },
+        {
+            PlantId: 3,
+            TagId: 3,
+            type: "물주기",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B5.png",
+            description: "스프레이로 잎에 주 1회 분무"
+        },
+        {
+            PlantId: 3,
+            TagId: 4,
+            type: "크기"
+        },
+        {
+            PlantId: 3,
+            TagId: 7,
+            type: "꽃/열매"
+        },
+        {
+            PlantId: 3,
+            TagId: 10,
+            type: "장소",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B5.png",
+            description: "여름은 베란다 정원\n겨울은 햇빛이 잘드는 실내"
+        },
+        {
+            PlantId: 3,
+            TagId: 11,
+            type: "속도",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B5.png",
+            description: "빠르게 자라는 편"
+        },
+        {
+            PlantId: 3,
+            TagId: 13,
+            type: "온도",
+            imagePath: "https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%8B%E1%85%A1%E1%84%8B%E1%85%B5%E1%84%87%E1%85%B5.png",
+            description: "16~20℃"
         }
-
     ]);
 
 

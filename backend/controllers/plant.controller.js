@@ -9,6 +9,9 @@ const getListPlants = async (req, res, next) => {
             const result = await Plant.findAll({
                 include: [{
                     model: Tag,
+                    attributes: {
+                        exclude: ['createdAt', 'updatedAt']
+                    },
                     through: {
                         attributes: []
                     }
@@ -24,6 +27,9 @@ const getListPlants = async (req, res, next) => {
             const result = await Plant.findAll({
                 include: [{
                     model: Tag,
+                    attributes: {
+                        exclude: ['createdAt', 'updatedAt']
+                    },
                     through: {
                         attributes: []
                     }
@@ -39,6 +45,9 @@ const getListPlants = async (req, res, next) => {
             const result = await Plant.findAll({
                 include: [{
                     model: Tag,
+                    attributes: {
+                        exclude: ['createdAt', 'updatedAt']
+                    },
                     through: {
                         attributes: []
                     }
@@ -54,7 +63,7 @@ const getListPlants = async (req, res, next) => {
 
 const getDetailPlant = async (req, res, next) => {
     try {
-        const result = await Plant.findByPk((req.params.plantId), {
+        const baseResult = await Plant.findByPk((req.params.plantId), {
             attributes : {
                 exclude: ['createdAt', 'updatedAt']
             },
@@ -77,18 +86,40 @@ const getDetailPlant = async (req, res, next) => {
             }],
         });
 
+        const additonalResult = await Plant.findByPk((req.params.plantId), { //모든 태그를 조회하기 위한 쿼리
+            attributes: [],
+            include: [{
+                    model: Tag,
+                    attributes: ['name'],
+                through: {
+                        attributes: []
+                }
+                }],
+        });
+
+        // Promise<Model>의 응답값을 JSON 오브젝트로 바꾸는 메서드 .get() 사용.
+        const tags = additonalResult.get({
+            plain: true
+        });
+
+        const detailResult = baseResult.get({
+            plain: true
+        });
+
+        detailResult.allTags = tags;
+
         await Plant.update({
             views: sequelize.literal('views + 1')
         }, {
             where: {id: req.params.plantId}
         });
-        res.json(result);
+        res.json(detailResult);
     } catch (error) {
         next(error);
     }
 }
 
-const quratingResult = async (req, res, next) => {
+const curatingResult = async (req, res, next) => {
     try {
         const resultPlant = await Plant.findOne({
             attributes: ['id', 'name', 'description', 'ment', 'imagePath'],
@@ -129,7 +160,6 @@ const keywordSearch = async (req, res, next) => {
 const tagSearch = async(req,res,next)=>{
     try{
         const tags = req.body.tags.split(',');
-        console.log(tags);
         const tagSearchResult = await Plant.findAll({
             attributes:['id','name','description','thumbnailPath'],
             include:[{
@@ -148,4 +178,4 @@ const tagSearch = async(req,res,next)=>{
 }
 
 
-module.exports = { getListPlants , getDetailPlant, quratingResult,keywordSearch,tagSearch};
+module.exports = { getListPlants , getDetailPlant, curatingResult,keywordSearch,tagSearch};

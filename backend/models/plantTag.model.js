@@ -8,11 +8,11 @@ module.exports = class PlantTags extends Sequelize.Model{
                 allowNull: false
             },
             imagePath: {
-                type: Sequelize.STRING(200),
+                type: Sequelize.TEXT,
                 allowNull: true
             },
             description: {
-                type: Sequelize.STRING(100),
+                type: Sequelize.TEXT,
                 allowNull: true
             }
         }, {

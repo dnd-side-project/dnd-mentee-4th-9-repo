@@ -1,7 +1,7 @@
 // 홈/요즘 뜨는 친구들 (mobile)
 // 식물 상세 정보/키워드 검색, 친구 추천 (mobile)
 const sm = {
-  margin: 35,
+  margin: 20,
   padding: 13,
 
   width: 235,

@@ -27,7 +27,7 @@ const searchTag = async (req, res, next) => {
 const getListTags = async(req, res, next) => {
     try {
         const result = await Tag.findAll({
-            attributes: ['name']
+            attributes: ['id', 'name', 'type']
         });
         res.json(result);
     } catch (error) {

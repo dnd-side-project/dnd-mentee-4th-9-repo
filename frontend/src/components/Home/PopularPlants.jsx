@@ -65,53 +65,29 @@ function PopularPlants() {
       <Wrapper>
         <SubHead>요즘 뜨는 친구들</SubHead>
         <Plants>
-          <StyledSlider
-            freeMode={true}
-            slidesPerView={1}
-            pagination={{clickable: true}}
-            breakpoints={{
-              815: {
-                slidesPerView: 2,
-              },
-              1202: {
-                slidesPerView: 3,
-              },
-            }}
-          >
+          <StyledSwiper freeMode={true} slidesPerView={'auto'} pagination={{clickable: true}}>
             {popularPlants.map((plant, i) => (
               <SwiperSlide key={i}>
                 <RecommendPlant plant={plant} />
               </SwiperSlide>
             ))}
-          </StyledSlider>
+          </StyledSwiper>
         </Plants>
       </Wrapper>
     </Section>
   );
 }
 
-const StyledSlider = styled(Swiper)`
-  width: 100% !important;
-  cursor: pointer;
-
-  button {
-    display: none;
-  }
-
-  .slick-slide {
-    display: inline-block !important;
-    outline: none;
-  }
-
-  .slick-track {
-    width: max-content !important;
-    display: flex;
-  }
-`;
-
 const Wrapper = styled.div`
   li {
     margin-bottom: 0 !important;
+  }
+`;
+
+const StyledSwiper = styled(Swiper)`
+  cursor: pointer;
+  .swiper-slide {
+    width: max-content !important;
   }
 `;
 

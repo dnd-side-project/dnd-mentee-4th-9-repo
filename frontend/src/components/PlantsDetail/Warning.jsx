@@ -1,8 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import {getReactiveSize} from '../../lib/calculate';
 import Section from '../Section';
 import {TagsHead} from './Feature';
 import WarningCard from './WarningCard';
+
+const margins = getReactiveSize(30);
 
 function Warning() {
   return (
@@ -23,11 +26,18 @@ function Warning() {
 
 const WarningHead = styled(TagsHead)`
   margin-bottom: 79px;
+
+  @media ${({theme}) => theme.devices.md} {
+    margin-bottom: ${margins.lg}px;
+  }
 `;
 
 const Warnings = styled.ul`
   li {
-    margin-bottom: 30px;
+    margin-bottom: ${margins.lg}px;
+    @media ${({theme}) => theme.devices.md} {
+      margin-bottom: ${margins.md}px;
+    }
   }
 
   li:last-child {

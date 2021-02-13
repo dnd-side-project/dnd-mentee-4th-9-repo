@@ -1,14 +1,14 @@
 const express = require('express');
-const { getListPlants, getDetailPlant,curatingResult,keywordSearch,tagSearch} = require('../controllers/plant.controller');
+const { getListPlants, getDetailPlant,curatingResult,searchByPlantName,searchByPlantTag} = require('../controllers/plant.controller');
 const router = express.Router()
 
 
 router.get('/', getListPlants) //쿼리스트링. /plants?order=recent});
 
-router.post('/curating',curatingResult);
+router.get('/curating',curatingResult);
 
-router.post('/encyclopedia/keyword',keywordSearch);
-router.post('/encyclopedia/tag',tagSearch);
+router.post('/encyclopedia/keyword',searchByPlantName);
+router.post('/encyclopedia/tag',searchByPlantTag);
 
 router.get('/:plantId', getDetailPlant) //for detail
 

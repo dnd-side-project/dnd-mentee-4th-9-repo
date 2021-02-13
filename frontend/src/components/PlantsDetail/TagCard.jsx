@@ -3,23 +3,13 @@ import styled from 'styled-components';
 import TagList from '../TagList';
 import {getReactiveSize} from '../../lib/calculate';
 
-const testData = {
-  id: 9,
-  name: '#그늘에서',
-  PlantTag: {
-    type: '장소',
-    imagePath: '',
-    description: '실내 또는 실외의 그늘진 장소',
-  },
-};
-
 const margins = {
   '20': getReactiveSize(20),
   '30': getReactiveSize(30),
 };
 const lineHeight = getReactiveSize(40);
 
-function TagCard({tag = testData}) {
+function TagCard({tag}) {
   const {type, imagePath, description} = tag.PlantTag;
 
   return (
@@ -34,7 +24,8 @@ function TagCard({tag = testData}) {
   );
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.li`
+  margin-bottom: 30px;
   width: 285px;
 
   li {
@@ -49,7 +40,9 @@ const Wrapper = styled.div`
   }
 
   @media ${({theme}) => theme.devices.md} {
+    margin-bottom: 25px;
     width: 150px;
+
     p {
       margin-top: ${margins['20'].md}px;
       line-height: ${lineHeight.md}px;
@@ -69,6 +62,7 @@ const ImgWrapper = styled.div`
   @media ${({theme}) => theme.devices.md} {
     margin-bottom: ${margins['20'].md}px;
     height: 100px;
+    border-radius: ${margins['20'].md}px;
     font-size: ${({theme}) => theme.fontSizes['28'].md}px;
   }
 `;
@@ -94,4 +88,4 @@ const Title = styled.h2`
   }
 `;
 
-export default TagCard;
+export default React.memo(TagCard);

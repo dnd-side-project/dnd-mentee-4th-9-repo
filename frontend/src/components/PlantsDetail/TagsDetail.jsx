@@ -6,7 +6,7 @@ import TagCard from './TagCard';
 
 function TagsDetail() {
   return (
-    <Section width="lg">
+    <Section width="lg" margin={100}>
       <Wrapper>
         <TagsHead>
           <span>몬스테라</span>는 어떤 친구인가요?

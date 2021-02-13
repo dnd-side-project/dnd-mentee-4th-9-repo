@@ -18,7 +18,7 @@ const router = express.Router()
  *         type: string
  *     responses:
  *       200:
- *         description: An array of plants
+ *         description: 식물의 정보에 대한 배열을 반환합니다.
  */
 router.get('/', getListPlants) //쿼리스트링. /plants?order=recent});
 
@@ -41,7 +41,7 @@ router.get('/', getListPlants) //쿼리스트링. /plants?order=recent});
  *         example: 1
  *     responses:
  *       200:
- *         description: An array of plants
+ *         description: 식물의 디테일한 내용을 얻습니다.
  */
 router.get('/:plantId', getDetailPlant) //for detail
 

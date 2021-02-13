@@ -25,31 +25,8 @@ router.get('/', getListPlants) //쿼리스트링. /plants?order=recent});
 
 /**
  * @swagger
- * /plants/{plantId}:
- *   get:
- *     tags:
- *       - plants
- *     description: 디테일 식물을 조회한다.
- *     produces:
- *       - application/json
- *     parameters:
- *       - name: plantId
- *         in: path
- *         description: 식물의 id를 path parameter로 주입한다.
- *         type: integer
- *         format: int64
- *         required: true
- *         example: 1
- *     responses:
- *       200:
- *         description: 식물의 디테일한 내용을 얻습니다.
- */
-router.get('/:plantId', getDetailPlant) //for detail
-
-/**
- * @swagger
  * /plants/curating:
- *   post:
+ *   get:
  *     tags:
  *       - plants
  *     description: 큐레이팅 결과 식물의 내용을 반환
@@ -58,16 +35,12 @@ router.get('/:plantId', getDetailPlant) //for detail
  *       - application/json
  *     consumes:
  *       - application/json
- *     requestBody:
- *        content:
- *          application/json:
- *              schema:
- *               type: object
- *               properties:
- *                plant:
- *                  type: string
- *               example:
- *                plant: 몬스테라
+ *     parameters:
+ *       - name: result
+ *         description: 큐레이팅 결과 식물의 이름을 result 쿼리스트링에 전달
+ *         in: query
+ *         type: string
+ *         example: "몬스테라"
  *     responses:
  *       200:
  *         description: 큐레이팅 결과 식물 반환
@@ -128,7 +101,27 @@ router.post('/encyclopedia/keyword',searchByPlantName);
  */
 router.post('/encyclopedia/tag',searchByPlantTag);
 
-
-
+/**
+ * @swagger
+ * /plants/{plantId}:
+ *   get:
+ *     tags:
+ *       - plants
+ *     description: 디테일 식물을 조회한다.
+ *     produces:
+ *       - application/json
+ *     parameters:
+ *       - name: plantId
+ *         in: path
+ *         description: 식물의 id를 path parameter로 주입한다.
+ *         type: integer
+ *         format: int64
+ *         required: true
+ *         example: 1
+ *     responses:
+ *       200:
+ *         description: 식물의 디테일한 내용을 얻습니다.
+ */
+router.get('/:plantId', getDetailPlant) //for detail
 
 module.exports = router;

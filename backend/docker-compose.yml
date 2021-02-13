@@ -36,3 +36,31 @@ services:
     expose:
       - "4000"
     restart: "unless-stopped"
+  express_5:
+    build:
+      context: .
+    container_name: express5
+    expose:
+      - "4000"
+    restart: "unless-stopped"
+  express_6:
+    build:
+      context: .
+    container_name: express6
+    expose:
+      - "4000"
+    restart: "unless-stopped"
+  express_7:
+    build:
+      context: .
+    container_name: express7
+    expose:
+      - "4000"
+    restart: "unless-stopped"
+  express_8:
+    build:
+      context: .
+    container_name: express8
+    expose:
+      - "4000"
+    restart: "unless-stopped"

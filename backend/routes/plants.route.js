@@ -1,5 +1,5 @@
 const express = require('express');
-const { getListPlants, getDetailPlant,curatingResult,keywordSearch,tagSearch} = require('../controllers/plant.controller');
+const { getListPlants, getDetailPlant,curatingResult,searchByPlantName,searchByPlantTag} = require('../controllers/plant.controller');
 const router = express.Router()
 
 /**
@@ -72,7 +72,7 @@ router.get('/:plantId', getDetailPlant) //for detail
  *       200:
  *         description: 큐레이팅 결과 식물 반환
  */
-router.post('/curating',curatingResult);
+router.get('/curating',curatingResult);
 
 /**
  * @swagger
@@ -99,7 +99,7 @@ router.post('/curating',curatingResult);
  *       200:
  *         description: 식물 이름 검색 내용을 반환
  */
-router.post('/encyclopedia/keyword',keywordSearch);
+router.post('/encyclopedia/keyword',searchByPlantName);
 
 /**
  * @swagger
@@ -126,7 +126,8 @@ router.post('/encyclopedia/keyword',keywordSearch);
  *       200:
  *         description: 태그 검색 내용을 반환
  */
-router.post('/encyclopedia/tag',tagSearch);
+router.post('/encyclopedia/tag',searchByPlantTag);
+
 
 
 

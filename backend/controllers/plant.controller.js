@@ -123,7 +123,7 @@ const curatingResult = async (req, res, next) => {
     try {
         const resultPlant = await Plant.findOne({
             attributes: ['id', 'name', 'description', 'ment', 'imagePath'],
-            where: {name: req.body.plant},
+            where: {name: req.query.result},
             include: [{
                 model: Tag,
                 attributes: ['id', 'name'],
@@ -138,11 +138,11 @@ const curatingResult = async (req, res, next) => {
     }
 }
 
-const keywordSearch = async (req, res, next) => {
+const searchByPlantName = async (req, res, next) => {
     try {
-        const searchResult = await Plant.findOne({
+        const searchResult = await Plant.findAll({
             attributes: ['id', 'name', 'description', 'thumbnailPath'],
-            where: {name: req.body.keyword},
+            where: {name: {[Op.like]:`${req.body.keyword}%`}},
             include: [{
                 model: Tag,
                 attributes: ['id', 'name'],
@@ -157,7 +157,7 @@ const keywordSearch = async (req, res, next) => {
     }
 }
 
-const tagSearch = async(req,res,next)=>{
+const searchByPlantTag = async(req,res,next)=>{
     try{
         const tags = req.body.tags.split(',');
         const tagSearchResult = await Plant.findAll({
@@ -178,4 +178,4 @@ const tagSearch = async(req,res,next)=>{
 }
 
 
-module.exports = { getListPlants , getDetailPlant, curatingResult,keywordSearch,tagSearch};
+module.exports = { getListPlants , getDetailPlant, curatingResult,searchByPlantName,searchByPlantTag};

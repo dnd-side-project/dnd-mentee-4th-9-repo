@@ -16,6 +16,7 @@ const router = express.Router()
  *         description: recent / view 두가지. recent는 최신순 view는 인기순
  *         in: query
  *         type: string
+ *         example: view
  *     responses:
  *       200:
  *         description: 식물의 정보에 대한 배열을 반환합니다.

@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Section from '../Section';
 import SubHead from '../../styles/SubHead';
+import FeatureCard from './FeatureCard';
 
 function Feature() {
   return (
@@ -17,15 +18,6 @@ function Feature() {
         </Features>
       </div>
     </Section>
-  );
-}
-
-function FeatureCard({name, children}) {
-  return (
-    <FeatWrapper>
-      <FeatImg imgPath={`${process.env.PUBLIC_URL}/images/${name}.svg`} alt={name} />
-      <p>{children}</p>
-    </FeatWrapper>
   );
 }
 
@@ -45,30 +37,21 @@ const TagsHead = styled(SubHead)`
 const Features = styled.div`
   display: flex;
 
-  div {
+  div:nth-child(-n + 3) {
     margin-right: 30px;
   }
 
-  div:last-child {
-    margin-right: 0;
+  @media ${({theme}) => theme.devices.lg} {
+    flex-direction: column;
+
+    div {
+      margin-right: 0 !important;
+    }
+
+    div:nth-child(-n + 3) {
+      margin-bottom: 20px;
+    }
   }
-`;
-
-const FeatWrapper = styled.div`
-  flex: 1;
-  display: flex;
-  align-items: center;
-
-  p {
-    line-height: 43px;
-    font-size: 28.5px;
-    color: ${({theme}) => theme.colors.darkGray};
-  }
-`;
-
-const FeatImg = styled.img`
-  content: url(${({imgPath}) => imgPath});
-  margin-right: 30px;
 `;
 
 export default Feature;

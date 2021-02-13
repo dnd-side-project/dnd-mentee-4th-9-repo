@@ -4,9 +4,8 @@ import Section from '../Section';
 import SubHead from '../../styles/SubHead';
 import RecommendPlant from '../RecommentPlant';
 
-import Slider from 'react-slick';
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
+import {Swiper, SwiperSlide} from 'swiper/react';
+import 'swiper/swiper.scss';
 
 // test data
 const popularPlants = [
@@ -60,39 +59,29 @@ const popularPlants = [
   },
 ];
 
-const settings = {
-  centerMode: false,
-  infinite: false,
-  slidesToShow: 3,
-  slide: 'div',
-  speed: 500,
-  slidesToScroll: 1,
-  responsive: [
-    {
-      breakpoint: 1202,
-      settings: {
-        slidesToShow: 2,
-      },
-    },
-    {
-      breakpoint: 815,
-      settings: {
-        slidesToShow: 1,
-        slidesToScroll: 1,
-      },
-    },
-  ],
-};
-
 function PopularPlants() {
   return (
     <Section width="lg" margin={200}>
       <Wrapper>
         <SubHead>요즘 뜨는 친구들</SubHead>
         <Plants>
-          <StyledSlider {...settings}>
+          <StyledSlider
+            freeMode={true}
+            slidesPerView={1}
+            pagination={{clickable: true}}
+            breakpoints={{
+              815: {
+                slidesPerView: 2,
+              },
+              1202: {
+                slidesPerView: 3,
+              },
+            }}
+          >
             {popularPlants.map((plant, i) => (
-              <RecommendPlant key={i} plant={plant} />
+              <SwiperSlide key={i}>
+                <RecommendPlant plant={plant} />
+              </SwiperSlide>
             ))}
           </StyledSlider>
         </Plants>
@@ -101,7 +90,7 @@ function PopularPlants() {
   );
 }
 
-const StyledSlider = styled(Slider)`
+const StyledSlider = styled(Swiper)`
   width: 100% !important;
   cursor: pointer;
 

@@ -140,9 +140,9 @@ const curatingResult = async (req, res, next) => {
 
 const searchByPlantName = async (req, res, next) => {
     try {
-        const searchResult = await Plant.findOne({
+        const searchResult = await Plant.findAll({
             attributes: ['id', 'name', 'description', 'thumbnailPath'],
-            where: {name: req.body.keyword},
+            where: {name: {[Op.like]:`${req.body.keyword}%`}},
             include: [{
                 model: Tag,
                 attributes: ['id', 'name'],

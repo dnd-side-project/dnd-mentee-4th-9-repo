@@ -13,6 +13,7 @@ const colors = {
 
 const fontSizes = {
   '24': getReactiveSize(24),
+  '28': getReactiveSize(28),
   '30': getReactiveSize(30),
   '32': getReactiveSize(32),
   '40': getReactiveSize(40),

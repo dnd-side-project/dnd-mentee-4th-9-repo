@@ -5,10 +5,12 @@ import Warning from '../components/PlantsDetail/Warning';
 import Nothing from '../components/Nothing';
 import TestMain from '../components/TestMain';
 import Footer from '../components/Footer/Footer';
+import TagsDetail from '../components/PlantsDetail/TagsDetail';
 
 function PlantsDetail() {
   return (
     <>
+      <TagsDetail />
       <Feature />
       <Warning />
       <Nothing />

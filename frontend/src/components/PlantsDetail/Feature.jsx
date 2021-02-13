@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import Section from '../Section';
+import Section, { SIDE } from '../Section';
 import SubHead from '../../styles/SubHead';
 import FeatureCard from './FeatureCard';
 
 function Feature() {
   return (
-    <Section width="lg" margin={100} bgColor="bgLightGray">
+    <Section width="lg" margin={100} bgColor="bgLightGray" order={SIDE}>
       <div>
         <TagsHead>
           <span>몬스테라</span>는 이런 반전 매력도 있어요
@@ -21,9 +21,9 @@ function Feature() {
   );
 }
 
-const TagsHead = styled(SubHead)`
+export const TagsHead = styled(SubHead)`
   margin-bottom: 50px;
-  font-weight: ${({theme}) => theme.fontWeights.medium} !important;
+  font-weight: ${({theme}) => theme.fontWeights.regular} !important;
 
   span {
     color: ${({theme}) => theme.colors.green};

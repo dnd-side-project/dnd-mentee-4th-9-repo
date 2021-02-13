@@ -9,6 +9,7 @@ const passport = require("passport");
 const {sequelize} = require('./models');
 const passportConfig = require('./passport');
 
+
 dotenv.config();
 sequelize.sync({force:false})
 .then(()=>{
@@ -24,6 +25,7 @@ const indexRouter = require("./routes/index.route");
 const authRouter = require('./routes/auth.route');
 const plantsRouter = require('./routes/plants.route');
 const tagsRouter = require('./routes/tags.route');
+const swaggerDoc = require('./routes/swagger.route');
 
 app.use(morgan('dev'));
 app.use(express.json());
@@ -49,5 +51,6 @@ app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/plants",plantsRouter);
 app.use("/tags", tagsRouter);
+app.use(swaggerDoc);
 
 module.exports = app;

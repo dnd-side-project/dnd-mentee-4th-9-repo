@@ -25,6 +25,8 @@
     "passport": "^0.4.1",
     "passport-kakao": "^1.0.0",
     "sequelize": "^6.3.5",
-    "sequelize-cli": "^6.2.0"
+    "sequelize-cli": "^6.2.0",
+    "swagger-jsdoc": "^6.0.2",
+    "swagger-ui-express": "^4.1.4"
   }
 }

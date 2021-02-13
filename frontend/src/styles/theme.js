@@ -8,6 +8,7 @@ const colors = {
   darkGray: 'rgba(0, 0, 0, 0.9)',
   gray: 'rgba(0, 0, 0, 0.6)',
   lightGray: '#f2f2f2',
+  bgLightGray: '#f7f7f7',
 };
 
 const fontSizes = {

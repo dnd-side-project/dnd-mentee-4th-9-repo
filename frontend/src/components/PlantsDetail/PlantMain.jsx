@@ -1,29 +1,24 @@
 import React from 'react';
 import styled from 'styled-components';
-import {getReactiveSize, getVW} from '../../lib/calculate';
+import {getReactiveSize} from '../../lib/calculate';
+import TagList from '../TagList';
 
 // test data
-const mainData = {
-  name: '몬스테라',
-  description: '바쁜 일상 속 조용한 힐링',
-  imagePath: 'https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%A9%E1%86%AB%E1%84%89%E1%85%B3%E1%84%90%E1%85%A6%E1%84%85%E1%85%A1_full.png',
-  thumbnailPath: 'https://seeat-image-dev-image-bucket.s3.ap-northeast-2.amazonaws.com/%E1%84%86%E1%85%A9%E1%86%AB%E1%84%89%E1%85%B3%E1%84%90%E1%85%A6%E1%84%85%E1%85%A1.png',
-};
-
 const widths = getReactiveSize(640);
 const heights = getReactiveSize(200);
 const fontSizes = getReactiveSize(48);
 
-function PlantMain() {
+function PlantMain({name, description, imgPath, star}) {
   return (
     <Wrapper>
-      <Img imgPath={mainData.imagePath} alt="plant main" />
+      <Img imgPath={imgPath} alt="plant main" />
       <LabelWrapper>
         <Label>
           <Text>
             <h1>몬스테라</h1>
             <span>바쁜 일상 속 조용한 힐링</span>
           </Text>
+          <TagList tagData={[star]} />
         </Label>
       </LabelWrapper>
     </Wrapper>
@@ -114,6 +109,19 @@ const Label = styled.div`
   @media ${({theme}) => theme.devices.md} {
     padding-top: 15px;
     border-radius: 10px;
+  }
+
+  li {
+    border-radius: 100px;
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, 167px);
+
+    @media ${({theme}) => theme.devices.md} {
+      transform: translate(-50%, 80px);
+    }
   }
 `;
 

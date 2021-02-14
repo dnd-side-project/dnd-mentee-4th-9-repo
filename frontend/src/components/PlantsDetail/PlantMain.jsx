@@ -33,6 +33,7 @@ const Wrapper = styled.section`
   width: 100%;
   height: 720px;
   display: flex;
+  z-index: -1;
 
   @media ${({theme}) => theme.devices.md} {
     margin-bottom: 119px;

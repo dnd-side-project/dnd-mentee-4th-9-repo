@@ -34,10 +34,9 @@ const Button = styled.button`
   }
 
   @media ${({theme}) => theme.devices.md} {
-    margin: 0 20px;
     border-radius: ${({borderRadius}) => borderRadius}px;
     border-width: 1px;
-    width: ${width.md - 40}px;
+    width: min(320px, 100%);
     height: ${({height}) => height.md}px;
     font-size: 16px;
     font-weight: ${({theme}) => theme.fontWeights.medium};

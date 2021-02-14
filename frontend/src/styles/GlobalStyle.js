@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Noto Sans KR', sans-serif;
   }
 
-  ul {
+  ul, li {
     margin: 0;
     padding: 0;
     list-style: none;

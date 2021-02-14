@@ -6,7 +6,7 @@ import sizes from '../styles/recommentPlant';
 /*
 plant {
   img: string;
-  title: string;
+  name: string;
   description: string;
   tagData: string[];
 }
@@ -15,11 +15,11 @@ mobile: string (recommentPlant/sizes)
 */
 function RecommendPlant({plant, desk = 'md', mobile = 'sm'}) {
   return (
-    <Wrapper desk={desk} mobile={mobile}>
+    <Wrapper desk={desk} mobile={mobile} className="card-wrapper">
       <Image imgUrl={plant.img} />
       <TextWrapper desk={desk} mobile={mobile}>
         <Title desk={desk} mobile={mobile}>
-          {plant.title}
+          {plant.name}
         </Title>
         <Description desk={desk} mobile={mobile}>
           {plant.description}

@@ -9,6 +9,7 @@ import TagsDetail from '../components/PlantsDetail/TagsDetail';
 import PlantMain from '../components/PlantsDetail/PlantMain';
 import AllKeywords from '../components/PlantsDetail/AllKeywords';
 import DescText from '../styles/DescText';
+import Friends from '../components/PlantsDetail/Friends';
 
 // test data
 function PlantsDetail() {
@@ -60,6 +61,7 @@ function PlantsDetail() {
       <TagsDetail />
       <Feature />
       <Warning />
+      <Friends />
       <Nothing />
       <Section bgColor="green" margin={200}>
         <TestMain type={SECTION} />

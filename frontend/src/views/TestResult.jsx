@@ -8,6 +8,7 @@ import TagList from '../components/TagList';
 import Button from '../styles/Button';
 import {getReactiveSize} from '../lib/calculate';
 import SubHead from '../styles/SubHead';
+import DescText from '../styles/DescText';
 
 function TestResult() {
   const location = useLocation();
@@ -40,7 +41,7 @@ function TestResult() {
       <Section>
         <Description marginBottom="20">
           <SubHead>{plantData.description}</SubHead>
-          <Text>{plantData.ment}</Text>
+          <DescText>{plantData.ment}</DescText>
         </Description>
         <Description marginBottom="30">
           <SubHead>#{plantData.name} #키워드</SubHead>
@@ -92,18 +93,6 @@ const Description = styled.div`
     @media ${({theme}) => theme.devices.md} {
       margin-bottom: ${({marginBottom}) => marginBottom / 2}px;
     }
-  }
-`;
-
-const Text = styled.span`
-  color: ${({theme}) => theme.colors.darkGray};
-  font-weight: ${({theme}) => theme.fontWeights.regular};
-  font-size: 28.61px;
-  line-height: 42.92px;
-
-  @media ${({theme}) => theme.devices.md} {
-    font-size: 14px;
-    line-height: 21px;
   }
 `;
 

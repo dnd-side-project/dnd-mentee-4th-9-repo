@@ -8,6 +8,8 @@ const dotenv = require("dotenv");
 const passport = require("passport");
 const {sequelize} = require('./models');
 const passportConfig = require('./passport');
+const rateLimit = require('express-rate-limit');
+const oneMinute = 1*60*1000;
 
 dotenv.config();
 sequelize.sync({force:false})
@@ -24,6 +26,7 @@ const indexRouter = require("./routes/index.route");
 const authRouter = require('./routes/auth.route');
 const plantsRouter = require('./routes/plants.route');
 const tagsRouter = require('./routes/tags.route');
+const swaggerDoc = require('./routes/swagger.route');
 
 app.use(morgan('dev'));
 app.use(express.json());
@@ -45,9 +48,16 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+//접속한 IP의 1분당 최대 API 호출 횟수를 60번으로 제한. Dos 공격 방지
+app.use(rateLimit({
+    windowMs: oneMinute,
+    max:60})
+);
+
 app.use("/", indexRouter);
 app.use("/auth", authRouter);
 app.use("/plants",plantsRouter);
 app.use("/tags", tagsRouter);
+app.use(swaggerDoc);
 
 module.exports = app;

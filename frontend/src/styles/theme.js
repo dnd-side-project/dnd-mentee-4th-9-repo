@@ -8,10 +8,12 @@ const colors = {
   darkGray: 'rgba(0, 0, 0, 0.9)',
   gray: 'rgba(0, 0, 0, 0.6)',
   lightGray: '#f2f2f2',
+  bgLightGray: '#f7f7f7',
 };
 
 const fontSizes = {
   '24': getReactiveSize(24),
+  '28': getReactiveSize(28),
   '30': getReactiveSize(30),
   '32': getReactiveSize(32),
   '40': getReactiveSize(40),

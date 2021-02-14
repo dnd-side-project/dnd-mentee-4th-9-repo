@@ -7,6 +7,10 @@ module.exports = class Tag extends Sequelize.Model{
             name:{
                 type: Sequelize.STRING(50),
                 allowNull: false,
+            },
+            type: {
+                type: Sequelize.STRING(50),
+                allowNull: false,
             }
         }, {
             sequelize,

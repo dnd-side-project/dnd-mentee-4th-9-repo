@@ -129,7 +129,7 @@ const getDetailPlant = async (req, res, next) => {
         });
 
         //몇개의 태그가 매칭되는지 계산하는 함수
-        const matchedTagCount = (Plant) => {
+        const isRecommended = (Plant) => {
             const tags = Plant.get({
                 plain: true
             })['Tags']
@@ -141,7 +141,7 @@ const getDetailPlant = async (req, res, next) => {
             return count > 4
         }
 
-        const recommendPlants = allPlants.filter(plant => matchedTagCount(plant));
+        const recommendPlants = allPlants.filter(plant => isRecommended(plant));
 
         // ****************************************
 

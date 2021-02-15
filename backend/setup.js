@@ -203,7 +203,7 @@ const reset = async () => {
             type: "물주기"
         },
         {
-            name: "잎도촉촉히", // id : 3
+            name: "#잎도촉촉히", // id : 3
             type: "물주기"
         },
         {

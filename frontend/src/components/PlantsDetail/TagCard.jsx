@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import TagList from '../TagList';
 import {getReactiveSize} from '../../lib/calculate';
+import path from '../../const/detailTags';
 
 const margins = {
   '20': getReactiveSize(20),
@@ -9,18 +10,33 @@ const margins = {
 };
 const lineHeight = getReactiveSize(40);
 
+/*
+tag
+{
+  id: number,
+    name: string,
+    PlantTag: {
+      type: string,
+      imagePath: string,
+      description: string,
+    },
+}
+*/
 function TagCard({tag}) {
-  const {type, imagePath, description} = tag.PlantTag;
+  const {type, description} = tag.PlantTag;
+  const imgPath = path[tag.name];
 
   return (
-    <Wrapper>
-      <Title>{type}</Title>
-      <ImgWrapper>
-        <Img imgPath={`${process.env.PUBLIC_URL}/images/detailTags/shade`} alt={tag.name} />
-      </ImgWrapper>
-      <TagList tagData={[tag.name]} />
-      <p>{description}</p>
-    </Wrapper>
+    <>
+      <Wrapper>
+        <Title>{type}</Title>
+        <ImgWrapper>
+          <Img deskPath={imgPath.lg} mobilePath={imgPath.md} alt={tag.name} />
+        </ImgWrapper>
+        <TagList tagData={[tag.name]} />
+        <p>{description}</p>
+      </Wrapper>
+    </>
   );
 }
 
@@ -69,10 +85,10 @@ const ImgWrapper = styled.div`
 
 const Img = styled.img`
   width: fit-content;
-  content: url(${({imgPath}) => `${imgPath}.svg`});
+  content: url(${({deskPath}) => deskPath});
 
   @media ${({theme}) => theme.devices.md} {
-    content: url(${({imgPath}) => `${imgPath}_md.svg`});
+    content: url(${({mobilePath}) => mobilePath});
   }
 `;
 

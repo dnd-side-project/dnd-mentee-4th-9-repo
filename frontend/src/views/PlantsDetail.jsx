@@ -22,7 +22,7 @@ function PlantsDetail({
   },
 }) {
   const plant = usePlantInfo(id);
-  const {name, ment = '', description, imagePath, allTags} = plant;
+  const {name, ment = '', description, imagePath, Tags, allTags} = plant;
 
   const star = !isEmptyArr(allTags) && allTags[allTags.length - 1].name;
 
@@ -33,7 +33,7 @@ function PlantsDetail({
         <DescText>{ment}</DescText>
       </Section>
       <AllKeywords name={name} keywords={allTags} />
-      <TagsDetail />
+      <TagsDetail name={name} tags={Tags} />
       <Feature />
       <Warning />
       {/* <Friends /> */}

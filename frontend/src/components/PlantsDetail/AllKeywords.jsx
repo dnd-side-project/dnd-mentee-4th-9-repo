@@ -1,12 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
-
 import Section, {SIDE} from '../Section';
 import SubHead from '../../styles/SubHead';
 import TagList from '../TagList';
 import Button from '../../styles/Button';
 
-function AllKeywords({name, keywords}) {
+/*
+tag: {
+  name: '⭐',
+}
+*/
+
+/*
+name: string
+keywords: tag[]
+*/
+function AllKeywords({name = '', keywords = []}) {
   const tagData = keywords.map((tag) => tag.name);
 
   return (

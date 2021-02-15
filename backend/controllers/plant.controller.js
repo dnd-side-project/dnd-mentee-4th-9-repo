@@ -64,8 +64,8 @@ const getListPlants = async (req, res, next) => {
 const getDetailPlant = async (req, res, next) => {
     try {
         const baseResult = await Plant.findByPk((req.params.plantId), {
-            attributes: {
-                exclude: ['createdAt', 'updatedAt']
+            attributes : {
+                exclude: ['thumbnailPath', 'createdAt', 'updatedAt']
             },
             include: [{
                 model: Tag,

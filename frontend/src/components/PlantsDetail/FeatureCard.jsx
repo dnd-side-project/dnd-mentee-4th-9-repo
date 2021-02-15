@@ -1,15 +1,22 @@
 import React from 'react';
 import styled from 'styled-components';
+import featPath from '../../const/featureCard';
 import {getReactiveSize} from '../../lib/calculate';
+import {isEmptyStr} from '../../lib/handleString';
 
 const lineHeights = getReactiveSize(42);
 const fontSizes = getReactiveSize(28);
 
-function FeatureCard({name, children}) {
+/*
+feature: string ex) "잎:벽을 타고 오르거나 땅을 기는 덩굴 식물이에요."
+*/
+function FeatureCard({feature = ''}) {
+  const [type = '', description = ''] = feature.split(':');
+
   return (
     <FeatWrapper>
-      <FeatImg imgPath={`${process.env.PUBLIC_URL}/images/${name}.svg`} alt={name} />
-      <p>{children}</p>
+      {!isEmptyStr(feature) && <FeatImg deskPath={featPath[type].lg} mobilePath={featPath[type].lg} alt={type} />}
+      <p>{description}</p>
     </FeatWrapper>
   );
 }
@@ -34,12 +41,12 @@ const FeatWrapper = styled.div`
 `;
 
 const FeatImg = styled.img`
-  content: url(${({imgPath}) => imgPath});
+  content: url(${({deskPath}) => deskPath});
   margin-right: 30px;
 
   @media ${({theme}) => theme.devices.md} {
+    content: url(${({mobilePath}) => mobilePath});
     margin-right: 20px;
-    width: 65px;
   }
 `;
 

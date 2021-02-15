@@ -64,7 +64,7 @@ const getListPlants = async (req, res, next) => {
 const getDetailPlant = async (req, res, next) => {
     try {
         const baseResult = await Plant.findByPk((req.params.plantId), {
-            attributes : {
+            attributes: {
                 exclude: ['createdAt', 'updatedAt']
             },
             include: [{
@@ -89,12 +89,12 @@ const getDetailPlant = async (req, res, next) => {
         const additonalResult = await Plant.findByPk((req.params.plantId), { //모든 태그를 조회하기 위한 쿼리
             attributes: [],
             include: [{
-                    model: Tag,
-                    attributes: ['name'],
+                model: Tag,
+                attributes: ['name'],
                 through: {
-                        attributes: []
+                    attributes: []
                 }
-                }],
+            }],
         });
 
         // Promise<Model>의 응답값을 JSON 오브젝트로 바꾸는 메서드 .get() 사용.
@@ -102,11 +102,52 @@ const getDetailPlant = async (req, res, next) => {
             plain: true
         });
 
+        // ************추천 식물*********************
+
+        const tagArray = Object.values(tags)[0];
+        const recommendTag = [];
+        for (i in tagArray) {
+            recommendTag.push(tagArray[i].name);
+        }
+        // tag객체에서 시퀄라이스 함수에서 사용하기 편하도록 배열로 뽑아냅니다.
+        // 배열에서 특정 태그를 슬라이싱하는 것은 나중에 합니다.
+
+        const allPlants = await Plant.findAll({
+            attributes: ['id', 'name', 'thumbnailPath', 'description'],
+            where: {
+                id: {
+                    [Op.ne]: req.params.plantId
+                }
+            },
+            include: [{
+                model: Tag,
+                attributes: ['id', 'name'],
+                through: {
+                    attributes: []
+                }
+            }]
+        });
+
+        //몇개의 태그가 매칭되는지 계산하는 함수
+        const matchedTagCount = (Plant) => {
+            const plantTags = Plant.get({
+                plain: true
+            }).Tags
+            const tagArr = plantTags.map(item => item.name);
+            const count = tagArr.filter(item => recommendTag.includes(item)).length
+            return count > 5
+        }
+
+        const recommendPlants = allPlants.filter(plant => matchedTagCount(plant));
+
+        // ****************************************
+
         const detailResult = baseResult.get({
             plain: true
         });
 
         detailResult.allTags = tags.Tags;
+        detailResult.recommendPlants = recommendPlants;
 
         await Plant.update({
             views: sequelize.literal('views + 1')
@@ -142,7 +183,7 @@ const searchByPlantName = async (req, res, next) => {
     try {
         const searchResult = await Plant.findAll({
             attributes: ['id', 'name', 'description', 'thumbnailPath'],
-            where: {name: {[Op.like]:`${req.body.keyword}%`}},
+            where: {name: {[Op.like]: `${req.body.keyword}%`}},
             include: [{
                 model: Tag,
                 attributes: ['id', 'name'],
@@ -157,25 +198,25 @@ const searchByPlantName = async (req, res, next) => {
     }
 }
 
-const searchByPlantTag = async(req,res,next)=>{
-    try{
+const searchByPlantTag = async (req, res, next) => {
+    try {
         const tags = req.body.tags.split(',');
         const tagSearchResult = await Plant.findAll({
-            attributes:['id','name','description','thumbnailPath'],
-            include:[{
-                model:Tag,
-                where:{name:{[Op.or]:tags}},
-                attributes:['id','name'],
-                through:{
-                    attributes:[]
+            attributes: ['id', 'name', 'description', 'thumbnailPath'],
+            include: [{
+                model: Tag,
+                where: {name: {[Op.or]: tags}},
+                attributes: ['id', 'name'],
+                through: {
+                    attributes: []
                 }
             }]
         });
         res.json(tagSearchResult);
-    }catch(error){
+    } catch (error) {
         next(error);
     }
 }
 
 
-module.exports = { getListPlants , getDetailPlant, curatingResult,searchByPlantName,searchByPlantTag};
+module.exports = {getListPlants, getDetailPlant, curatingResult, searchByPlantName, searchByPlantTag};

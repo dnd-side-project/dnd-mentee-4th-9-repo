@@ -135,7 +135,7 @@ const getDetailPlant = async (req, res, next) => {
             }).Tags
             const tagArr = plantTags.map(item => item.name);
             const count = tagArr.filter(item => recommendTag.includes(item)).length
-            return count > 5
+            return count > 4
         }
 
         const recommendPlants = allPlants.filter(plant => matchedTagCount(plant));

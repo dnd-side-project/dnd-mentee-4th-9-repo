@@ -94,6 +94,7 @@ const QuestionWrapper = styled.div`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: column;
 
   ${Button} + ${Button} {

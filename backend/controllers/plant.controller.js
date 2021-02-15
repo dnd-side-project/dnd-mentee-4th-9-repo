@@ -121,7 +121,7 @@ const getDetailPlant = async (req, res, next) => {
             },
             include: [{
                 model: Tag,
-                attributes: ['id', 'name'],
+                attributes: ['id', 'name', 'type'],
                 through: {
                     attributes: []
                 }

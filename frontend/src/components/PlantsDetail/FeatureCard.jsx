@@ -15,7 +15,7 @@ function FeatureCard({feature = ''}) {
 
   return (
     <FeatWrapper>
-      {!isEmptyStr(feature) && <FeatImg deskPath={featPath[type].lg} mobilePath={featPath[type].lg} alt={type} />}
+      {!isEmptyStr(feature) && <FeatImg deskPath={featPath[type].lg} mobilePath={featPath[type].md} alt={type} />}
       <p>{description}</p>
     </FeatWrapper>
   );

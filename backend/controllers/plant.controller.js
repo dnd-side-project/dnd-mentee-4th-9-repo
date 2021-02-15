@@ -130,11 +130,14 @@ const getDetailPlant = async (req, res, next) => {
 
         //몇개의 태그가 매칭되는지 계산하는 함수
         const matchedTagCount = (Plant) => {
-            const plantTags = Plant.get({
+            const tags = Plant.get({
                 plain: true
-            }).Tags
-            const tagArr = plantTags.map(item => item.name);
-            const count = tagArr.filter(item => recommendTag.includes(item)).length
+            })['Tags']
+
+            const count = tags
+                .map(tag => tag.name)
+                .filter(item => recommendTag.includes(item))
+                .length
             return count > 4
         }
 

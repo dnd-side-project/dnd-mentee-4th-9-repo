@@ -9,7 +9,7 @@ feature: string ex) "꽃:실내에서는 거의 꽃이 피지 않지만, 만약 
 */
 function Feature({name = '', feature = ''}) {
   const features = feature.split('\n');
-  
+
   return (
     <Section width="lg" margin={100} bgColor="bgLightGray" order={SIDE}>
       <div>
@@ -17,8 +17,8 @@ function Feature({name = '', feature = ''}) {
           <span>{name}</span>는 이런 반전 매력도 있어요
         </TagsHead>
         <Features>
-          {features.map((feature) => (
-            <FeatureCard feature={feature} />
+          {features.map((feature, i) => (
+            <FeatureCard key={`feature-${i}th`} feature={feature} />
           ))}
         </Features>
       </div>

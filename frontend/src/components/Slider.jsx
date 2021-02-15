@@ -23,10 +23,6 @@ const StyledSlider = styled(Swiper)`
   .swiper-slide {
     width: max-content !important;
   }
-
-  .card-wrapper {
-    margin: 0 20px !important;
-  }
 `;
 
 export default Slider;

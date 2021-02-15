@@ -8,7 +8,7 @@ import TagCard from './TagCard';
 
 import theme from '../../styles/theme';
 
-const NO_DISPLAY_TAG = '잎도촉촉히';
+const NO_DISPLAY_TAG = '#잎도촉촉히';
 
 /*
 tag

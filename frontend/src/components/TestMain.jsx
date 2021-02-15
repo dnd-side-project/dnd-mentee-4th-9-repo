@@ -19,7 +19,7 @@ function TestMain({type = FULL_SCREEN}) {
   const history = useHistory();
 
   const onClick = () => {
-    const pathname = type === FULL_SCREEN ? '/test' : 'test-start';
+    const pathname = type === FULL_SCREEN ? '/test' : '/test-start';
     history.push(pathname);
   };
 

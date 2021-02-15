@@ -102,11 +102,39 @@ const getDetailPlant = async (req, res, next) => {
             plain: true
         });
 
+        // ************추천 식물*********************
+        
+        const tagArray = Object.values(tags)[0];
+        const recommendTag = [];
+        for(i in tagArray){
+            recommendTag.push(tagArray[i].name);
+        }
+        // tag객체에서 시퀄라이스 함수에서 사용하기 편하도록 배열로 뽑아냅니다. 
+        // 배열에서 특정 태그를 슬라이싱하는 것은 나중에 합니다.
+        const recommendPlants = await Plant.findAll({
+            limit:5,
+            attributes:['id','name','imagePath'],
+            include:[{
+                model:Tag,
+                where:{
+                    name:{[Op.or]:recommendTag}
+                },
+                attributes:['id','name'],
+                through:{
+                    attributes:[]
+                }
+            }]
+
+        })
+
+        // ****************************************
+
         const detailResult = baseResult.get({
             plain: true
         });
 
         detailResult.allTags = tags.Tags;
+        detailResult.recommendPlants = recommendPlants;
 
         await Plant.update({
             views: sequelize.literal('views + 1')

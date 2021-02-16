@@ -1,4 +1,5 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import TagList from './TagList';
 import sizes from '../styles/recommentPlant';
@@ -22,21 +23,23 @@ desk: string (recommentPlant/sizes)
 mobile: string (recommentPlant/sizes)
 */
 function RecommendPlant({plant, desk, mobile, isSimple}) {
-  const {thumbnailPath = '', name, description, Tags} = plant;
+  const {id, thumbnailPath = '', name, description, Tags} = plant;
 
   return (
-    <Wrapper desk={desk} mobile={mobile} isSimple={isSimple} className="card-wrapper">
-      <Image imgUrl={thumbnailPath} />
-      <TextWrapper desk={desk} mobile={mobile}>
-        <Title desk={desk} mobile={mobile}>
-          {name}
-        </Title>
-        <Description desk={desk} mobile={mobile}>
-          {description}
-        </Description>
-        <TagList tagData={Tags} desk={sizes[desk].tagSize} mobile={sizes[mobile].tagSize} isSimple={isSimple} />
-      </TextWrapper>
-    </Wrapper>
+    <Link to={`/plants/detail/${id}`}>
+      <Wrapper desk={desk} mobile={mobile} isSimple={isSimple} className="card-wrapper">
+        <Image imgUrl={thumbnailPath} />
+        <TextWrapper desk={desk} mobile={mobile}>
+          <Title desk={desk} mobile={mobile}>
+            {name}
+          </Title>
+          <Description desk={desk} mobile={mobile}>
+            {description}
+          </Description>
+          <TagList tagData={Tags} desk={sizes[desk].tagSize} mobile={sizes[mobile].tagSize} isSimple={isSimple} />
+        </TextWrapper>
+      </Wrapper>
+    </Link>
   );
 }
 

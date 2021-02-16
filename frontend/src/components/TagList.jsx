@@ -2,6 +2,7 @@ import React from 'react';
 import styled, {css} from 'styled-components';
 import tagList from '../styles/tagList';
 import {sliderTags, NO_DISPLAY_TAG} from '../const/tags';
+import {includeArr} from '../lib/handler';
 
 const {margins, paddings, fontSizes} = tagList;
 
@@ -21,7 +22,7 @@ isSimple: bool (true => 난이도, 물주기 태그만 출력)
 */
 
 function TagList({tagData = [], desk, mobile, isSimple}) {
-  const tags = isSimple ? tagData.filter((tag) => sliderTags.indexOf(tag.type) !== -1) : tagData;
+  const tags = isSimple ? tagData.filter((tag) => includeArr(sliderTags, tag.type)) : tagData;
 
   return (
     <Tags isSimple={isSimple}>

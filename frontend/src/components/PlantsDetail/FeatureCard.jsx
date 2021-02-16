@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import featPath from '../../const/featureCard';
 import {getReactiveSize} from '../../lib/calculate';
-import {isEmptyStr} from '../../lib/handleString';
+import {isEmptyStr} from '../../lib/handler';
 
 const lineHeights = getReactiveSize(42);
 const fontSizes = getReactiveSize(28);

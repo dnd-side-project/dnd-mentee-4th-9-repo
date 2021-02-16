@@ -14,7 +14,7 @@ import DescText from '../styles/DescText';
 import Friends from '../components/PlantsDetail/Friends';
 
 import {getPlantDetail} from '../api/plantsAPI';
-import {isEmptyArr} from '../lib/handleArray';
+import {isEmptyArr} from '../lib/handler';
 
 function PlantsDetail({
   match: {

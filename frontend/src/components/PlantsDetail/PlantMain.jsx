@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import TagList from '../TagList';
 
 import {getReactiveSize} from '../../lib/calculate';
-import {isEmptyStr} from '../../lib/handleString';
+import {isEmptyStr} from '../../lib/handler';
 
 const widths = getReactiveSize(640);
 const heights = getReactiveSize(200);

@@ -44,7 +44,7 @@ function TestResult() {
         </Description>
         <Description marginBottom="30">
           <SubHead>#{plantData.name} #키워드</SubHead>
-          <TagList tagData={plantData.Tags.map(({name}) => name)} />
+          <TagList tagData={plantData.Tags} />
           <MoreButton>{plantData.name} 더 알아보기</MoreButton>
         </Description>
       </Section>

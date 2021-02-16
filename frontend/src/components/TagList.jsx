@@ -27,9 +27,9 @@ function TagList({tagData = [], desk, mobile, isSimple}) {
   return (
     <Tags isSimple={isSimple}>
       {tags.map(
-        (tag) =>
+        (tag, index) =>
           (!isSimple || (isSimple && tag.name !== NO_DISPLAY_TAG)) && (
-            <Tag key={tag.name} desk={desk} mobile={mobile}>
+            <Tag key={index} desk={desk} mobile={mobile}>
               <Text desk={desk} mobile={mobile}>
                 {tag.name}
               </Text>

@@ -5,10 +5,10 @@ const instance = axios.create({
   baseURL: BASE_URL,
 });
 
-const get = (path) => {
+const get = (path, request = null) => {
   return new Promise((resolve, reject) => {
     instance
-      .get(path)
+      .get(path, request)
       .then(({data}) => resolve(data))
       .catch((e) => reject(e.message));
   });

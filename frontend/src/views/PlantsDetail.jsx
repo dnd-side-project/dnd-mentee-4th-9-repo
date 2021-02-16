@@ -22,13 +22,14 @@ function PlantsDetail({
   },
 }) {
   const plant = usePlantInfo(id);
-  const {name, feature, ment = '', warning, description, imagePath, Tags, allTags} = plant;
+  const {name, feature, ment = '', warning, description, imagePath, Tags, allTags, recommendPlants} = plant;
 
-  const star = !isEmptyArr(allTags) && allTags[allTags.length - 1].name;
+  const star = !isEmptyArr(allTags) && allTags[allTags.length - 1];
 
   return (
     <>
       <PlantMain name={name} description={description} imgPath={imagePath} star={star} />
+
       <Section width="lg">
         <DescText>{ment}</DescText>
       </Section>
@@ -36,11 +37,12 @@ function PlantsDetail({
       <TagsDetail name={name} tags={Tags} />
       <Feature name={name} feature={feature} />
       <Warning name={name} warning={warning} />
-      {/* <Friends /> */}
+      {!isEmptyArr(recommendPlants) && <Friends name={name} plants={recommendPlants} />}
       <Nothing />
       <Section bgColor="green" margin={200}>
         <TestMain type={SECTION} />
       </Section>
+
       <Footer />
     </>
   );

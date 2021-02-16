@@ -4,31 +4,47 @@ import TagList from './TagList';
 import sizes from '../styles/recommentPlant';
 
 /*
+tag {
+   id: number;
+   name: string;
+   type: string;
+}
+*/
+
+/*
 plant {
-  img: string;
+  thumbnailPath: string;
   name: string;
   description: string;
-  tagData: string[];
+  Tags: tag[];
 }
 desk: string (recommentPlant/sizes)
 mobile: string (recommentPlant/sizes)
 */
-function RecommendPlant({plant, desk = 'md', mobile = 'sm'}) {
+function RecommendPlant({plant, desk, mobile, isSimple}) {
+  const {thumbnailPath = '', name, description, Tags} = plant;
+
   return (
-    <Wrapper desk={desk} mobile={mobile} className="card-wrapper">
-      <Image imgUrl={plant.img} />
+    <Wrapper desk={desk} mobile={mobile} isSimple={isSimple} className="card-wrapper">
+      <Image imgUrl={thumbnailPath} />
       <TextWrapper desk={desk} mobile={mobile}>
         <Title desk={desk} mobile={mobile}>
-          {plant.name}
+          {name}
         </Title>
         <Description desk={desk} mobile={mobile}>
-          {plant.description}
+          {description}
         </Description>
-        <TagList tagData={plant.tagData} desk={sizes[desk].tagSize} mobile={sizes[mobile].tagSize} />
+        <TagList tagData={Tags} desk={sizes[desk].tagSize} mobile={sizes[mobile].tagSize} isSimple={isSimple} />
       </TextWrapper>
     </Wrapper>
   );
 }
+
+RecommendPlant.defaultProps = {
+  desk: 'md',
+  mobile: 'sm',
+  isSimple: false,
+};
 
 const Wrapper = styled.div`
   display: inline-block;

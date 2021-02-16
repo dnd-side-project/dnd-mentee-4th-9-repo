@@ -5,14 +5,13 @@ import SubHead from '../../styles/SubHead';
 import Section from '../Section';
 import TagList from '../TagList';
 import {getReactiveSize} from '../../lib/calculate';
+import {mainTags} from '../../const/tags';
 
 const margins = {
   '14': getReactiveSize(14),
   '22': getReactiveSize(22),
   '48': getReactiveSize(48),
 };
-
-const tagListData = ['⭐️', '💧💧💧', '#보통크기', '#열매', '#그늘에서', '#쑥쑥자라요', '#따뜻하게'];
 
 function KeywordSearch() {
   return (
@@ -21,7 +20,7 @@ function KeywordSearch() {
         <p>어떤 식물이 좋을지 잘 모르겠다면?</p>
         <SubHead>마음에 드는 키워드를 검색해보세요!</SubHead>
         <TagsWrapper>
-          <TagList tagData={tagListData} />
+          <TagList tagData={mainTags} />
         </TagsWrapper>
         <SearchBtn borderColor="lightGreen" borderRadius={5} color="lightGreen" iconSize={36}>
           <img src={`${process.env.PUBLIC_URL}/images/search.svg`} alt="search" />

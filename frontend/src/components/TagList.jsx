@@ -1,28 +1,61 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import tagList from '../styles/tagList';
+import {sliderTags, NO_DISPLAY_TAG} from '../const/tags';
 
 const {margins, paddings, fontSizes} = tagList;
 
 /*
-tagData: string[]
-desk: string (xl, lg, sm, xs, xxs)
-mobile: string
+tag {
+   id: number;
+   name: string; (required)
+   type: string;
+}
 */
 
-function TagList({tagData, desk = 'xl', mobile = 'xs'}) {
+/*
+tagData: tag[];
+desk: string (xl, lg, sm, xs, xxs);
+mobile: string;
+isSimple: bool (true => 난이도, 물주기 태그만 출력)
+*/
+
+function TagList({tagData = [], desk, mobile, isSimple}) {
+  const tags = isSimple ? tagData.filter((tag) => sliderTags.indexOf(tag.type) !== -1) : tagData;
+
   return (
-    <ul>
-      {tagData.map((data) => (
-        <Tag key={data} desk={desk} mobile={mobile}>
-          <Text desk={desk} mobile={mobile}>
-            {data}
-          </Text>
-        </Tag>
-      ))}
-    </ul>
+    <Tags isSimple={isSimple}>
+      {tags.map(
+        (tag) =>
+          (!isSimple || (isSimple && tag.name !== NO_DISPLAY_TAG)) && (
+            <Tag key={tag.name} desk={desk} mobile={mobile}>
+              <Text desk={desk} mobile={mobile}>
+                {tag.name}
+              </Text>
+            </Tag>
+          )
+      )}
+    </Tags>
   );
 }
+
+TagList.defaultProps = {
+  desk: 'xl',
+  mobile: 'xs',
+  isSimple: false,
+};
+
+const Tags = styled.ul`
+  ${({isSimple}) => {
+    if (isSimple) {
+      return css`
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: flex-end;
+      `;
+    }
+  }}
+`;
 
 const Tag = styled.li`
   margin-right: ${({desk}) => margins[desk]}px;

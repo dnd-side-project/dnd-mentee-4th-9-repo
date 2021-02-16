@@ -5,11 +5,14 @@ import SubHead from '../../styles/SubHead';
 import TagList from '../TagList';
 import Button from '../../styles/Button';
 import Slider from '../Slider';
+
 import plants from '../../const/sliderPlantsTest';
 
 /*
 tag: {
-  name: '⭐',
+  id: number;
+  name: string;
+  type: string;
 }
 */
 
@@ -18,14 +21,12 @@ name: string
 keywords: tag[]
 */
 function AllKeywords({name = '', keywords = []}) {
-  const tagData = keywords.map((tag) => tag.name);
-
   return (
     <Section width="lg" margin={100} order={SIDE}>
       <KeywordsHead>{`${name} #키워드`}</KeywordsHead>
 
       <TagsWrapper>
-        <TagList tagData={tagData} />
+        <TagList tagData={keywords} />
       </TagsWrapper>
 
       <SliderWrapper>

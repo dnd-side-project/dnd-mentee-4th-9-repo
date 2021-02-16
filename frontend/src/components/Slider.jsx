@@ -9,8 +9,8 @@ function Slider({plants}) {
   return (
     <StyledSlider freeMode={true} slidesPerView={'auto'} pagination={{clickable: true}}>
       {plants.map((plant, i) => (
-        <SwiperSlide key={plant.name}>
-          <RecommendPlant plant={plant} />
+        <SwiperSlide key={i}>
+          <RecommendPlant plant={plant} isSimple />
         </SwiperSlide>
       ))}
     </StyledSlider>

@@ -27,16 +27,14 @@ function TagCard({tag}) {
   const imgPath = path[tag.name];
 
   return (
-    <>
-      <Wrapper>
-        <Title>{type}</Title>
-        <ImgWrapper>
-          <Img deskPath={imgPath.lg} mobilePath={imgPath.md} alt={tag.name} />
-        </ImgWrapper>
-        <TagList tagData={[tag.name]} />
-        <p>{description}</p>
-      </Wrapper>
-    </>
+    <Wrapper>
+      <Title>{type}</Title>
+      <ImgWrapper>
+        <Img deskPath={imgPath.lg} mobilePath={imgPath.md} alt={tag.name} />
+      </ImgWrapper>
+      <TagList tagData={[tag]} />
+      <p>{description}</p>
+    </Wrapper>
   );
 }
 

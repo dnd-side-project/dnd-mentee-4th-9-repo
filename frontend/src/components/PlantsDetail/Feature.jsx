@@ -1,20 +1,25 @@
 import React from 'react';
 import styled from 'styled-components';
-import Section, { SIDE } from '../Section';
+import Section, {SIDE} from '../Section';
 import SubHead from '../../styles/SubHead';
 import FeatureCard from './FeatureCard';
+/*
+name: string
+feature: string ex) "꽃:실내에서는 거의 꽃이 피지 않지만, 만약 핀다면 별 모양의 노란 꽃을 피워요.\n잎:벽을 타고 오르거나 땅을 기는 덩굴 식물이에요."
+*/
+function Feature({name = '', feature = ''}) {
+  const features = feature.split('\n');
 
-function Feature() {
   return (
     <Section width="lg" margin={100} bgColor="bgLightGray" order={SIDE}>
       <div>
         <TagsHead>
-          <span>몬스테라</span>는 이런 반전 매력도 있어요
+          <span>{name}</span>는 이런 반전 매력도 있어요
         </TagsHead>
         <Features>
-          <FeatureCard name="flower">꽃과 열매를 맺을 수 있어 열매의 맛은 바나나와 파인애플의 중간맛이에요.</FeatureCard>
-          <FeatureCard name="leaf">큰 녹색의 구멍난 잎을 가지고 있으며 수경재배가 가능한 식물이에요.</FeatureCard>
-          {/* <FeatureCard name="func">큰 녹색의 구멍난 잎을 가지고 있으며 수경재배가 가능한 식물이에요.</FeatureCard> */}
+          {features.map((feature, i) => (
+            <FeatureCard key={`feature-${i}th`} feature={feature} />
+          ))}
         </Features>
       </div>
     </Section>

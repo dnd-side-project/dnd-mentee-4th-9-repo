@@ -1,22 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
-import {getReactiveSize} from '../../lib/calculate';
 import TagList from '../TagList';
 
-// test data
+import {getReactiveSize} from '../../lib/calculate';
+import {isEmptyStr} from '../../lib/handler';
+
 const widths = getReactiveSize(640);
 const heights = getReactiveSize(200);
 const fontSizes = getReactiveSize(48);
 
+/*
+name: string
+description: string
+imgPath: string
+star: string ex) "⭐"
+*/
 function PlantMain({name, description, imgPath, star}) {
   return (
     <Wrapper>
-      <Img imgPath={imgPath} alt="plant main" />
+      {!isEmptyStr(imgPath) && <Img imgPath={imgPath} alt="plant main" />}
       <LabelWrapper>
         <Label>
           <Text>
-            <h1>몬스테라</h1>
-            <span>바쁜 일상 속 조용한 힐링</span>
+            <h1>{name}</h1>
+            <span>{description}</span>
           </Text>
           <TagList tagData={[star]} />
         </Label>
@@ -24,6 +31,13 @@ function PlantMain({name, description, imgPath, star}) {
     </Wrapper>
   );
 }
+
+PlantMain.detailProps = {
+  name: '',
+  description: '',
+  imgPath: '',
+  start: '',
+};
 
 /* container */
 const Wrapper = styled.section`

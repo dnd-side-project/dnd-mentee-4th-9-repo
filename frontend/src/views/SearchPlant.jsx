@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 import TagList from '../components/TagList';
 import {getAllTags} from '../api/plantsAPI';
+import Section from '../components/Section';
 
 const SearchPlant = () => {
   const [tagData, setTagData] = useState([]);
@@ -34,27 +35,32 @@ const SearchPlant = () => {
 
   return (
     <Wrapper>
-      <SearchInput>
-        <input type="text" placeholder="어떤 식물 친구를 찾으시나요?" />
-      </SearchInput>
+      <Section>
+        <SearchInput>
+          <input type="text" placeholder="어떤 식물 친구를 찾으시나요?" />
+        </SearchInput>
+      </Section>
 
-      <KeywordGroup>
-        {tagData.map(({type, tags}) => (
-          <KeywordField key={type}>
-            <h2>{type}</h2>
-            <TagList tagData={tags} />
-          </KeywordField>
-        ))}
-      </KeywordGroup>
+      <Section width="lg" bgColor="">
+        <KeywordGroup>
+          {tagData.map(({type, tags}) => (
+            <KeywordField key={type}>
+              <h2>{type}</h2>
+              <TagList tagData={tags} />
+            </KeywordField>
+          ))}
+        </KeywordGroup>
+      </Section>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  margin-top: 56px;
+  margin-top: 0;
 `;
 
 const SearchInput = styled.div`
+  margin-top: 56px;
   margin-bottom: 20px;
   height: 80px;
 `;
@@ -63,12 +69,17 @@ const KeywordGroup = styled.fieldset`
   height: 324px;
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
 `;
 
 const KeywordField = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   height: 68px;
+
+  h2 {
+  }
 `;
 
 export default SearchPlant;

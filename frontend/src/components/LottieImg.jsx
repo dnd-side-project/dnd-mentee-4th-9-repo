@@ -9,11 +9,9 @@ function LottieImg({lottieFile}) {
     loop: true,
     autoplay: true,
     animationData: lottieFile,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
   };
-  return <Lottie options={defaultOptions} isStopped={false} isPaused={false} />;
+
+  return <Lottie options={defaultOptions} />;
 }
 
 export default LottieImg;

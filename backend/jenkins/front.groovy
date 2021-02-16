@@ -12,6 +12,7 @@ pipeline {
         stage('prepare') {
             steps {
                     git branch: "${BRANCH}", credentialsId: "GIT_ACCOUNT", url: 'https://github.com/dnd-mentee-4th/dnd-mentee-4th-9-repo.git'
+                    sh 'cp /var/lib/jenkins/.env ./frontend'
             }
         }
         stage('build') {

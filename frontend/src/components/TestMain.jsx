@@ -1,9 +1,13 @@
 import React from 'react';
 import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
+
 import Button from '../styles/Button';
 import {FULL_SCREEN, SECTION} from './Section';
+
 import {getReactiveSize} from '../lib/calculate';
+import LottieImg from './LottieImg';
+import * as testMain from '../lottie/test_main.json';
 
 const styles = {
   // btn text color, ima margin top, img min width(only main page)
@@ -27,9 +31,11 @@ function TestMain({type = FULL_SCREEN}) {
     <Wrapper>
       <p>테스트로 알아보는 나의 반려식물 찾기</p>
       <h2>나와 잘 맞는 식물 친구는?</h2>
-      <ImgWrapper type={type} mt={mt} min={minWidth}>
-        <img src="/images/test_start.png" alt="test start" />
-      </ImgWrapper>
+
+      <LottieWrapper type={type} mt={mt} min={minWidth}>
+        <LottieImg lottieFile={testMain.default} />
+      </LottieWrapper>
+
       <Button onClick={onClick} borderRadius={5} fontWeight="bold" color={btnTextColor}>
         테스트 GO!
       </Button>
@@ -75,11 +81,11 @@ const Wrapper = styled.div`
   }
 `;
 
-const ImgWrapper = styled.div`
+const LottieWrapper = styled.div`
   margin-top: ${({mt}) => mt}px;
   width: ${({type}) => (type === FULL_SCREEN ? 594 : 482)}px;
 
-  img {
+  svg {
     width: 100%;
   }
 

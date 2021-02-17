@@ -1,0 +1,107 @@
+{
+  "config": {
+    "target": "http://3.34.87.77",
+    "phases": [
+      {
+        "duration": 60,
+        "arrivalRate": 200
+      }
+    ],
+    "defaults": {
+      "headers": {
+        "User-Agent": "Artillery"
+      }
+    },
+    "scenarios": [
+      {
+        "name": "listing plants",
+        "flow": [
+          {
+            "get": {
+              "url": "/plants"
+            }
+          }
+        ]
+      },
+      {
+        "name": "get detail plants",
+        "flow": [
+          {
+            "get": {
+              "url": "/plants/1"
+            },
+          {
+            "get": {
+              "url": "/plants/2"
+            }
+          },
+          {
+            "get": {
+              "url": "/plants/3"
+            }
+          },
+          {
+            "get": {
+              "url": "/plants/4"
+            }
+          },
+          {
+            "get": {
+              "url": "/plants/5"
+            }
+          },
+          {
+            "get": {
+              "url": "/plants/6"
+            }
+          },
+          {
+            "get": {
+              "url": "/plants/7"
+            }
+          },
+          {
+            "get": {
+              "url": "/plants/8"
+            }
+          },
+          {
+            "get": {
+              "url": "/plants/9"
+            }
+          },
+          {
+            "get": {
+              "url": "/plants/10"
+            }
+          },
+          {
+            "get": {
+              "url": "/plants/11"
+            }
+          },
+          {
+            "get": {
+              "url": "/plants/12"
+            }
+          },
+          {
+            "get": {
+              "url": "/plants/13"
+            }
+          },
+          {
+            "get": {
+              "url": "/plants/14"
+            }
+          },
+          {
+            "get": {
+              "url": "/plants/15"
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

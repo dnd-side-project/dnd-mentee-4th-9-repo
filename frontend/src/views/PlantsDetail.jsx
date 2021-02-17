@@ -26,6 +26,10 @@ function PlantsDetail({
 
   const star = !isEmptyArr(allTags) && allTags[allTags.length - 1];
 
+  window.scrollTo({
+    top: 0,
+  });
+
   return (
     <>
       <PlantMain name={name} description={description} imgPath={imagePath} star={star} />

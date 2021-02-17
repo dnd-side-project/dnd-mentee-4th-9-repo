@@ -2,13 +2,19 @@ import {getScreenSize, getReactiveSize} from '../lib/calculate';
 
 const colors = {
   white: 'white',
-  green: '#2A845D',
-  lightGreen: '#8CD29C',
-  skyBlue: '#5CACC5',
-  darkGray: 'rgba(0, 0, 0, 0.9)',
-  gray: 'rgba(0, 0, 0, 0.6)',
-  lightGray: '#f2f2f2',
+  green: '#00994F',
+  lightGreen: '#64CC80',
+  skyBlue: '#2DC0CC',
   bgLightGray: '#f7f7f7',
+  orange: '#FFA819',
+
+  // for bg
+  lightGray: '#F0F5ED',
+
+  // black
+  darkGray: '#111',
+  gray: '#666',
+  lightBlack: '#999',
 };
 
 const fontSizes = {

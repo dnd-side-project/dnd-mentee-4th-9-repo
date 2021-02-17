@@ -12,3 +12,7 @@ export const getCuratingResult = (result) => {
 export const getAllTags = () => {
   return get('/tags');
 };
+
+export const getAllPlants = (order) => {
+  return get(`/plants?order=${order}`);
+};

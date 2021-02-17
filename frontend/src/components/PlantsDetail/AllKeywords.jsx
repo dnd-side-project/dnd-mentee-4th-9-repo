@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Section, {SIDE} from '../Section';
 import SubHead from '../../styles/SubHead';
-import TagList from '../TagList';
+import TagList, {BUTTON} from '../TagList';
 import Button from '../../styles/Button';
 import Slider from '../Slider';
 
@@ -26,7 +26,7 @@ function AllKeywords({name = '', keywords = []}) {
       <KeywordsHead>{`${name} #키워드`}</KeywordsHead>
 
       <TagsWrapper>
-        <TagList tagData={keywords} />
+        <TagList tagData={keywords} type={BUTTON} />
       </TagsWrapper>
 
       <SliderWrapper>

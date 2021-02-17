@@ -48,12 +48,16 @@
 ### 💻 디렉토리 구조
 
 - 프론트엔드와 백엔드 디렉토리를 나누어 작업
+- resources에는 S3 Bucket에 저장할 어떤 파일들이든저장.
+    - 이미지, json, csv 등등 어떤 파일이든 저장 가능
 
 ```
 .
 ├── backend
 │   └── ...
 ├── frontend
+│   └── ...
+├── resources
 │   └── ...
 └── readme.md
 ```

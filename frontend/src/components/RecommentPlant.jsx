@@ -87,7 +87,7 @@ const TextWrapper = styled.div`
 `;
 
 const Title = styled.h2`
-  font-weight: ${({theme}) => theme.fontWeights.bold};
+  font-weight: ${({theme}) => theme.fontWeights.medium};
   font-size: ${({desk}) => sizes[desk].titleSize}px;
   line-height: ${({desk}) => sizes[desk].titleLineHeight}px;
 

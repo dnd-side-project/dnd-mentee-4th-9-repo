@@ -22,7 +22,7 @@ keywords: tag[]
 */
 function AllKeywords({name = '', keywords = []}) {
   return (
-    <Section width="lg" margin={100} order={SIDE}>
+    <Section width="lg" margin={80} order={SIDE}>
       <KeywordsHead>{`${name} #키워드`}</KeywordsHead>
 
       <TagsWrapper>
@@ -33,10 +33,10 @@ function AllKeywords({name = '', keywords = []}) {
         <Slider plants={plants} />
       </SliderWrapper>
 
-      <Button iconSize={36} borderColor="lightGreen" color="lightGreen">
+      <SearchBtn iconSize={36} borderColor="lightGreen" color="lightGreen">
         <img src={`${process.env.PUBLIC_URL}/images/search.svg`} alt="search" />
-        다른 키워드 검색
-      </Button>
+        다른 키워드로 검색
+      </SearchBtn>
     </Section>
   );
 }
@@ -46,9 +46,9 @@ const KeywordsHead = styled(SubHead)`
 `;
 
 const TagsWrapper = styled.div`
-  margin: 50px 0 32px 0;
+  margin: 50px 0;
   @media ${({theme}) => theme.devices.md} {
-    margin: 15px 0 5px 0;
+    margin: 15px 0;
   }
 `;
 
@@ -61,6 +61,10 @@ const SliderWrapper = styled.div`
       margin-bottom: 0 !important;
     }
   }
+`;
+
+const SearchBtn = styled(Button)`
+  margin: 0 auto;
 `;
 
 export default AllKeywords;

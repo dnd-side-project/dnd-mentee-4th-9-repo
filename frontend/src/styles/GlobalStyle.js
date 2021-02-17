@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
 
   h2, h3, li, p, button, span {
     font-family: 'Noto Sans KR', sans-serif;
+    letter-spacing: -0.05rem;
   }
 
   ul, li {

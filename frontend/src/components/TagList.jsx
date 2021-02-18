@@ -49,7 +49,7 @@ function TagList({tagData, desk, mobile, isSimple, selected, event, plantId}) {
         if (notDisplay(name)) return true;
 
         return (
-          <Tag key={`${plantId}-${name}`} selected={selected} onClick={() => onClick(name)}>
+          <Tag key={`${plantId}-${name}`} selected={selected} name={name} onClick={() => onClick(name)}>
             <span>{name}</span>
           </Tag>
         );
@@ -69,12 +69,24 @@ TagList.defaultProps = {
 
 const Tag = styled.li`
   cursor: pointer;
-  border-radius: 74.2px;
-  border: 1px solid rgba(0, 0, 0, 0.15);
   display: inline-block;
+  border-radius: 74.2px;
 
-  color: ${({theme}) => theme.colors.gray};
-  background: ${({theme}) => theme.colors.white};
+  ${({selected, name, theme: {colors}}) => {
+    if (selected === name) {
+      return css`
+        border: 1px solid ${colors.lightGreen};
+        color: white;
+        background-color: ${colors.lightGreen};
+      `;
+    } else {
+      return css`
+        border: 1px solid rgba(0, 0, 0, 0.15);
+        color: ${colors.gray};
+        background-color: white;
+      `;
+    }
+  }}
 `;
 
 const Tags = styled.ul`

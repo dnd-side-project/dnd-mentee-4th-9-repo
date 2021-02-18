@@ -29,7 +29,34 @@ const getListTags = async(req, res, next) => {
         const result = await Tag.findAll({
             attributes: ['id', 'name', 'type']
         });
-        res.json(result);
+
+        const tagOrderMap = {
+            '난이도' : [],
+            '물주기' : [],
+            '크기' : [],
+            '꽃/열매': [],
+            '속도': [],
+            '장소': [],
+            '온도': []
+        }
+
+        const makeMapOrder = (tagList) => {
+            tagList
+                .map(tagObj => tagObj.get({
+                    plain: true
+                }))
+                .forEach(tags => {
+                    tagOrderMap[tags.type].push(tags);
+                })
+        }
+
+        makeMapOrder(result);
+
+        const orderedList = Object.values(tagOrderMap).reduce((prev, curr) => {
+            return prev.concat(curr);
+        })
+
+        res.json(orderedList);
     } catch (error) {
         next(error);
     }

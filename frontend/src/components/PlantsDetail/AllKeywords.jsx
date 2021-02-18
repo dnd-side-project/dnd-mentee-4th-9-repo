@@ -5,8 +5,9 @@ import SubHead from '../../styles/SubHead';
 import TagList, {BUTTON} from '../TagList';
 import Button from '../../styles/Button';
 import Slider from '../Slider';
-import {isEmptyArr} from '../../lib/handler';
+import {isEmptyArr, isEmptyStr} from '../../lib/handler';
 import {getTagPlants} from '../../api/plantsAPI';
+import {getReactiveSize} from '../../lib/calculate';
 
 /*
 tag: {
@@ -38,10 +39,16 @@ function AllKeywords({name = '', keywords = []}) {
 
       <SliderWrapper>{!isEmptyArr(plants) && <Slider plants={plants} />}</SliderWrapper>
 
-      <SearchBtn iconSize={36} borderColor="lightGreen" color="lightGreen">
-        <img src={`${process.env.PUBLIC_URL}/images/search.svg`} alt="search" />
-        다른 키워드로 검색
-      </SearchBtn>
+      {isEmptyStr(selected) ? (
+        <StyledBtn iconSize={36} borderColor="lightGreen" color="lightGreen">
+          <img src={`${process.env.PUBLIC_URL}/images/search.svg`} alt="search" />
+          다른 키워드로 검색
+        </StyledBtn>
+      ) : (
+        <StyledBtn bgColor="lightGreen" borderColor="lightGreen" color="white">
+          <span>선택한 키워드 전체보기</span>
+        </StyledBtn>
+      )}
     </Section>
   );
 }
@@ -59,8 +66,8 @@ function useKeywordPlants() {
 
     setInfo((prevInfo) => ({
       ...prevInfo,
-      plants: resPlants,
-      selected: current,
+      plants: selected === current ? [] : resPlants,
+      selected: selected === current ? '' : current,
     }));
   };
 
@@ -91,7 +98,7 @@ const SliderWrapper = styled.div`
   }
 `;
 
-const SearchBtn = styled(Button)`
+const StyledBtn = styled(Button)`
   margin: 0 auto;
 `;
 

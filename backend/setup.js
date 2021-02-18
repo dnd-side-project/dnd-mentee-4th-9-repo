@@ -196,71 +196,88 @@ const reset = async () => {
     await db.Tag.bulkCreate([
         {
             name: "💧💧💧", // id : 1
-            type: "물주기"
+            type: "물주기",
+            order: 2
         },
         {
             name: "💧", // id : 2
-            type: "물주기"
+            type: "물주기",
+            order: 2
         },
         {
             name: "#잎도촉촉히", // id : 3
-            type: "물주기"
+            type: "물주기",
+            order: 2
         },
         {
             name: "#작은크기", // id : 4
-            type: "크기"
+            type: "크기",
+            order: 3
         },
         {
             name: "#보통크기", // id : 5
-            type: "크기"
+            type: "크기",
+            order: 3
         },
         {
             name: "#큰", // id : 6
-            type: "크기"
+            type: "크기",
+            order: 3
         },
         {
             name: "#꽃", // id : 7
-            type: "꽃/열매"
+            type: "꽃/열매",
+            order: 4
         },
         {
             name: "#열매", // id : 8
-            type: "꽃/열매"
+            type: "꽃/열매",
+            order: 4
         },
         {
             name: "#그늘에서", // id : 9
-            type: "장소"
+            type: "장소",
+            order: 5
         },
         {
             name: "#환한곳에서", // id : 10
-            type: "장소"
+            type: "장소",
+            order: 5
         },
         {
             name: "#쑥쑥자라요", // id : 11
-            type: "속도"
+            type: "속도",
+            order: 6
         },
         {
             name: "#처음모습그대로", // id : 12
-            type: "속도"
+            type: "속도",
+            order: 6
         },
         {
             name: "#적당히포근하게", // id : 13
-            type: "온도"
+            type: "온도",
+            order: 7
         },
         {
             name: "#따뜻하게", // id : 14
-            type: "온도"
+            type: "온도",
+            order: 7
         },
         {
             name: "⭐", // id : 15
-            type: "난이도"
+            type: "난이도",
+            order: 1
         },
         {
             name: "⭐⭐", // id : 16
-            type: "난이도"
+            type: "난이도",
+            order: 1
         },
         {
             name: "⭐⭐⭐", // id : 17
-            type: "난이도"
+            type: "난이도",
+            order: 1
         }
     ])
 

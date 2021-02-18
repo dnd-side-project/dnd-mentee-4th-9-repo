@@ -94,9 +94,10 @@ const detailPlant = async(plantDTO) => {
                 model: Tag,
                 attributes: ['name'],
                 through: {
-                    attributes: []
-                }
+                    attributes: [],
+                },
             }],
+            order:[[Tag , 'order', 'ASC']]
         });
 
         const tags = additonalResult.get({
@@ -167,7 +168,7 @@ const getCuratingResult = async(plantDTO) => {
                 attributes: ['id', 'name'],
                 through: {
                     attributes: []
-                }
+                },
             }]
         });
         return result;

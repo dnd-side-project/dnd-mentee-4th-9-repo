@@ -92,13 +92,15 @@ const detailPlant = async(plantDTO) => {
             attributes: [],
             include: [{
                 model: Tag,
-                attributes: ['name'],
+                attributes: ['name', 'order'],
                 through: {
-                    attributes: []
-                }
+                    attributes: [],
+                },
             }],
+            order:[[Tag , 'order', 'ASC']]
         });
 
+        // tag들 정렬하는 로직, order 필드 값을 보고 정
         const tags = additonalResult.get({
             plain: true
         });
@@ -167,7 +169,7 @@ const getCuratingResult = async(plantDTO) => {
                 attributes: ['id', 'name'],
                 through: {
                     attributes: []
-                }
+                },
             }]
         });
         return result;

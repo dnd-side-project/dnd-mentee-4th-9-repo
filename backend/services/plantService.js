@@ -92,7 +92,7 @@ const detailPlant = async(plantDTO) => {
             attributes: [],
             include: [{
                 model: Tag,
-                attributes: ['name', 'order'],
+                attributes: ['name'],
                 through: {
                     attributes: [],
                 },

@@ -198,12 +198,31 @@ const searchPlantName = async(plantDTO) => {
 
 const searchPlantTag = async(plantDTO) => {
     try {
-        const result = await Plant.findAll({
-            attributes: ['id', 'name', 'description', 'thumbnailPath'],
+        const findPlantsIds = await Plant.findAll({
+            attributes: ['id'],
+            where: {
+                '$Tags.name$': {[Op.or]: plantDTO}
+            },
             include: [{
                 model: Tag,
-                where: {name: {[Op.or]: plantDTO}},
-                attributes: ['id', 'name'],
+                attributes: [],
+                through: {
+                    attributes: []
+                }
+            }]
+        });
+        const plantIdArr = findPlantsIds.map(item => item.get({
+            plain: true
+        })).map(item => item.id);
+
+        const result = await Plant.findAll({
+            attributes: ['id', 'name', 'description', 'thumbnailPath'],
+            where: {
+                id: {[Op.in]: plantIdArr}
+            },
+            include: [{
+                model: Tag,
+                attributes: ['id', 'name', 'type'],
                 through: {
                     attributes: []
                 }

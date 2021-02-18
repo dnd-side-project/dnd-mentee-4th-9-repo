@@ -6,6 +6,7 @@ import Section from '../Section';
 import TagList from '../TagList';
 import {getReactiveSize} from '../../lib/calculate';
 import {mainTags} from '../../const/tags';
+import {useHistory} from 'react-router-dom';
 
 const margins = {
   '14': getReactiveSize(14),
@@ -14,6 +15,10 @@ const margins = {
 };
 
 function KeywordSearch() {
+  const history = useHistory();
+
+  const goToSearchPage = () => history.push('/search');
+
   return (
     <Section width="lg" margin={200}>
       <Wrapper>
@@ -22,7 +27,7 @@ function KeywordSearch() {
         <TagsWrapper>
           <TagList tagData={mainTags} />
         </TagsWrapper>
-        <SearchBtn borderColor="lightGreen" borderRadius={5} color="lightGreen" iconSize={36}>
+        <SearchBtn onClick={goToSearchPage} borderColor="lightGreen" borderRadius={5} color="lightGreen" iconSize={36}>
           <img src={`${process.env.PUBLIC_URL}/images/search.svg`} alt="search" />
           다른 키워드로 검색
         </SearchBtn>

@@ -13,6 +13,10 @@ const options = {
         },
         servers: [
             {
+                url: "https://api.seeat-plant.com",
+                basePath: "/"
+            },
+            {
                 url: "http://localhost:4000",
                 basePath: "/",
             },

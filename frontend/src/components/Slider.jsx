@@ -8,8 +8,8 @@ import 'swiper/swiper.scss';
 function Slider({plants}) {
   return (
     <StyledSlider freeMode={true} slidesPerView={'auto'} pagination={{clickable: true}}>
-      {plants.map((plant, i) => (
-        <SwiperSlide key={i}>
+      {plants.map((plant) => (
+        <SwiperSlide key={plant.id}>
           <RecommendPlant plant={plant} isSimple />
         </SwiperSlide>
       ))}

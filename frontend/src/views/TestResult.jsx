@@ -1,5 +1,4 @@
 import React, {useState, useEffect} from 'react';
-import axios from 'axios';
 import {useLocation, useHistory} from 'react-router-dom';
 import Footer from '../components/Footer/Footer';
 import Section from '../components/Section';
@@ -9,6 +8,7 @@ import Button from '../styles/Button';
 import {getReactiveSize} from '../lib/calculate';
 import SubHead from '../styles/SubHead';
 import DescText from '../styles/DescText';
+import {getCuratingResult} from '../api/plantsAPI';
 
 function TestResult() {
   const location = useLocation();
@@ -22,9 +22,8 @@ function TestResult() {
       history.replace('/test');
       return;
     }
-    // eslint-disable-next-line no-unused-vars
     const plant = Object.keys(result).reduce((a, b) => (result[a] > result[b] ? a : b));
-    const {data} = await axios.post('http://3.34.87.77/plants/curating', {plant: '몬스테라'});
+    const data = await getCuratingResult(plant);
 
     setPlantData(data);
   };
@@ -45,7 +44,7 @@ function TestResult() {
         </Description>
         <Description marginBottom="30">
           <SubHead>#{plantData.name} #키워드</SubHead>
-          <TagList tagData={plantData.Tags.map(({name}) => name)} />
+          <TagList tagData={plantData.Tags} />
           <MoreButton>{plantData.name} 더 알아보기</MoreButton>
         </Description>
       </Section>

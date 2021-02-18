@@ -11,10 +11,10 @@
   "author": "geneaky",
   "license": "MIT",
   "devDependencies": {
+    "artillery": "^1.6.1",
     "nodemon": "^2.0.7"
   },
   "dependencies": {
-    "artillery": "^1.6.1",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",

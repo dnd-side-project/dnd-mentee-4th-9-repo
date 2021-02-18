@@ -24,7 +24,7 @@ function PlantsDetail({
   const plant = usePlantInfo(id);
   const {name, feature, ment = '', warning, description, imagePath, Tags, allTags, recommendPlants} = plant;
 
-  const star = !isEmptyArr(allTags) && allTags[allTags.length - 1];
+  const star = !isEmptyArr(allTags) && allTags[0];
 
   window.scrollTo({
     top: 0,

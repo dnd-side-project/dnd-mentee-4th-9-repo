@@ -362,7 +362,7 @@ const reset = async () => {
       PlantId: 1,
       TagId: 13,
       type: '온도',
-      imagePath: `${resourceServer}/적당히포근하게.png`,
+      imagePath: `${resourceServer}/온도_적당히포근하게.png`,
       description: '16~20℃',
     },
     {

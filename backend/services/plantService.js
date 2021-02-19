@@ -136,6 +136,7 @@ const detailPlant = async (plantDTO) => {
           },
         },
       ],
+      order: [[Tag, 'order', 'ASC']],
     });
 
     const isRecommended = (Plant) => {

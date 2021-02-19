@@ -37,7 +37,7 @@ function PlantsDetail({
       <Section width="lg">
         <DescText>{ment}</DescText>
       </Section>
-      <AllKeywords name={name} keywords={allTags} />
+      <AllKeywords plantId={id} name={name} keywords={allTags} />
       <TagsDetail name={name} tags={Tags} />
       <Feature name={name} feature={feature} />
       <Warning name={name} warning={warning} />

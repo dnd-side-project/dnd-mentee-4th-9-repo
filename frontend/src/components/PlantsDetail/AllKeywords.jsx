@@ -1,13 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
+
 import Section, {SIDE} from '../Section';
 import SubHead from '../../styles/SubHead';
 import TagList, {BUTTON} from '../TagList';
 import Button from '../../styles/Button';
 import Slider from '../Slider';
-import {isEmptyArr, isEmptyStr} from '../../lib/handler';
+
 import {getTagPlants} from '../../api/plantsAPI';
-import {getReactiveSize} from '../../lib/calculate';
+import {isEmptyStr} from '../../lib/handler';
 
 /*
 tag: {
@@ -21,8 +22,8 @@ tag: {
 name: string
 keywords: tag[]
 */
-function AllKeywords({name = '', keywords = []}) {
-  const {plants, selected, onKeywordClick} = useKeywordPlants();
+function AllKeywords({plantId, name = '', keywords = []}) {
+  const {plants, selected, onKeywordClick} = useKeywordPlants(plantId);
 
   const event = {
     type: 'search',
@@ -34,10 +35,10 @@ function AllKeywords({name = '', keywords = []}) {
       <KeywordsHead>{`${name} #키워드`}</KeywordsHead>
 
       <TagsWrapper>
-        <TagList tagData={keywords} type={BUTTON} selected={selected} event={event} />
+        <TagList plantId={plantId} tagData={keywords} type={BUTTON} selected={selected} event={event} />
       </TagsWrapper>
 
-      <SliderWrapper>{!isEmptyArr(plants) && <Slider plants={plants} />}</SliderWrapper>
+      <SliderWrapper>{!isEmptyStr(selected) && <Slider plants={plants} />}</SliderWrapper>
 
       {isEmptyStr(selected) ? (
         <StyledBtn iconSize={36} borderColor="lightGreen" color="lightGreen">
@@ -53,7 +54,7 @@ function AllKeywords({name = '', keywords = []}) {
   );
 }
 
-function useKeywordPlants() {
+function useKeywordPlants(plantId) {
   const [plantsInfo, setInfo] = useState({
     plants: [],
     selected: '',
@@ -71,6 +72,13 @@ function useKeywordPlants() {
     }));
   };
 
+  useEffect(() => {
+    setInfo((prevInfo) => ({
+      ...prevInfo,
+      selected: '',
+    }));
+  }, [plantId]);
+
   return {plants, selected, onKeywordClick};
 }
 
@@ -86,9 +94,7 @@ const TagsWrapper = styled.div`
 `;
 
 const SliderWrapper = styled.div`
-  transition: 1s all ease-in-out;
   margin: 50px 0 20px 0;
-  opacity: ${({opacity}) => opacity};
 
   @media ${({theme}) => theme.devices.md} {
     margin: 15px 0 25px 0;

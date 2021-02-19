@@ -28,9 +28,7 @@ function RecommendPlant({plant, desk, mobile, isSimple}) {
   return (
     <Link to={`/plants/detail/${id}`}>
       <Wrapper desk={desk} mobile={mobile} isSimple={isSimple} className="card-wrapper">
-        <ImgWrapper>
-          <Img imgUrl={thumbnailPath} loading="lazy" />
-        </ImgWrapper>
+        <Img imgUrl={thumbnailPath} />
         <TextWrapper desk={desk} mobile={mobile}>
           <Title desk={desk} mobile={mobile}>
             {name}
@@ -38,7 +36,7 @@ function RecommendPlant({plant, desk, mobile, isSimple}) {
           <Description desk={desk} mobile={mobile}>
             {description}
           </Description>
-          <TagList plantId={plant.id} tagData={Tags} desk={sizes[desk].tagSize} mobile={sizes[mobile].tagSize} isSimple={isSimple} />
+          <TagList tagData={Tags} desk={sizes[desk].tagSize} mobile={sizes[mobile].tagSize} isSimple={isSimple} />
         </TextWrapper>
       </Wrapper>
     </Link>
@@ -51,12 +49,7 @@ RecommendPlant.defaultProps = {
   isSimple: false,
 };
 
-const ImgWrapper = styled.div`
-  background-color: #ffedd9;
-`;
-
 const Img = styled.img`
-  width: 100%;
   content: url(${({imgUrl}) => imgUrl});
   border-radius: 45px 45px 0 0;
 
@@ -73,7 +66,7 @@ const Wrapper = styled.div`
   border-radius: 45px 45px 45px 0px;
   box-shadow: 0px 25px 35px 0px rgba(0, 0, 0, 0.04);
 
-  ${ImgWrapper} {
+  ${Img} {
     border-radius: inherit;
     width: ${({desk}) => sizes[desk].width}px;
     height: ${({desk}) => sizes[desk].width}px;
@@ -86,7 +79,7 @@ const Wrapper = styled.div`
     border-radius: 30px 30px 30px 0px;
     box-shadow: 0px 14px 25px 0px rgba(0, 0, 0, 0.05);
 
-    ${ImgWrapper} {
+    ${Img} {
       width: ${({mobile}) => sizes[mobile].width}px;
       height: ${({mobile}) => sizes[mobile].width}px;
     }

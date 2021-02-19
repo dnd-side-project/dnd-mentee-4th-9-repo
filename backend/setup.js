@@ -573,7 +573,7 @@ const reset = async () => {
       PlantId: 5,
       TagId: 9,
       type: '장소',
-      imagePath: `${resourceServer}/장소_그늘에.png`,
+      imagePath: `${resourceServer}/장소_그늘에서.png`,
       description: '바람이 잘 드는 실내',
     },
     {

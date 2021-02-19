@@ -186,6 +186,7 @@ const getCuratingResult = async (plantDTO) => {
           },
         },
       ],
+      order: [[Tag, 'order', 'ASC']],
     });
     return result;
   } catch (error) {

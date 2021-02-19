@@ -69,7 +69,7 @@ const allOrderPlants = async () => {
   }
 };
 
-const baseResultFunc = async (plantDTO) => {
+const detailPlant = async (plantDTO) => {
   try {
     const baseResult = await Plant.findByPk(plantDTO, {
       attributes: {
@@ -95,14 +95,7 @@ const baseResultFunc = async (plantDTO) => {
         },
       ],
     });
-    return baseResult;
-  } catch (error) {
-    console.error(error);
-  }
-};
 
-const additonalResultFunc = async (plantDTO) => {
-  try {
     const additonalResult = await Plant.findByPk(plantDTO, {
       attributes: [],
       include: [
@@ -114,15 +107,19 @@ const additonalResultFunc = async (plantDTO) => {
           },
         },
       ],
+      order: [[Tag, 'order', 'ASC']],
     });
-    return additonalResult;
-  } catch (error) {
-    console.error(error);
-  }
-};
 
-const allPlantsFunc = async (plantDTO) => {
-  try {
+    const tags = additonalResult.get({
+      plain: true,
+    });
+
+    const tagArray = Object.values(tags)[0];
+    const recommendTag = [];
+    for (i in tagArray) {
+      recommendTag.push(tagArray[i].name);
+    }
+
     const allPlants = await Plant.findAll({
       attributes: ['id', 'name', 'thumbnailPath', 'description'],
       where: {
@@ -140,46 +137,6 @@ const allPlantsFunc = async (plantDTO) => {
         },
       ],
     });
-    return allPlants;
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-const plantUpdate = async (plantDTO) => {
-  try {
-    await Plant.update(
-      {
-        views: sequelize.literal('views + 1'),
-      },
-      {
-        where: {id: plantDTO},
-      }
-    );
-  } catch (error) {
-    console.error(error);
-  }
-};
-
-const detailPlant = async (plantDTO) => {
-  try {
-    const baseResult = await baseResultFunc(plantDTO);
-
-    const additonalResult = await additonalResultFunc(plantDTO);
-
-    const tags = additonalResult.get({
-      plain: true,
-    });
-
-    const tagArray = Object.values(tags)[0];
-
-    const recommendTag = [];
-
-    for (i in tagArray) {
-      recommendTag.push(tagArray[i].name);
-    }
-
-    const allPlants = await allPlantsFunc(plantDTO);
 
     const isRecommended = (Plant) => {
       const tags = Plant.get({
@@ -201,8 +158,14 @@ const detailPlant = async (plantDTO) => {
     detailResult.allTags = tags.Tags;
     detailResult.recommendPlants = recommendPlants;
 
-    await plantUpdate(plantDTO);
-
+    await Plant.update(
+      {
+        views: sequelize.literal('views + 1'),
+      },
+      {
+        where: {id: plantDTO},
+      }
+    );
     return detailResult;
   } catch (error) {
     console.error(error);
@@ -253,13 +216,38 @@ const searchPlantName = async (plantDTO) => {
 
 const searchPlantTag = async (plantDTO) => {
   try {
-    const result = await Plant.findAll({
-      attributes: ['id', 'name', 'description', 'thumbnailPath'],
+    const findPlantsIds = await Plant.findAll({
+      attributes: ['id'],
+      where: {
+        '$Tags.name$': {[Op.or]: plantDTO},
+      },
       include: [
         {
           model: Tag,
-          where: {name: {[Op.or]: plantDTO}},
-          attributes: ['id', 'name'],
+          attributes: [],
+          through: {
+            attributes: [],
+          },
+        },
+      ],
+    });
+    const plantIdArr = findPlantsIds
+      .map((item) =>
+        item.get({
+          plain: true,
+        })
+      )
+      .map((item) => item.id);
+
+    const result = await Plant.findAll({
+      attributes: ['id', 'name', 'description', 'thumbnailPath'],
+      where: {
+        id: {[Op.in]: plantIdArr},
+      },
+      include: [
+        {
+          model: Tag,
+          attributes: ['id', 'name', 'type'],
           through: {
             attributes: [],
           },

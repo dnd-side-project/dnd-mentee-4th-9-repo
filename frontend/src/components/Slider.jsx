@@ -6,6 +6,19 @@ import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/swiper.scss';
 import {isEmptyArr} from '../lib/handler';
 
+/*
+plants {
+  id: numberr;
+  name: string;
+  description: string;
+  thumbnailPath: string;
+  Tags: [
+    id: number;
+    name: string; (required)
+    type: string;
+  ]
+}
+*/
 function Slider({plants}) {
   useLayoutEffect(() => {
     if (!isEmptyArr(plants)) {

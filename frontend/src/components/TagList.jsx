@@ -22,7 +22,13 @@ tag {
 tagData: tag[];
 desk: string (xl, lg, sm, xs, xxs);
 mobile: string;
-isSimple: bool (true => 난이도, 물주기 태그만 출력)
+isSimple: bool; (true => 난이도, 물주기 태그만 출력)
+selected: string; (버튼 태그 시 선택한 값)
+event: {
+  type: string; (이벤트 유형)
+  func: function; (이벤트 함수)
+}
+plantId: number; (태그가 plant에 종속될 때 => AllKeywords)
 */
 
 function TagList({tagData, desk, mobile, isSimple, selected, event, plantId}) {
@@ -49,7 +55,7 @@ function TagList({tagData, desk, mobile, isSimple, selected, event, plantId}) {
         if (notDisplay(name)) return true;
 
         return (
-          <Tag key={`${plantId}-${name}`} selected={selected} name={name} onClick={() => onClick(name)}>
+          <Tag key={`${plantId}-${name}`} name={name} selected={selected} onClick={() => onClick(name)}>
             <span>{name}</span>
           </Tag>
         );
@@ -65,6 +71,7 @@ TagList.defaultProps = {
   isSimple: false,
   selected: '',
   event: null,
+  plantId: -1,
 };
 
 const Tag = styled.li`

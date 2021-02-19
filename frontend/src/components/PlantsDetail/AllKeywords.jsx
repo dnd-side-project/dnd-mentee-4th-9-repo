@@ -19,6 +19,7 @@ tag: {
 */
 
 /*
+plandId: number
 name: string
 keywords: tag[]
 */

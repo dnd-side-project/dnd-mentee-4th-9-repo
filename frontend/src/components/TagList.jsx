@@ -49,7 +49,7 @@ function TagList({tagData, desk, mobile, isSimple, selected, event, plantId}) {
   };
 
   return (
-    <Tags isSimple={isSimple} desk={desk} mobile={mobile}>
+    <Tags desk={desk} mobile={mobile}>
       {tags.map((tag) => {
         const {name} = tag;
         if (notDisplay(name)) return true;
@@ -97,16 +97,6 @@ const Tag = styled.li`
 `;
 
 const Tags = styled.ul`
-  ${({isSimple}) => {
-    if (isSimple) {
-      return css`
-        display: flex;
-        flex-direction: row-reverse;
-        justify-content: flex-end;
-      `;
-    }
-  }}
-
   ${Tag} {
     margin-right: ${({desk}) => margins[desk]}px;
     margin-bottom: ${({desk}) => margins[desk] + 2}px;

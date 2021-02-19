@@ -414,7 +414,7 @@ const reset = async () => {
       PlantId: 2,
       TagId: 12,
       type: '속도',
-      imagePath: `${resourceServer}/속도_처음모습그대.png`,
+      imagePath: `${resourceServer}/속도_처음모습그대로.png`,
       description: '느리게 자라는 편',
     },
     {

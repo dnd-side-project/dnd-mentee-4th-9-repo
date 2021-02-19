@@ -26,42 +26,44 @@ const searchTag = async (req, res, next) => {
   }
 };
 
-const getListTags = async(req, res, next) => {
-    try {
-        const result = await Tag.findAll({
-            attributes: ['id', 'name', 'type']
+const getListTags = async (req, res, next) => {
+  try {
+    const result = await Tag.findAll({
+      attributes: ['id', 'name', 'type'],
+    });
+
+    const tagOrderMap = {
+      난이도: [],
+      물주기: [],
+      크기: [],
+      '꽃/열매': [],
+      속도: [],
+      장소: [],
+      온도: [],
+    };
+
+    const makeMapOrder = (tagList) => {
+      tagList
+        .map((tagObj) =>
+          tagObj.get({
+            plain: true,
+          })
+        )
+        .forEach((tags) => {
+          tagOrderMap[tags.type].push(tags);
         });
+    };
 
-        const tagOrderMap = {
-            '난이도' : [],
-            '물주기' : [],
-            '크기' : [],
-            '꽃/열매': [],
-            '속도': [],
-            '장소': [],
-            '온도': []
-        }
+    makeMapOrder(result);
 
-        const makeMapOrder = (tagList) => {
-            tagList
-                .map(tagObj => tagObj.get({
-                    plain: true
-                }))
-                .forEach(tags => {
-                    tagOrderMap[tags.type].push(tags);
-                })
-        }
+    const orderedList = Object.values(tagOrderMap).reduce((prev, curr) => {
+      return prev.concat(curr);
+    });
 
-        makeMapOrder(result);
-
-        const orderedList = Object.values(tagOrderMap).reduce((prev, curr) => {
-            return prev.concat(curr);
-        })
-
-        res.json(orderedList);
-    } catch (error) {
-        next(error);
-    }
-}
+    res.json(orderedList);
+  } catch (error) {
+    next(error);
+  }
+};
 
 module.exports = {searchTag, getListTags};

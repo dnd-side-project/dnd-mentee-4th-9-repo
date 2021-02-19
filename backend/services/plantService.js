@@ -155,6 +155,32 @@ const detailPlant = async (plantDTO) => {
       plain: true,
     });
 
+    const tagOrderMap = {
+      장소: [],
+      온도: [],
+      물주기: [],
+      속도: [],
+    };
+
+    const makeMapOrder = (tagList) => {
+      tagList
+        .map((tagObj) =>
+          tagObj.get({
+            plain: true,
+          })
+        )
+        .forEach((tags) => {
+          tagOrderMap[tags.type].push(tags);
+        });
+    };
+
+    makeMapOrder(baseResult.Tags);
+
+    const orderedList = Object.values(tagOrderMap).reduce((prev, curr) => {
+      return prev.concat(curr);
+    });
+
+    detailResult.Tags = orderedList;
     detailResult.allTags = tags.Tags;
     detailResult.recommendPlants = recommendPlants;
 

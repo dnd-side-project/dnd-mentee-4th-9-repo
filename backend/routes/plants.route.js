@@ -1,6 +1,12 @@
 const express = require('express');
-const { getListPlants, getDetailPlant,curatingResult,searchByPlantName,searchByPlantTag} = require('../controllers/plant.controller');
-const router = express.Router()
+const {
+  getListPlants,
+  getDetailPlant,
+  curatingResult,
+  searchByPlantName,
+  searchByPlantTag,
+} = require('../controllers/plant.controller');
+const router = express.Router();
 
 /**
  * @swagger
@@ -21,7 +27,7 @@ const router = express.Router()
  *       200:
  *         description: 식물의 정보에 대한 배열을 반환합니다.
  */
-router.get('/', getListPlants) //쿼리스트링. /plants?order=recent});
+router.get('/', getListPlants); //쿼리스트링. /plants?order=recent});
 
 /**
  * @swagger
@@ -45,7 +51,7 @@ router.get('/', getListPlants) //쿼리스트링. /plants?order=recent});
  *       200:
  *         description: 큐레이팅 결과 식물 반환
  */
-router.get('/curating',curatingResult);
+router.get('/curating', curatingResult);
 
 /**
  * @swagger
@@ -72,7 +78,7 @@ router.get('/curating',curatingResult);
  *       200:
  *         description: 식물 이름 검색 내용을 반환
  */
-router.post('/encyclopedia/keyword',searchByPlantName);
+router.post('/encyclopedia/keyword', searchByPlantName);
 
 /**
  * @swagger
@@ -99,7 +105,7 @@ router.post('/encyclopedia/keyword',searchByPlantName);
  *       200:
  *         description: 태그 검색 내용을 반환
  */
-router.post('/encyclopedia/tag',searchByPlantTag);
+router.post('/encyclopedia/tag', searchByPlantTag);
 
 /**
  * @swagger
@@ -122,6 +128,6 @@ router.post('/encyclopedia/tag',searchByPlantTag);
  *       200:
  *         description: 식물의 디테일한 내용을 얻습니다.
  */
-router.get('/:plantId', getDetailPlant) //for detail
+router.get('/:plantId', getDetailPlant); //for detail
 
 module.exports = router;

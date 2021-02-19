@@ -26,14 +26,17 @@ const options = {
             }
         ]
     },
-    apis: ["./routes/*.js"]
+  apis: ['./routes/*.js'],
 };
 
 const specs = swaggerJsdoc(options);
 
 router.use('/api-docs', swaggerUi.serve);
-router.get('/api-docs', swaggerUi.setup(specs, {
-    explorer: true
-}));
+router.get(
+  '/api-docs',
+  swaggerUi.setup(specs, {
+    explorer: true,
+  })
+);
 
 module.exports = router;

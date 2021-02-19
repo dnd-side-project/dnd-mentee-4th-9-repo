@@ -55,6 +55,7 @@ Temporary Items
 
 
 /backend/node_modules
+/backend/coverage
 
 .env
 

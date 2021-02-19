@@ -1,6 +1,6 @@
 const express = require('express');
-const { searchTag, getListTags } = require('../controllers/tag.controller');
-const router = express.Router()
+const {searchTag, getListTags} = require('../controllers/tag.controller');
+const router = express.Router();
 
 /**
  * @swagger

@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Grid from '@material-ui/core/Grid';
 
@@ -10,15 +11,13 @@ import theme from '../../styles/theme';
 import {NO_DISPLAY_TAG} from '../../const/tags';
 
 /*
-tag
-{
+tag {
   id: number,
-    name: string,
-    PlantTag: {
-      type: string,
-      imagePath: string,
-      description: string,
-    },
+  name: string,
+  PlantTag: {
+    imagePath: string,
+    description: string,
+  },
 }
 */
 
@@ -32,9 +31,9 @@ function TagsDetail({name = '', tags = []}) {
   return (
     <Section width="lg" margin={100}>
       <div>
-        <TagsHead>
+        <DetailsHead>
           <span>{name}</span>는 어떤 친구인가요?
-        </TagsHead>
+        </DetailsHead>
         <Grid container spacing={matches ? 2 : 3}>
           {tags.map(
             (tag) =>
@@ -49,5 +48,13 @@ function TagsDetail({name = '', tags = []}) {
     </Section>
   );
 }
+
+const DetailsHead = styled(TagsHead)`
+  margin-bottom: 50px;
+
+  @media ${({theme}) => theme.devices.md} {
+    margin-bottom: 30px;
+  }
+`;
 
 export default TagsDetail;

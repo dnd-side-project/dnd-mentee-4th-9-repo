@@ -58,11 +58,13 @@ const Wrapper = styled.section`
   }
 `;
 
-const Img = styled.img`
-  content: url(${({imgPath}) => imgPath});
+const Img = styled.header`
+  content: '';
+  background-image: url(${({imgPath}) => imgPath});
   width: 100%;
   z-index: -1;
-  object-fit: cover;
+  background-size: cover;
+  background-position: center;
 `;
 
 /* label */

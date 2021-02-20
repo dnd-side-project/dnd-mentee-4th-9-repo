@@ -2,6 +2,7 @@ import os
 import datetime
 import time
 import boto3
+from log import logger
 from db import get_connection
 
 HOST = os.environ.get('DB_HOST', '3.34.87.77')
@@ -13,21 +14,21 @@ PASSWORD = os.environ.get('DB_PASSWORD', 'j112189')
 TEST_QUERY = 'SELECT 1 + 1 AS result'
 
 def handler(event, context):
-    print("this lambda has been invoked ")
-    print(event)
+    logger.info("this lambda has been invoked ")
+    logger.info(event)
 
     if event.get('dt'):
         dt = event.get('dt')
-        print(f'this is dt object  {dt}')
+        logger.info(f'this is dt object  {dt}')
     else:
-        print('No dt got')
+        logger.info('No dt got')
 
     conn = get_connection(HOST, PORT, USER, PASSWORD, TABLE)
 
     with conn.cursor() as cur:
         cur.execute(TEST_QUERY)
         result = cur.fetchall()
-        print(result)
+        logger.info(result)
         return result
 
 if __name__ == "__main__":
@@ -35,6 +36,6 @@ if __name__ == "__main__":
     with conn.cursor() as cur:
         cur.execute(TEST_QUERY)
         result = cur.fetchall()
-        print(result)
+        logger.info(result)
         cur.close()
     

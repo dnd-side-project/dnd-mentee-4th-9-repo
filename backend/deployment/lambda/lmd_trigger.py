@@ -20,7 +20,7 @@ def handler(event, context):
     try:
         lmd.invoke(
             FunctionName=TRIGGERD_LAMDA,
-            InvocationType='Event', Payload=json.dumps({'dt' : timenow_dt_strftime()})
+            InvocationType='Event', Payload=json.dumps({'dt' : timenow_dt_strftime()}) # this is dummy payload
         )
     except Exception as e:
         print(f'error occured when triggering lambda : {e}')

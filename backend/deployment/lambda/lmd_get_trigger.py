@@ -40,15 +40,19 @@ def handler(event, context):
     conn = get_connection(HOST, PORT, USER, PASSWORD, TABLE)
 
     with conn.cursor() as cur:
-        pass
+        views = get_all_views(cur)
+        logger.info(views)
+        for v in views:
+            total_view = int(v.get('totalViews'))
+            today_view = int(v.get('todayViews'))
+            id = int(v.get('id'))
+            print(f'UPDATE plants SET totalViews = {total_view + total_view}, todayViews = {0}, yesterDayViews = {today_view} WHERE id={id}')
+            cur.execute(f'UPDATE plants SET totalViews = {total_view + total_view}, todayViews = {0}, yesterDayViews = {today_view} WHERE id={id}')
+            try:
+                conn.commit() # commit.
+            except Exception as e:
+                logger.info(f'error occured while commit : {e}')
     
-    # TODO: First. select all todayViews and totalViews from all plants (o)
-    # TODO: Second. Save that counts in somewhere
-    # TODO: Third. update all plant's totalViews . Like this : Update totalViews = totalViews + todayViews
-    # TODO: Fourth. update yesterdayViews with todayViews
-    # TODO: Finally. update todayViews as 0.
-
-    # TODO: How to make all of above logics with OOP?
 
 if __name__ == "__main__":
     conn = get_connection(HOST, PORT, USER, PASSWORD, TABLE)

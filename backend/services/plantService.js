@@ -39,7 +39,7 @@ const viewOrderPlants = async () => {
           },
         },
       ],
-      order: [['views', 'DESC']],
+      order: [['yesterDayViews', 'DESC']],
     });
     return result;
   } catch (error) {
@@ -187,7 +187,7 @@ const detailPlant = async (plantDTO) => {
 
     await Plant.update(
       {
-        views: sequelize.literal('views + 1'),
+        todayViews: sequelize.literal('todayViews + 1'),
       },
       {
         where: {id: plantDTO},

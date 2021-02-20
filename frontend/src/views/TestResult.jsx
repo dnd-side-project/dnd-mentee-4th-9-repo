@@ -5,6 +5,7 @@ import html2canvas from 'html2canvas';
 import canvas2image from 'canvas2image-2';
 import Footer from '../components/Footer/Footer';
 import Section from '../components/Section';
+import PlantMain from '../components/PlantsDetail/PlantMain';
 import styled from 'styled-components';
 import TagList from '../components/TagList';
 import Button from '../styles/Button';
@@ -23,6 +24,7 @@ function TestResult() {
   const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${sharedUrl}&src=sdkpreparse`;
 
   const returnTest = () => history.push('/test');
+  const goToDetailPage = (id) => history.push(`/plants/detail/${id}`);
   const shareKakao = () => alert('카카오톡 공유 기능은 추후 제공 예정입니다.');
   const copyUrl = () => alert('결과 주소가 복사되었습니다.\n주소를 공유해 보세요!');
   const saveImage = () => {
@@ -48,22 +50,26 @@ function TestResult() {
 
   return (
     <>
+      <PlantMain name={plantData.name} type="result" imgPath={plantData.imagePath} />
+
       <div className="save-result">
         <Section>
           <Description marginBottom="20">
-            <SubHead>{plantData.description}</SubHead>
+            <SubHead iropke={true}>{plantData.description}</SubHead>
             <DescText>{plantData.ment}</DescText>
           </Description>
-          <Description marginBottom="30">
-            <SubHead>#{plantData.name} #키워드</SubHead>
+          <Description marginTop="60" marginBottom="30">
+            <SubHead iropke={true}>#{plantData.name} #키워드</SubHead>
             <TagList tagData={plantData.Tags} />
-            <MoreButton>{plantData.name} 더 알아보기</MoreButton>
+            <MoreButton onClick={() => goToDetailPage(plantData.id)}>{plantData.name} 더 알아보기</MoreButton>
           </Description>
         </Section>
       </div>
 
       <Section bgColor="lightGray" margin="100" marginPercent="2.5" column={true}>
-        <ResultHeader color="green">결과를 공유해보세요!</ResultHeader>
+        <ResultHeader iropke={true} color="green">
+          결과를 공유해보세요!
+        </ResultHeader>
         <SnsShare>
           <a href={facebookUrl} target="_blank" rel="noreferrer">
             <img src={`${process.env.PUBLIC_URL}/images/fb.svg`} alt="facebook share" />
@@ -99,13 +105,14 @@ const Description = styled.div`
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  margin-top: 56px;
 
   ${SubHead} {
     margin-bottom: ${({marginBottom}) => marginBottom}px;
+    margin-top: ${({marginTop}) => marginTop}px;
 
     @media ${({theme}) => theme.devices.md} {
       margin-bottom: ${({marginBottom}) => marginBottom / 2}px;
+      margin-top: ${({marginTop}) => marginTop / 2}px;
     }
   }
 `;
@@ -141,7 +148,6 @@ const MoreButton = styled.button`
 `;
 
 const ResultHeader = styled(SubHead)`
-  font-family: 'Iropke Batang', Batang, Serif;
   line-height: 61px;
 
   @media ${({theme}) => theme.devices.md} {

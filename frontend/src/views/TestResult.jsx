@@ -2,7 +2,6 @@ import React, {useState, useEffect, useCallback} from 'react';
 import {useLocation, useHistory} from 'react-router-dom';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import html2canvas from 'html2canvas';
-import canvas2image from 'canvas2image-2';
 import Footer from '../components/Footer/Footer';
 import Section from '../components/Section';
 import PlantMain from '../components/PlantsDetail/PlantMain';
@@ -28,7 +27,13 @@ function TestResult() {
   const shareKakao = () => alert('카카오톡 공유 기능은 추후 제공 예정입니다.');
   const copyUrl = () => alert('결과 주소가 복사되었습니다.\n주소를 공유해 보세요!');
   const saveImage = () => {
-    html2canvas(document.querySelector('.save-result')).then((canvas) => canvas2image.saveAsImage(canvas));
+    html2canvas(document.body, {allowTaint: true, useCORS: true}).then((canvas) => {
+      const a = document.createElement('a');
+      const fileName = `나와 가장 잘 맞는 식물 ${plantData.name}.jpg`;
+      a.href = canvas.toDataURL('image/jpeg').replace('image/jpeg', 'image/octet-stream');
+      a.download = fileName.normalize('NFC');
+      a.click();
+    });
   };
 
   const getResultPlant = useCallback(async () => {

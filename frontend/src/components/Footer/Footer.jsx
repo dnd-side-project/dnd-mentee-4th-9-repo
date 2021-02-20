@@ -26,7 +26,7 @@ const Wrapper = styled.footer`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #f0f5ed;
+  background-color: ${({theme}) => theme.colors.lightGray};
 `;
 
 const Items = styled.ul`

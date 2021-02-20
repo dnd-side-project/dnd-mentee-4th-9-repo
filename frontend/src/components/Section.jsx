@@ -11,13 +11,13 @@ bgColor: string
 column: boolean (true => flex-direction: column)
 bgImage: boolean (true => background-image: bg_home.png)
 */
-function Section({type, margin, width, bgColor, children, column, bgImage, order}) {
+function Section({type, margin, marginPercent, width, bgColor, children, column, bgImage, order}) {
   bgImage = type === MAIN || bgImage;
   const height = type !== SECTION && type !== NAV ? '100vh' : 'initial';
 
   return (
     <Container className="container" type={type} bgColor={bgColor} bgImage={bgImage} height={height}>
-      <Wrapper type={type} margin={margin} width={width} column={column} order={order}>
+      <Wrapper type={type} margin={margin} marginPercent={marginPercent} width={width} column={column} order={order}>
         {children}
       </Wrapper>
     </Container>
@@ -77,13 +77,13 @@ export const Wrapper = styled.div`
     `;
   }}
 
-  ${({type, margin, order}) => {
+  ${({type, margin, marginPercent, order}) => {
     if (type !== FULL_SCREEN && margin > 0) {
       if (order === MIDDLE) {
         return css`
           margin: ${margin}px 0;
           @media ${({theme}) => theme.devices.md} {
-            margin: ${margin / 2}px 0;
+            margin: ${margin / (marginPercent || 2)}px 0;
           }
         `;
       } else {

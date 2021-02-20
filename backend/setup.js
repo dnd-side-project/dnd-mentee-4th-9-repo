@@ -362,7 +362,7 @@ const reset = async () => {
       PlantId: 1,
       TagId: 13,
       type: '온도',
-      imagePath: `${resourceServer}/적당히포근하게.png`,
+      imagePath: `${resourceServer}/온도_적당히포근하게.png`,
       description: '16~20℃',
     },
     {
@@ -414,7 +414,7 @@ const reset = async () => {
       PlantId: 2,
       TagId: 12,
       type: '속도',
-      imagePath: `${resourceServer}/속도_처음모습그대.png`,
+      imagePath: `${resourceServer}/속도_처음모습그대로.png`,
       description: '느리게 자라는 편',
     },
     {
@@ -573,7 +573,7 @@ const reset = async () => {
       PlantId: 5,
       TagId: 9,
       type: '장소',
-      imagePath: `${resourceServer}/장소_그늘에.png`,
+      imagePath: `${resourceServer}/장소_그늘에서.png`,
       description: '바람이 잘 드는 실내',
     },
     {
@@ -624,7 +624,7 @@ const reset = async () => {
       type: '장소',
       imagePath: `${resourceServer}/장소_환한곳에서.png`,
       description:
-        '- 햇빛을 좋아하므로 어두운곳은 부적합해요\n- 반양지를 가장 추천합니다.',
+        '햇빛을 좋아하므로 어두운곳은 부적합해요\n반양지를 가장 추천합니다.',
     },
     {
       PlantId: 6,
@@ -745,7 +745,7 @@ const reset = async () => {
       type: '물주기',
       imagePath: `${resourceServer}/물주기_1.png`,
       description:
-        '- 흙이 건조해졌을 때 적당히\n' + '- 분무기로 잎에 물을 뿌려주면 좋음',
+        '흙이 건조해졌을 때 적당히\n' + '분무기로 잎에 물을 뿌려주면 좋음',
     },
     {
       PlantId: 9,
@@ -790,7 +790,7 @@ const reset = async () => {
       type: '물주기',
       imagePath: `${resourceServer}/물주기_1.png`,
       description:
-        '- 흙이 마를 때 급수\n' + '물을 좋아하기 때문에 수경재배도 가능',
+        '흙이 마를 때 급수\n' + '물을 좋아하기 때문에 수경재배도 가능',
     },
     {
       PlantId: 10,
@@ -958,7 +958,7 @@ const reset = async () => {
       type: '물주기',
       imagePath: `${resourceServer}/물주기_3.png`,
       description:
-        '- 물은 흠뻑 젖을 만큼 주고, 자주 줄 필요는 없음\n' + '- 10~15일 주기',
+        '물은 흠뻑 젖을 만큼 주고, 자주 줄 필요는 없음\n' + '10~15일 주기',
     },
     {
       PlantId: 14,

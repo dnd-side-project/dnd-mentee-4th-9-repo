@@ -14,6 +14,8 @@ PASSWORD = os.environ.get('DB_PASSWORD', 'j112189')
 
 TEST_QUERY = 'SELECT 1 + 1 AS result'
 
+GET_VIEWS_QUERY = 'SELECT id, totalViews, yesterDayViews, todayViews FROM plants WHERE 1=1'
+
 def handler(event, context):
     logger.info("this lambda has been invoked ")
     logger.info(event)
@@ -27,12 +29,12 @@ def handler(event, context):
     conn = get_connection(HOST, PORT, USER, PASSWORD, TABLE)
 
     with conn.cursor() as cur:
-        cur.execute(TEST_QUERY)
+        cur.execute(GET_VIEWS_QUERY)
         result = cur.fetchall()
         logger.info(result)
         return result
     
-    # TODO: First. select all todayViews and totalViews from all plants
+    # TODO: First. select all todayViews and totalViews from all plants (o)
     # TODO: Second. Save that counts in somewhere
     # TODO: Third. update all plant's totalViews . Like this : Update totalViews = totalViews + todayViews
     # TODO: Fourth. update yesterdayViews with todayViews
@@ -43,8 +45,16 @@ def handler(event, context):
 if __name__ == "__main__":
     conn = get_connection(HOST, PORT, USER, PASSWORD, TABLE)
     with conn.cursor() as cur:
-        cur.execute(TEST_QUERY)
+        cur.execute(GET_VIEWS_QUERY)
         result = cur.fetchall()
-        logger.info(result)
-        cur.close()
+        print(result)
     
+
+'''
+result : 
+[{'id': 1, 'totalViews': 0, 'yesterDayViews': 0, 'todayViews': 2}, 
+{'id': 2, 'totalViews': 0, 'yesterDayViews': 0, 'todayViews': 1}, 
+{'id': 3, 'totalViews': 0, 'yesterDayViews': 0, 'todayViews': 0}, 
+{'id': 4, 'totalViews': 0, 'yesterDayViews': 0, 'todayViews': 0} ....
+]
+'''

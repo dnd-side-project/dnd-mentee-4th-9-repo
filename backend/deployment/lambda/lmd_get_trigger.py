@@ -1,7 +1,4 @@
 import os
-import datetime
-import time
-import boto3
 import pymysql
 from typing import List # for type annotation
 from log import logger
@@ -11,7 +8,8 @@ HOST = os.environ.get('DB_HOST', '3.34.87.77')
 PORT = int(os.environ.get('DB_PORT', 3306))
 USER = os.environ.get('DB_USER', 'root')
 TABLE = os.environ.get('DB_TABLE', 'dnd')
-PASSWORD = os.environ.get('DB_PASSWORD', 'j112189')
+PASSWORD = os.environ.get('DB_PASSWORD', 'password')
+COLS = ['totalViews', 'todayViews', 'id']
 # TODO: How to hide this password in serverless.yml ?
 
 TEST_QUERY = 'SELECT 1 + 1 AS result'
@@ -31,21 +29,13 @@ def handler(event, context):
     logger.info("this lambda has been invoked ")
     logger.info(event)
 
-    if event.get('dt'):
-        dt = event.get('dt')
-        logger.info(f'this is dt object  {dt}')
-    else:
-        logger.info('No dt got')
-
     conn = get_connection(HOST, PORT, USER, PASSWORD, TABLE)
 
     with conn.cursor() as cur:
         views = get_all_views(cur)
         logger.info(views)
         for v in views:
-            total_view = int(v.get('totalViews'))
-            today_view = int(v.get('todayViews'))
-            id = int(v.get('id'))
+            total_view, today_view, id = map(lambda x : v.get(x), COLS)
             cur.execute(f'UPDATE plants SET totalViews = {total_view + today_view}, todayViews = {0}, yesterDayViews = {today_view} WHERE id={id}')
             try:
                 conn.commit() # commit.
@@ -59,9 +49,7 @@ if __name__ == "__main__":
         origin_views = get_all_views(cur)
         # print(result)
         for v in origin_views:
-            total_view = int(v.get('totalViews'))
-            today_view = int(v.get('todayViews'))
-            id = int(v.get('id'))
+            total_view, today_view, id = map(lambda x : v.get(x), COLS)
             cur.execute(f'UPDATE plants SET totalViews = {total_view + today_view}, todayViews = {0}, yesterDayViews = {today_view} WHERE id={id}')
             result = conn.commit() # commit.
             print(result)

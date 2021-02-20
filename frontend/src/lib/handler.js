@@ -5,7 +5,7 @@ export const isEmptyArr = (arr = []) => {
 
 export const includeArr = (arr = [], element) => {
   return arr.includes(element);
-};
+}; 
 
 /* string */
 const EMPTY = '';

@@ -86,42 +86,6 @@ const LabelWrapper = styled.div`
   }
 `;
 
-const Text = styled.div`
-  h1 {
-    margin-bottom: ${({type}) => type === 'detail' && 10}px;
-    font-size: ${fontSizes.lg}px;
-    font-weight: bold;
-    color: ${({theme}) => theme.colors.green};
-  }
-
-  span {
-    margin-bottom: ${({type}) => type === 'result' && 10}px;
-    line-height: 30px;
-    font-size: ${({theme}) => theme.fontSizes['32'].lg}px;
-    color: ${({theme}) => theme.colors.gray};
-  }
-
-  ${({type}) => {
-    if (type === 'detail') return;
-    return css`
-      display: flex;
-      justify-content: space-between;
-      flex-direction: column;
-    `;
-  }}
-
-  @media ${({theme}) => theme.devices.md} {
-    h1 {
-      margin-bottom: 0;
-      font-size: ${fontSizes.md}px;
-    }
-    span {
-      margin-bottom: 0;
-      font-size: ${({theme}) => theme.fontSizes['32'].md}px;
-    }
-  }
-`;
-
 const Label = styled.div`
   padding-top: 40px;
   width: 100%;
@@ -160,6 +124,51 @@ const Label = styled.div`
 
     @media ${({theme}) => theme.devices.md} {
       transform: translate(-50%, 80px);
+    }
+  }
+
+  h1 {
+    font-family: 'Iropke Batang', Batang, Serif;
+  }
+
+  @media ${({theme}) => theme.devices.md} {
+    padding-top: 15px;
+    border-radius: 10px;
+  }
+`;
+
+const Text = styled.div`
+  h1 {
+    margin-bottom: ${({type}) => type === 'detail' && 10}px;
+    font-size: ${fontSizes.lg}px;
+    font-weight: bold;
+    color: ${({theme}) => theme.colors.green};
+  }
+
+  span {
+    margin-bottom: ${({type}) => type === 'result' && 10}px;
+    line-height: 30px;
+    font-size: ${({theme}) => theme.fontSizes['32'].lg}px;
+    color: ${({theme}) => theme.colors.gray};
+  }
+
+  ${({type}) => {
+    if (type === 'detail') return;
+    return css`
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+    `;
+  }}
+
+  @media ${({theme}) => theme.devices.md} {
+    h1 {
+      margin-bottom: 0;
+      font-size: ${fontSizes.md}px;
+    }
+    span {
+      margin-bottom: 0;
+      font-size: ${({theme}) => theme.fontSizes['32'].md}px;
     }
   }
 `;

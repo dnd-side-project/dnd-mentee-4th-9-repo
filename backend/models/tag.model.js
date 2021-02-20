@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const PlantTags = require('./plantTag.model')
+const PlantTags = require('./plantTag.model');
 
 module.exports = class Tag extends Sequelize.Model{
     static init(sequelize){
@@ -11,6 +11,10 @@ module.exports = class Tag extends Sequelize.Model{
             type: {
                 type: Sequelize.STRING(50),
                 allowNull: false,
+            },
+            order : {
+                type: Sequelize.INTEGER,
+                allowNull: false
             }
         }, {
             sequelize,

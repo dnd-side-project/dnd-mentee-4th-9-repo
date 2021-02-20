@@ -64,6 +64,7 @@ const Wrapper = styled.div`
   }
 
   h2 {
+    font-family: 'Iropke Batang', Batang, Serif;
     font-size: ${({theme}) => theme.fontSizes['40'].lg}px;
     font-weight: ${({theme}) => theme.fontWeights.bold};
   }

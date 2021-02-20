@@ -28,7 +28,7 @@ function RecommendPlant({plant, desk, mobile, isSimple}) {
   return (
     <Link to={`/plants/detail/${id}`}>
       <Wrapper desk={desk} mobile={mobile} isSimple={isSimple} className="card-wrapper">
-        <Image imgUrl={thumbnailPath} />
+        <Img imgUrl={thumbnailPath} />
         <TextWrapper desk={desk} mobile={mobile}>
           <Title desk={desk} mobile={mobile}>
             {name}
@@ -49,32 +49,40 @@ RecommendPlant.defaultProps = {
   isSimple: false,
 };
 
-const Wrapper = styled.div`
-  display: inline-block;
-  margin: ${({desk}) => `0 ${sizes[desk].margin}px ${sizes[desk].margin}px 0`};
-  width: ${({desk}) => sizes[desk].width}px;
-  height: ${({desk}) => sizes[desk].height}px;
-
-  border-radius: 45px 45px 45px 0px;
-  box-shadow: 0px 25px 35px 0px rgba(0, 0, 0, 0.04);
-
-  @media ${({theme}) => theme.devices.md} {
-    margin: ${({mobile}) => `0 ${sizes[mobile].margin}px ${sizes[mobile].margin}px 0`};
-    width: ${({mobile}) => sizes[mobile].width}px;
-    height: ${({mobile}) => sizes[mobile].height}px;
-
-    border-radius: 30px 30px 30px 0px;
-    box-shadow: 0px 14px 25px 0px rgba(0, 0, 0, 0.05);
-  }
-`;
-
-const Image = styled.img`
-  width: 100%;
+const Img = styled.img`
   content: url(${({imgUrl}) => imgUrl});
   border-radius: 45px 45px 0 0;
 
   @media ${({theme}) => theme.devices.md} {
     border-radius: 30px 30px 0 0;
+  }
+`;
+
+const Wrapper = styled.div`
+  display: inline-block;
+  margin: ${({desk}) => `0 ${sizes[desk].margin}px ${sizes[desk].margin}px 0`};
+  height: ${({desk}) => sizes[desk].height}px;
+
+  border-radius: 45px 45px 45px 0px;
+  box-shadow: 0px 25px 35px 0px rgba(0, 0, 0, 0.04);
+
+  ${Img} {
+    border-radius: inherit;
+    width: ${({desk}) => sizes[desk].width}px;
+    height: ${({desk}) => sizes[desk].width}px;
+  }
+
+  @media ${({theme}) => theme.devices.md} {
+    margin: ${({mobile}) => `0 ${sizes[mobile].margin}px ${sizes[mobile].margin}px 0`};
+    height: ${({mobile}) => sizes[mobile].height}px;
+
+    border-radius: 30px 30px 30px 0px;
+    box-shadow: 0px 14px 25px 0px rgba(0, 0, 0, 0.05);
+
+    ${Img} {
+      width: ${({mobile}) => sizes[mobile].width}px;
+      height: ${({mobile}) => sizes[mobile].width}px;
+    }
   }
 `;
 
@@ -87,7 +95,7 @@ const TextWrapper = styled.div`
 `;
 
 const Title = styled.h2`
-  font-weight: ${({theme}) => theme.fontWeights.bold};
+  font-weight: ${({theme}) => theme.fontWeights.medium};
   font-size: ${({desk}) => sizes[desk].titleSize}px;
   line-height: ${({desk}) => sizes[desk].titleLineHeight}px;
 
@@ -115,4 +123,4 @@ const Description = styled.p`
   }
 `;
 
-export default RecommendPlant;
+export default React.memo(RecommendPlant);

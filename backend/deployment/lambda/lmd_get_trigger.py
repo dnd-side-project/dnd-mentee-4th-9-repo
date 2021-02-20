@@ -2,6 +2,8 @@ import os
 import datetime
 import time
 import boto3
+import pymysql
+from typing import List # for type annotation
 from log import logger
 from db import get_connection
 
@@ -16,6 +18,15 @@ TEST_QUERY = 'SELECT 1 + 1 AS result'
 
 GET_VIEWS_QUERY = 'SELECT id, totalViews, yesterDayViews, todayViews FROM plants WHERE 1=1'
 
+def get_all_views(cursor: pymysql.connections.Connection.cursor) -> List[dict]:
+    try:
+        cursor.execute(GET_VIEWS_QUERY)
+        return cursor.fetchall()
+    except Exception as e:
+        logger.info(f'failed to fetch :{e}')
+        return []
+    
+
 def handler(event, context):
     logger.info("this lambda has been invoked ")
     logger.info(event)
@@ -29,10 +40,7 @@ def handler(event, context):
     conn = get_connection(HOST, PORT, USER, PASSWORD, TABLE)
 
     with conn.cursor() as cur:
-        cur.execute(GET_VIEWS_QUERY)
-        result = cur.fetchall()
-        logger.info(result)
-        return result
+        pass
     
     # TODO: First. select all todayViews and totalViews from all plants (o)
     # TODO: Second. Save that counts in somewhere
@@ -45,16 +53,13 @@ def handler(event, context):
 if __name__ == "__main__":
     conn = get_connection(HOST, PORT, USER, PASSWORD, TABLE)
     with conn.cursor() as cur:
-        cur.execute(GET_VIEWS_QUERY)
-        result = cur.fetchall()
-        print(result)
-    
-
-'''
-result : 
-[{'id': 1, 'totalViews': 0, 'yesterDayViews': 0, 'todayViews': 2}, 
-{'id': 2, 'totalViews': 0, 'yesterDayViews': 0, 'todayViews': 1}, 
-{'id': 3, 'totalViews': 0, 'yesterDayViews': 0, 'todayViews': 0}, 
-{'id': 4, 'totalViews': 0, 'yesterDayViews': 0, 'todayViews': 0} ....
-]
-'''
+        origin_views = get_all_views(cur)
+        # print(result)
+        for v in origin_views:
+            total_view = int(v.get('totalViews'))
+            today_view = int(v.get('todayViews'))
+            id = int(v.get('id'))
+            print(f'UPDATE plants SET totalViews = {total_view + total_view}, todayViews = {0}, yesterDayViews = {today_view} WHERE id={id}')
+            cur.execute(f'UPDATE plants SET totalViews = {total_view + total_view}, todayViews = {0}, yesterDayViews = {today_view} WHERE id={id}')
+            result = conn.commit() # commit.
+            print(result)

@@ -46,7 +46,7 @@ def handler(event, context):
             total_view = int(v.get('totalViews'))
             today_view = int(v.get('todayViews'))
             id = int(v.get('id'))
-            cur.execute(f'UPDATE plants SET totalViews = {total_view + total_view}, todayViews = {0}, yesterDayViews = {today_view} WHERE id={id}')
+            cur.execute(f'UPDATE plants SET totalViews = {total_view + today_view}, todayViews = {0}, yesterDayViews = {today_view} WHERE id={id}')
             try:
                 conn.commit() # commit.
             except Exception as e:
@@ -62,6 +62,6 @@ if __name__ == "__main__":
             total_view = int(v.get('totalViews'))
             today_view = int(v.get('todayViews'))
             id = int(v.get('id'))
-            cur.execute(f'UPDATE plants SET totalViews = {total_view + total_view}, todayViews = {0}, yesterDayViews = {today_view} WHERE id={id}')
+            cur.execute(f'UPDATE plants SET totalViews = {total_view + today_view}, todayViews = {0}, yesterDayViews = {today_view} WHERE id={id}')
             result = conn.commit() # commit.
             print(result)

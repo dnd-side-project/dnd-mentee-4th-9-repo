@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 import TagList from '../TagList';
 
 import {getReactiveSize} from '../../lib/calculate';
@@ -11,21 +11,23 @@ const fontSizes = getReactiveSize(48);
 
 /*
 name: string
+type: string (default: detail) detail | result
 description: string
 imgPath: string
 star: string ex) "⭐"
 */
-function PlantMain({name, description, imgPath, star}) {
+function PlantMain({name, type = 'detail', description, imgPath, star}) {
   return (
     <Wrapper>
       {!isEmptyStr(imgPath) && <Img imgPath={imgPath} alt="plant main" />}
-      <LabelWrapper>
-        <Label>
-          <Text>
+      <LabelWrapper type={type}>
+        <Label type={type}>
+          <Text type={type}>
+            {type === 'result' && <span>나에게 맞는 식물 친구는</span>}
             <h1>{name}</h1>
-            <span>{description}</span>
+            {type === 'detail' && <span>{description}</span>}
           </Text>
-          <TagList tagData={[star]} />
+          {star && <TagList tagData={[star]} />}
         </Label>
       </LabelWrapper>
     </Wrapper>
@@ -34,9 +36,10 @@ function PlantMain({name, description, imgPath, star}) {
 
 PlantMain.detailProps = {
   name: '',
+  type: 'detail',
   description: '',
   imgPath: '',
-  start: '',
+  star: null,
 };
 
 /* container */
@@ -55,11 +58,13 @@ const Wrapper = styled.section`
   }
 `;
 
-const Img = styled.img`
-  content: url(${({imgPath}) => imgPath});
+const Img = styled.header`
+  content: '';
+  background-image: url(${({imgPath}) => imgPath});
   width: 100%;
   z-index: -1;
-  object-fit: cover;
+  background-size: cover;
+  background-position: center;
 `;
 
 /* label */
@@ -68,12 +73,12 @@ const LabelWrapper = styled.div`
   bottom: 0;
   left: 50%;
 
-  width: min(${({theme}) => theme.width.lg}px, 100%);
+  width: min(${({theme, type}) => (type === 'detail' ? theme.width.lg : theme.width.md)}px, 100%);
   height: ${heights.lg}px;
   transform: translate(-50%, 140px);
 
   @media ${({theme}) => theme.devices.lg} {
-    padding: 0 ${({theme}) => theme.width.padding}px;
+    padding: 0 ${({theme, type}) => type === 'detail' && theme.width.padding}px;
   }
 
   @media ${({theme}) => theme.devices.md} {
@@ -95,6 +100,21 @@ const Label = styled.div`
 
   box-shadow: 0px 25px 35px rgba(0, 0, 0, 0.04);
   border-radius: 20px;
+
+  @media ${({theme}) => theme.devices.md} {
+    padding-top: 15px;
+    border-radius: 10px;
+  }
+
+  ${({type}) => {
+    if (type === 'detail') return;
+    return css`
+      padding: 50px 0;
+      @media ${({theme}) => theme.devices.md} {
+        padding: 20px 0;
+      }
+    `;
+  }}
 
   li {
     border-radius: 100px;
@@ -121,17 +141,27 @@ const Label = styled.div`
 
 const Text = styled.div`
   h1 {
-    margin-bottom: 10px;
+    margin-bottom: ${({type}) => type === 'detail' && 10}px;
     font-size: ${fontSizes.lg}px;
     font-weight: bold;
     color: ${({theme}) => theme.colors.green};
   }
 
   span {
+    margin-bottom: ${({type}) => type === 'result' && 10}px;
     line-height: 30px;
     font-size: ${({theme}) => theme.fontSizes['32'].lg}px;
     color: ${({theme}) => theme.colors.gray};
   }
+
+  ${({type}) => {
+    if (type === 'detail') return;
+    return css`
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+    `;
+  }}
 
   @media ${({theme}) => theme.devices.md} {
     h1 {
@@ -139,6 +169,7 @@ const Text = styled.div`
       font-size: ${fontSizes.md}px;
     }
     span {
+      margin-bottom: 0;
       font-size: ${({theme}) => theme.fontSizes['32'].md}px;
     }
   }

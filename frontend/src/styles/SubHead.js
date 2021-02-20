@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, {css} from 'styled-components';
 
 const SubHead = styled.h2`
   font-family: 'Iropke Batang', Batang, Serif;
@@ -9,6 +9,13 @@ const SubHead = styled.h2`
   span {
     font-family: 'Iropke Batang', Batang, Serif;
   }
+
+  ${({iropke}) => {
+    if (!iropke) return;
+    return css`
+      font-family: 'Iropke Batang', Batang, Serif;
+    `;
+  }}
 
   @media ${({theme}) => theme.devices.md} {
     font-size: 20px;

@@ -20,7 +20,9 @@ function TestQuestion() {
     result[plantName]++;
 
     if (!testData[currentId + 1]) {
-      history.push({pathname: '/test/result/1', state: result});
+      const resultPlant = Object.keys(result).reduce((a, b) => (result[a] > result[b] ? a : b));
+
+      history.push({pathname: `/test/result/${resultPlant}`, state: resultPlant});
       return;
     }
     setCurrentId(currentId + 1);

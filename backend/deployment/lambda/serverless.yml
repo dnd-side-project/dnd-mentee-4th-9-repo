@@ -48,7 +48,7 @@ functions:
     handler: lmd_trigger.handler
     name: ${self:service}-cron-trigger
     events:
-      - schedule: cron(0/1 * * * ? *) # for test. every 1 minutes
+      - schedule: cron(0/5 * * * ? *) # for test. every 5 minutes
   lmd_get_trigger:
     handler: lmd_get_trigger.handler
     name: ${self:service}-cron-get-trigger

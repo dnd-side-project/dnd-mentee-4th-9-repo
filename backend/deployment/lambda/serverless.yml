@@ -17,8 +17,10 @@ provider:
   environment:
     TRIGGERD_LAMBDA: ${self:service}-cron-get-trigger
     DB_HOST: "3.34.87.77"
+    DB_USER: "root"
+    DB_PORT: 3306
     DB_TABLE: "dnd"
-    DB_PASSWORD: "password"
+    DB_PASSWORD: "j112189"
 
 
 package:

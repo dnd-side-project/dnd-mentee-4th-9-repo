@@ -2,7 +2,7 @@ import React, {useEffect, useState, useCallback} from 'react';
 import styled from 'styled-components';
 
 import Section from '../components/Section';
-import TagList from '../components/TagList';
+import TagList, {ADD_FILTER} from '../components/TagList';
 import ColorTags from '../components/SearchPlants/ColorTags';
 
 import {getAllTags} from '../api/plantsAPI';
@@ -63,7 +63,7 @@ const SearchPlant = ({location: {search}}) => {
           {tagData.map(({type, tags}) => (
             <KeywordField key={type}>
               <h2>{type}</h2>
-              <TagList tagData={tags} selected={selectedTag} event={{type: 'filter'}} query={search} />
+              <TagList tagData={tags} selected={selectedTag} event={{type: ADD_FILTER}} query={search} />
             </KeywordField>
           ))}
         </KeywordGroup>

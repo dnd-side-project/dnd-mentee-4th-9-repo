@@ -4,10 +4,10 @@ import styled, {css} from 'styled-components';
 
 import tagList from '../styles/tagList';
 import {sliderTags, NO_DISPLAY_TAG} from '../const/tags';
-import {EMPTY, getOriginTag, getQsTag, includeArr, isEmptyStr} from '../lib/handler';
+import {EMPTY, getQsTag, includeArr, includeStr} from '../lib/handler';
 
 export const [NORMAL, BUTTON] = ['normal', 'button'];
-export const [FILTER, SEARCH, MOVE] = ['filter', 'search', 'move'];
+export const [FILTER, ADD_FILTER, DEL_FILTER, SEARCH, MOVE] = ['filter', 'add_filter', 'del_filter', 'search', 'move'];
 const AND = '+';
 
 const {margins, paddings, fontSizes} = tagList;
@@ -44,36 +44,28 @@ function TagList({tagData, desk, mobile, isSimple, selected = [], event, plantId
 
     if (type === SEARCH) {
       func(name);
-    } else if (type === FILTER) {
-      // 현재 클릭한 태그 formatting
-      const newTag = includeArr(selected, getQsTag(name)) ? EMPTY : getQsTag(name);
-
-      // queryString 내용 갱신 -> 새로운 태그 추가 or 이미 선택한 태그면 제거
+    } else if (includeStr(type, FILTER)) {
+      const newTag = getQsTag(name);
       let qsTag = EMPTY;
-      selected.forEach((item, i) => {
-        if (getOriginTag(item) !== name) {
-          qsTag = qsTag.concat(item);
+      let resultTags = [...selected];
 
-          const lastIndex = selected.length - 1;
-          const nextItem = getQsTag(selected[i + 1]);
+      // selected tag array
+      if (type === ADD_FILTER) {
+        if (includeArr(selected, getQsTag(name))) return;
+        resultTags.push(newTag);
+      } else if (type === DEL_FILTER) {
+        resultTags = selected.filter((tag) => tag !== newTag);
+      }
 
-          if (i !== lastIndex || (i + 1 === lastIndex && nextItem !== name)) {
-            /*
-             * concat(+) 조건
-             * 1. 마지막 태그가 아닐 경우
-             * 2. 다음이 마지막인데 toggle 태그가 아닐 경우
-             */
-            qsTag = qsTag.concat(AND);
-          }
-        }
+      // selected tag query string
+      resultTags.forEach((item, i) => {
+        qsTag = qsTag.concat(item);
+        if (i !== resultTags.length - 1) qsTag = qsTag.concat(AND);
       });
 
-      if (qsTag[qsTag.length - 1] === AND) qsTag = qsTag.slice(0, -1);
-
-      const newQsTag = isEmptyStr(newTag) ? qsTag : isEmptyStr(qsTag) ? newTag : `${qsTag}+${newTag}`;
       history.push({
         pathname: `/plants`,
-        search: `?tag=${newQsTag}`,
+        search: `?tag=${qsTag}`,
       });
     }
   };
@@ -119,7 +111,7 @@ const Tag = styled.li`
   border-radius: 74.2px;
 
   ${({selected, name, eventType, theme: {colors}}) => {
-    const comparedName = eventType === FILTER ? getQsTag(name) : name;
+    const comparedName = includeStr(eventType, FILTER) ? getQsTag(name) : name;
 
     if (includeArr(selected, comparedName)) {
       return css`

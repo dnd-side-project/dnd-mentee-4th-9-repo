@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Section from '../Section';
-import TagList from '../TagList';
+import TagList, {DEL_FILTER} from '../TagList';
 
 function ColorTags({tags}) {
   const colorTags = tags.map((tag) => ({
@@ -12,7 +12,7 @@ function ColorTags({tags}) {
     <Container length={colorTags.length}>
       <Section width="lg">
         <Wrapper>
-          <TagList tagData={colorTags} />
+          <TagList tagData={colorTags} selected={tags} event={{type: DEL_FILTER}} />
         </Wrapper>
       </Section>
     </Container>
@@ -53,4 +53,4 @@ const Wrapper = styled.div`
   }
 `;
 
-export default ColorTags;
+export default React.memo(ColorTags);

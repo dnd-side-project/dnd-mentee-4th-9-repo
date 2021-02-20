@@ -16,8 +16,13 @@ export const includeArr = (arr = [], element) => {
 
 /* string */
 export const EMPTY = '';
+
 export const isEmptyStr = (string = EMPTY) => {
   return string === EMPTY;
+};
+
+export const includeStr = (string = '', word) => {
+  return string.includes(word);
 };
 
 export const isEmoji = (string = '') => {

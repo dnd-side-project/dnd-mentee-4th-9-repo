@@ -48,7 +48,7 @@ functions:
     handler: lmd_trigger.handler
     name: ${self:service}-cron-trigger
     events:
-      - schedule: cron(0/5 * * * ? *) # for test. every 5 minutes
+      - schedule: cron(0 * * * ? *) # 매시 정각에 수행함.
   lmd_get_trigger:
     handler: lmd_get_trigger.handler
     name: ${self:service}-cron-get-trigger

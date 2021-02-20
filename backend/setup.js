@@ -790,7 +790,7 @@ const reset = async () => {
       type: '물주기',
       imagePath: `${resourceServer}/물주기_1.png`,
       description:
-        '- 흙이 마를 때 급수\n' + '물을 좋아하기 때문에 수경재배도 가능',
+        '흙이 마를 때 급수\n' + '물을 좋아하기 때문에 수경재배도 가능',
     },
     {
       PlantId: 10,

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Section from '../components/Section';
 import TagList from '../components/TagList';
+import ColorTags from '../components/SearchPlants/ColorTags';
 
 import {getAllTags} from '../api/plantsAPI';
 import {EMPTY, isEmptyArr, isEmptyStr, qsParse} from '../lib/handler';
@@ -67,6 +68,8 @@ const SearchPlant = ({location: {search}}) => {
           ))}
         </KeywordGroup>
       </Section>
+
+      <ColorTags tags={selectedTag} />
     </Wrapper>
   );
 };

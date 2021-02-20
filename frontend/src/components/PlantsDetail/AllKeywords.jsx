@@ -36,7 +36,7 @@ function AllKeywords({plantId, name = '', keywords = []}) {
       <KeywordsHead>{`${name} #키워드`}</KeywordsHead>
 
       <TagsWrapper>
-        <TagList plantId={plantId} tagData={keywords} type={BUTTON} selected={selected} event={event} />
+        <TagList plantId={plantId} tagData={keywords} type={BUTTON} selected={[selected]} event={event} />
       </TagsWrapper>
 
       <SliderWrapper>{!isEmptyStr(selected) && <Slider plants={plants} />}</SliderWrapper>

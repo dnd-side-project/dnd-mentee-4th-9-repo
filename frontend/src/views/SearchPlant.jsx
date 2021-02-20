@@ -1,16 +1,21 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import styled from 'styled-components';
-import TagList from '../components/TagList';
-import {getAllTags} from '../api/plantsAPI';
-import Section from '../components/Section';
 
-const SearchPlant = () => {
+import Section from '../components/Section';
+import TagList from '../components/TagList';
+
+import {getAllTags} from '../api/plantsAPI';
+import {EMPTY, isEmptyArr, isEmptyStr, qsParse} from '../lib/handler';
+
+const SPACE = ' ';
+
+const SearchPlant = ({location: {search}}) => {
   const [tagData, setTagData] = useState([]);
 
-  const getTags = async () => {
+  const getTags = useCallback(async () => {
     const data = await getAllTags();
     setTagData(formatTag(data));
-  };
+  }, []);
 
   const formatTag = (data) => {
     const types = data.map(({type}) => type);
@@ -28,8 +33,11 @@ const SearchPlant = () => {
 
   useEffect(() => {
     getTags();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [getTags]);
+
+  const qsTag = qsParse(search).tag;
+  const tagArr = isEmptyStr(qsTag) ? [] : qsTag.split(SPACE);
+  const selectedTag = isEmptyArr(tagArr) ? tagArr : tagArr.filter((tag) => tag !== EMPTY);
 
   if (!tagData) return null;
 
@@ -54,7 +62,7 @@ const SearchPlant = () => {
           {tagData.map(({type, tags}) => (
             <KeywordField key={type}>
               <h2>{type}</h2>
-              <TagList tagData={tags} />
+              <TagList tagData={tags} selected={selectedTag} event={{type: 'filter'}} query={search} />
             </KeywordField>
           ))}
         </KeywordGroup>

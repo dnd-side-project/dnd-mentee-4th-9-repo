@@ -1,5 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {useLocation, useHistory} from 'react-router-dom';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import html2canvas from 'html2canvas';
+import canvas2image from 'canvas2image-2';
 import Footer from '../components/Footer/Footer';
 import Section from '../components/Section';
 import styled from 'styled-components';
@@ -14,51 +17,63 @@ function TestResult() {
   const location = useLocation();
   const history = useHistory();
   const [plantData, setPlantData] = useState();
+  const isShared = window.location.href.includes('?shared=true');
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const getResultPlant = async () => {
-    const result = location.state;
+  const sharedUrl = `${window.location.href}${isShared ? '' : '?shared=true'}`;
+  const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${sharedUrl}&src=sdkpreparse`;
+
+  const returnTest = () => history.push('/test');
+  const shareKakao = () => alert('카카오톡 공유 기능은 추후 제공 예정입니다.');
+  const copyUrl = () => alert('결과 주소가 복사되었습니다.\n주소를 공유해 보세요!');
+  const saveImage = () => {
+    html2canvas(document.querySelector('.save-result')).then((canvas) => canvas2image.saveAsImage(canvas));
+  };
+
+  const getResultPlant = useCallback(async () => {
+    const result = isShared ? location.pathname.split('/')[2] : location.state;
     if (!result) {
       history.replace('/test');
       return;
     }
-    const plant = Object.keys(result).reduce((a, b) => (result[a] > result[b] ? a : b));
-    const data = await getCuratingResult(plant);
 
+    const data = await getCuratingResult(result);
     setPlantData(data);
-  };
+  }, [location.pathname, location.state, history, isShared]);
 
   useEffect(() => {
     getResultPlant();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [getResultPlant]);
 
   if (!plantData) return null;
 
   return (
     <>
-      <Section>
-        <Description marginBottom="20">
-          <SubHead>{plantData.description}</SubHead>
-          <DescText>{plantData.ment}</DescText>
-        </Description>
-        <Description marginBottom="30">
-          <SubHead>#{plantData.name} #키워드</SubHead>
-          <TagList tagData={plantData.Tags} />
-          <MoreButton>{plantData.name} 더 알아보기</MoreButton>
-        </Description>
-      </Section>
+      <div className="save-result">
+        <Section>
+          <Description marginBottom="20">
+            <SubHead>{plantData.description}</SubHead>
+            <DescText>{plantData.ment}</DescText>
+          </Description>
+          <Description marginBottom="30">
+            <SubHead>#{plantData.name} #키워드</SubHead>
+            <TagList tagData={plantData.Tags} />
+            <MoreButton>{plantData.name} 더 알아보기</MoreButton>
+          </Description>
+        </Section>
+      </div>
 
-      <Section bgColor="lightGray" margin="100" column={true}>
-        <ResultButton borderColor="lightGreen" bgColor="lightGreen" color="white" fontSize="32" icon="share">
-          결과 공유하기
-        </ResultButton>
+      <Section bgColor="lightGray" margin="100" marginPercent="2.5" column={true}>
+        <ResultHeader color="green">결과를 공유해보세요!</ResultHeader>
         <SnsShare>
-          <img src={`${process.env.PUBLIC_URL}/images/fb.svg`} alt="facebook share" />
-          <img src={`${process.env.PUBLIC_URL}/images/kt.svg`} alt="kakaotalk share" />
-          <img src={`${process.env.PUBLIC_URL}/images/url.svg`} alt="url share" />
+          <a href={facebookUrl} target="_blank" rel="noreferrer">
+            <img src={`${process.env.PUBLIC_URL}/images/fb.svg`} alt="facebook share" />
+          </a>
+          <img onClick={shareKakao} src={`${process.env.PUBLIC_URL}/images/kt.svg`} alt="kakaotalk share" />
+          <CopyToClipboard text={sharedUrl} onCopy={copyUrl}>
+            <img src={`${process.env.PUBLIC_URL}/images/url.svg`} alt="url share" />
+          </CopyToClipboard>
         </SnsShare>
-        <ResultButton borderColor="lightGreen" bgColor="white" color="lightGreen" fontSize="32" icon="save">
+        <ResultButton onClick={saveImage} className="get-image" borderColor="lightGreen" bgColor="white" color="lightGreen" fontSize="32" icon="save">
           결과 저장하기
         </ResultButton>
       </Section>
@@ -69,7 +84,7 @@ function TestResult() {
       </Section>
 
       <Section margin="100" column={true}>
-        <ResultButton borderColor="lightGreen" bgColor="white" color="lightGreen" fontSize="32" icon="reset">
+        <ResultButton onClick={returnTest} borderColor="lightGreen" bgColor="white" color="lightGreen" fontSize="32" icon="reset">
           다시 테스트하기
         </ResultButton>
       </Section>
@@ -104,18 +119,33 @@ const MoreButton = styled.button`
   font-size: 28px;
   line-height: 40px;
   &:after {
+    display: inline-block;
     content: url(${process.env.PUBLIC_URL}/images/right_arrow.svg);
     margin-left: 11px;
+    height: 20px;
+    width: 10px;
+    top: 0;
   }
 
   @media ${({theme}) => theme.devices.md} {
     margin: 15px 0 40px 0;
     font-size: 14px;
     line-height: 20px;
+    display: flex;
+    align-items: center;
     &:after {
       transform: scale(0.5);
       margin-left: 6.5px;
     }
+  }
+`;
+
+const ResultHeader = styled(SubHead)`
+  font-family: 'Iropke Batang', Batang, Serif;
+  line-height: 61px;
+
+  @media ${({theme}) => theme.devices.md} {
+    line-height: 30px;
   }
 `;
 
@@ -138,6 +168,9 @@ const SnsShare = styled.div`
   margin: 40px 0 80px 0;
   display: flex;
   justify-content: space-between;
+  img {
+    cursor: pointer;
+  }
 
   @media ${({theme}) => theme.devices.md} {
     width: ${() => getReactiveSize(380).md}px;
@@ -165,6 +198,7 @@ const Title = styled.h2`
   line-height: 58px;
   text-align: center;
   color: ${({theme}) => theme.colors.white};
+  font-family: 'Iropke Batang', Batang, Serif;
 
   @media ${({theme}) => theme.devices.md} {
     font-size: 16px;

@@ -2,13 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import TagList from '../TagList';
 import {getReactiveSize} from '../../lib/calculate';
-import path from '../../const/detailTags';
 
 const margins = {
+  '14': getReactiveSize(14),
   '20': getReactiveSize(20),
-  '30': getReactiveSize(30),
+  '24': getReactiveSize(24),
 };
-const lineHeight = getReactiveSize(40);
 
 /*
 tag
@@ -16,21 +15,18 @@ tag
   id: number,
     name: string,
     PlantTag: {
-      type: string,
       imagePath: string,
       description: string,
     },
 }
 */
 function TagCard({tag}) {
-  const {type, description} = tag.PlantTag;
-  const imgPath = path[tag.name];
+  const {description, imagePath} = tag.PlantTag;
 
   return (
     <Wrapper>
-      <Title>{type}</Title>
       <ImgWrapper>
-        <Img deskPath={imgPath.lg} mobilePath={imgPath.md} alt={tag.name} />
+        <Img imgPath={imagePath} lt={tag.name} />
       </ImgWrapper>
       <TagList tagData={[tag]} />
       <p>{description}</p>
@@ -47,26 +43,26 @@ const Wrapper = styled.li`
   }
 
   p {
-    margin-top: ${margins['20'].lg}px;
-    line-height: ${lineHeight.lg}px;
-    font-size: ${({theme}) => theme.fontSizes['28'].lg}px;
+    margin-top: ${margins['14'].lg}px;
+    line-height: 36px;
+    font-size: ${({theme}) => theme.fontSizes['24'].lg}px;
     color: ${({theme}) => theme.colors.darkGray};
   }
 
   @media ${({theme}) => theme.devices.md} {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
     width: 150px;
 
     p {
-      margin-top: ${margins['20'].md}px;
-      line-height: ${lineHeight.md}px;
+      margin-top: ${margins['14'].md}px;
+      line-height: 20px;
       font-size: ${({theme}) => theme.fontSizes['28'].md}px;
     }
   }
 `;
 
 const ImgWrapper = styled.div`
-  margin-bottom: ${margins['20'].lg}px;
+  margin-bottom: ${margins['24'].lg}px;
   height: 190px;
   border-radius: ${margins['20'].lg}px;
   background-color: ${({theme}) => theme.colors.bgLightGray};
@@ -74,7 +70,7 @@ const ImgWrapper = styled.div`
   justify-content: center;
 
   @media ${({theme}) => theme.devices.md} {
-    margin-bottom: ${margins['20'].md}px;
+    margin-bottom: ${margins['24'].md}px;
     height: 100px;
     border-radius: ${margins['20'].md}px;
     font-size: ${({theme}) => theme.fontSizes['28'].md}px;
@@ -83,22 +79,10 @@ const ImgWrapper = styled.div`
 
 const Img = styled.img`
   width: fit-content;
-  content: url(${({deskPath}) => deskPath});
+  content: url(${({imgPath}) => imgPath});
 
   @media ${({theme}) => theme.devices.md} {
-    content: url(${({mobilePath}) => mobilePath});
-  }
-`;
-
-const Title = styled.h2`
-  margin-bottom: ${margins['20'].lg}px;
-  font-size: ${({theme}) => theme.fontSizes['30'].lg}px;
-  font-weight: ${({theme}) => theme.fontWeights.medium};
-  color: ${({theme}) => theme.colors.green};
-
-  @media ${({theme}) => theme.devices.md} {
-    margin-bottom: ${margins['30'].md}px;
-    font-size: 16px;
+    width: 150px;
   }
 `;
 

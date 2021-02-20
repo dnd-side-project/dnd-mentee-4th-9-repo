@@ -11,7 +11,7 @@ function Feature({name = '', feature = ''}) {
   const features = feature.split('\n');
 
   return (
-    <Section width="lg" margin={100} bgColor="bgLightGray" order={SIDE}>
+    <Section width="lg" margin={100} bgColor="lightGray" order={SIDE}>
       <div>
         <TagsHead>
           <span>{name}</span>는 이런 반전 매력도 있어요
@@ -27,7 +27,7 @@ function Feature({name = '', feature = ''}) {
 }
 
 export const TagsHead = styled(SubHead)`
-  margin-bottom: 50px;
+  margin-bottom: 44px;
   font-weight: ${({theme}) => theme.fontWeights.regular} !important;
 
   span {
@@ -54,7 +54,7 @@ const Features = styled.div`
     }
 
     div:nth-child(-n + 3) {
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
   }
 `;

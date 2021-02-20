@@ -24,7 +24,7 @@ function PlantsDetail({
   const plant = usePlantInfo(id);
   const {name, feature, ment = '', warning, description, imagePath, Tags, allTags, recommendPlants} = plant;
 
-  const star = !isEmptyArr(allTags) && allTags[allTags.length - 1];
+  const star = !isEmptyArr(allTags) && allTags[0];
 
   window.scrollTo({
     top: 0,
@@ -37,7 +37,7 @@ function PlantsDetail({
       <Section width="lg">
         <DescText>{ment}</DescText>
       </Section>
-      <AllKeywords name={name} keywords={allTags} />
+      <AllKeywords plantId={id} name={name} keywords={allTags} />
       <TagsDetail name={name} tags={Tags} />
       <Feature name={name} feature={feature} />
       <Warning name={name} warning={warning} />

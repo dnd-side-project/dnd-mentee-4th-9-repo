@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import styled from 'styled-components';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Grid from '@material-ui/core/Grid';
@@ -7,7 +7,8 @@ import Section from '../Section';
 import RecommentPlant from '../RecommentPlant';
 import {TagsHead} from '../PlantsDetail/Feature';
 
-import {getAllPlants} from '../../api/plantsAPI';
+import {getAllPlants, getTagPlants} from '../../api/plantsAPI';
+import {EMPTY, isEmptyArr, getOriginTag} from '../../lib/handler';
 import theme from '../../styles/theme';
 
 function PlantList({filterTag}) {
@@ -38,9 +39,26 @@ function useSearchPlants(filterTag) {
     setPlants(resPlants);
   };
 
+  const _getTagPlants = useCallback(async () => {
+    let params = EMPTY;
+
+    filterTag.forEach((tag, i) => {
+      const originTag = getOriginTag(tag);
+      params = params.concat(originTag);
+      if (i < filterTag.length - 1) params = params.concat(',');
+    });
+
+    const resPlants = await getTagPlants({tags: params});
+    setPlants(resPlants);
+  }, [filterTag]);
+
   useEffect(() => {
-    _getAllPlants();
-  }, []);
+    if (isEmptyArr(filterTag)) {
+      _getAllPlants();
+    } else {
+      _getTagPlants();
+    }
+  }, [_getTagPlants, filterTag]);
 
   return plants;
 }

@@ -5,7 +5,7 @@ import TestQuestion from '../components/TestQuestion';
 
 function Test() {
   return (
-    <Section type={FULL_SCREEN} bgColor="lightGreen">
+    <Section type={FULL_SCREEN} bgImage="true">
       <TestQuestion />
     </Section>
   );

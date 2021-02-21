@@ -36,18 +36,22 @@ function TestQuestion() {
       </QuestionWrapper>
       <ButtonWrapper>
         {testData[currentId].answer.map(({plantName, ment}, index) => (
-          <Button key={index} onClick={() => increaseScore(plantName)} height={getReactiveSize(150)} color="green">
+          <OptionBox key={index} onClick={() => increaseScore(plantName)} color="green" fontWeight="regular">
             {ment}
-          </Button>
+          </OptionBox>
         ))}
       </ButtonWrapper>
 
-      <Navigation>
-        <Progress percent={currentId + 1}>
-          <Path src={`${process.env.PUBLIC_URL}/images/test_path.svg`} />
-          <PathId>{currentId + 1}</PathId>
-        </Progress>
-      </Navigation>
+      <NavigatorWrapper optionLength={testData[currentId].answer.length}>
+        <Navigation>
+          <Progress percent={currentId + 1}>
+            <Path src={`${process.env.PUBLIC_URL}/images/logo_home.png`} alt="navigator icon" />
+          </Progress>
+        </Navigation>
+        <PathId>
+          <p>{currentId + 1}/7</p>
+        </PathId>
+      </NavigatorWrapper>
     </Wrapper>
   );
 }
@@ -65,19 +69,21 @@ const Wrapper = styled.div`
 `;
 
 const QuestionWrapper = styled.div`
-  opacity: 0.8;
   text-align: center;
   margin-bottom: 89px;
   p {
-    color: ${({theme}) => theme.colors.green};
+    font-family: 'Fredoka One', cursive;
+    color: ${({theme}) => theme.colors.white};
     margin-bottom: ${marginBottom.lg}px;
-    font-size: ${({theme}) => theme.fontSizes['32'].lg}px;
+    font-size: ${({theme}) => theme.fontSizes['24'].lg}px;
     font-weight: ${({theme}) => theme.fontWeights.regular};
+    letter-spacing: 0;
   }
 
   h2 {
-    color: rgba(0, 0, 0, 0.9);
-    font-size: ${({theme}) => theme.fontSizes['40'].lg}px;
+    font-family: 'Iropke Batang', Batang, Serif;
+    color: ${({theme}) => theme.colors.white};
+    font-size: ${({theme}) => theme.fontSizes['32'].lg}px;
     font-weight: ${({theme}) => theme.fontWeights.medium};
   }
 
@@ -85,10 +91,11 @@ const QuestionWrapper = styled.div`
     margin-bottom: 41px;
     p {
       margin-bottom: ${marginBottom.md}px;
-      font-size: ${({theme}) => theme.fontSizes['32'].md}px;
+      font-size: ${({theme}) => theme.fontSizes['24'].md}px;
     }
     h2 {
-      font-size: ${({theme}) => theme.fontSizes['40'].md}px;
+      font-size: ${({theme}) => theme.fontSizes['32'].md}px;
+      line-height: 30px;
     }
   }
 `;
@@ -100,51 +107,91 @@ const ButtonWrapper = styled.div`
   flex-direction: column;
 
   ${Button} + ${Button} {
-    margin-top: 20px;
+    margin-top: 24px;
+    @media ${({theme}) => theme.devices.md} {
+      margin-top: 10px;
+    }
+  }
+`;
+
+const OptionBox = styled(Button)`
+  background-color: rgba(255, 255, 255, 0.1);
+  color: ${({theme}) => theme.colors.white};
+  border: none;
+  height: 128px;
+  padding: 30px;
+
+  &:focus {
+    background-color: ${({theme}) => theme.colors.white};
+    color: ${({theme}) => theme.colors.green};
+    box-shadow: 0px 25px 35px 0px rgba(0, 0, 0, 0.04);
+  }
+
+  @media ${({theme}) => theme.devices.md} {
+    height: 76px;
+    padding: 15px;
+  }
+`;
+
+const NavigatorWrapper = styled.section`
+  height: 89px;
+  width: min(${width.lg}px, 100%);
+  margin-top: ${({optionLength}) => (optionLength === 3 ? 45 : 121)}px;
+
+  @media ${({theme}) => theme.devices.md} {
+    margin-top: ${({optionLength}) => (optionLength === 3 ? 33 : 74)}px;
+    height: 48px;
+    width: min(320px, 100%);
   }
 `;
 
 const Navigation = styled.div`
-  margin-top: 149px;
-  height: ${() => getReactiveSize(20).lg}px;
-  width: min(${width.lg}px, 100%);
-  background-color: rgba(255, 255, 255, 0.3);
+  height: ${() => getReactiveSize(12).lg}px;
+  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 20px;
+  margin-top: 42px;
 
   @media ${({theme}) => theme.devices.md} {
-    margin-top: 71px;
-    height: ${() => getReactiveSize(20).md}px;
-    width: ${width.md - 40}px;
+    height: ${() => getReactiveSize(12).md}px;
+    margin-top: 21px;
   }
 `;
 
 const Path = styled.img`
   position: absolute;
-  width: ${() => getReactiveSize(40).lg}px;
-  height: ${() => getReactiveSize(60).lg}px;
-  top: -${() => getReactiveSize(60).lg}px;
-  right: -${() => getReactiveSize(20).lg}px;
+  width: ${() => getReactiveSize(30).lg}px;
+  height: ${() => getReactiveSize(30).lg}px;
+  top: -${() => getReactiveSize(42).lg}px;
+  right: -${() => getReactiveSize(30).lg}px;
 
   @media ${({theme}) => theme.devices.md} {
-    width: ${() => getReactiveSize(40).md}px;
-    height: ${() => getReactiveSize(60).md}px;
-    top: -${() => getReactiveSize(60).md}px;
-    right: -${() => getReactiveSize(20).md}px;
+    width: ${() => getReactiveSize(30).md}px;
+    height: ${() => getReactiveSize(30).md}px;
+    top: -${() => getReactiveSize(42).md}px;
+    right: -${() => getReactiveSize(30).md}px;
   }
 `;
 
-const PathId = styled.span`
+const PathId = styled.div`
+  width: min(${width.lg}px, 100%);
   position: absolute;
-  color: ${({theme}) => theme.colors.white};
-  font-weight: ${({theme}) => theme.fontWeights.bold};
-  font-size: ${({theme}) => theme.fontSizes['24'].lg}px;
-  top: -${() => getReactiveSize(50).lg}px;
-  right: -${() => getReactiveSize(8).lg}px;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-top: 12px;
+
+  p {
+    color: rgba(255, 255, 255, 0.5);
+    font-family: 'Fredoka One', cursive;
+    font-size: 21px;
+    line-height: 24px;
+  }
 
   @media ${({theme}) => theme.devices.md} {
-    font-size: ${({theme}) => theme.fontSizes['24'].md}px;
-    top: -${() => getReactiveSize(50).md}px;
-    right: -${() => getReactiveSize(8).md}px;
+    width: min(320px, 100%);
+    font-size: 12px;
+    line-height: 15px;
+    margin-top: 6px;
   }
 `;
 
@@ -152,11 +199,11 @@ const Progress = styled.span`
   position: absolute;
   width: ${({percent}) => (width.lg * percent) / 7}px;
   background-color: ${({theme}) => theme.colors.white};
-  border-radius: 20px 0px 0px 20px;
-  height: ${() => getReactiveSize(20).lg}px;
+  border-radius: 20px;
+  height: ${() => getReactiveSize(12).lg}px;
 
   @media ${({theme}) => theme.devices.md} {
-    height: ${() => getReactiveSize(20).md}px;
+    height: ${() => getReactiveSize(12).md}px;
     width: ${({percent}) => ((width.md - 40) * percent) / 7}px;
   }
 `;

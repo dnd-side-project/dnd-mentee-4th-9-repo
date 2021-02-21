@@ -17,7 +17,10 @@ const recentOrderPlants = async () => {
           },
         },
       ],
-      order: [['createdAt', 'DESC']],
+      order: [
+        ['createdAt', 'DESC'],
+        [Tag, 'order', 'ASC'],
+      ],
     });
     return result;
   } catch (error) {
@@ -39,7 +42,10 @@ const viewOrderPlants = async () => {
           },
         },
       ],
-      order: [['views', 'DESC']],
+      order: [
+        ['yesterDayViews', 'DESC'],
+        [Tag, 'order', 'ASC'],
+      ],
     });
     return result;
   } catch (error) {
@@ -61,7 +67,10 @@ const allOrderPlants = async () => {
           },
         },
       ],
-      order: [['createdAt', 'DESC']],
+      order: [
+        ['createdAt', 'DESC'],
+        [Tag, 'order', 'ASC'],
+      ],
     });
     return result;
   } catch (error) {
@@ -187,7 +196,7 @@ const detailPlant = async (plantDTO) => {
 
     await Plant.update(
       {
-        views: sequelize.literal('views + 1'),
+        todayViews: sequelize.literal('todayViews + 1'),
       },
       {
         where: {id: plantDTO},
@@ -235,6 +244,7 @@ const searchPlantName = async (plantDTO) => {
           },
         },
       ],
+      order: [[Tag, 'order', 'ASC']],
     });
     return result;
   } catch (error) {
@@ -281,6 +291,7 @@ const searchPlantTag = async (plantDTO) => {
           },
         },
       ],
+      order: [[Tag, 'order', 'ASC']],
     });
     return result;
   } catch (error) {

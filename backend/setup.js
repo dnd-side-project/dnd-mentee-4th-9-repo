@@ -253,7 +253,7 @@ const reset = async () => {
       order: 2,
     },
     {
-      name: '#잎도촉촉히', // id : 3
+      name: '#잎촉촉', // id : 3
       type: '물주기',
       order: 2,
     },

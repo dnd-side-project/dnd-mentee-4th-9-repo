@@ -26,8 +26,16 @@ module.exports = class Plant extends Sequelize.Model {
           //멘트
           type: Sequelize.TEXT,
         },
-        views: {
+        totalViews: {
           //추후 인기순 기반 정렬을 위해 구현
+          type: Sequelize.INTEGER,
+          defaultValue: 0,
+        },
+        todayViews: {
+          type: Sequelize.INTEGER,
+          defaultValue: 0,
+        },
+        yesterDayViews: {
           type: Sequelize.INTEGER,
           defaultValue: 0,
         },

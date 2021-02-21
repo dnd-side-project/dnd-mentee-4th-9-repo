@@ -1,0 +1,54 @@
+service: dnd-4th-9-seeat-batch-lambda
+
+provider:
+  name: aws
+  runtime: python3.7
+  memorySiz: 1024
+  timeout: 60 # seconds
+  stage: ${opt:stage, self:custom.defaultStage}
+  stackName: ${self:service}-${self:provider.stage}
+  versionFunctions: true
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "logs:*"
+        - "lambda:*"
+      Resource: "*"
+  environment:
+    TRIGGERD_LAMBDA: ${self:service}-cron-get-trigger
+    DB_HOST: "3.34.87.77"
+    DB_USER: "root"
+    DB_PORT: 3306
+    DB_TABLE: "dnd"
+    DB_PASSWORD: "j112189"
+
+
+package:
+  individually: true
+  exclude:
+    - node_modules/**
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  defaultStage: dev
+  regionAbbr:
+    ap-northeast-2: an2
+  pythonRequirements:
+    dockerizePip: true
+    useDownloadCache: false
+    useStaticCache: false
+
+resources:
+  Description: "batch lambda"
+
+functions:
+  lmd_trigger:
+    handler: lmd_trigger.handler
+    name: ${self:service}-cron-trigger
+    events:
+      - schedule: cron(0 * * * ? *) # 매시 정각에 수행함.
+  lmd_get_trigger:
+    handler: lmd_get_trigger.handler
+    name: ${self:service}-cron-get-trigger

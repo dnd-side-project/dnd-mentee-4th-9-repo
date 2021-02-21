@@ -10,12 +10,23 @@ const menuList = [
   {name: '정기구독', path: '/subscription'},
 ];
 
+const opacityPath = ['/', '/test-start'];
+
 function Nav() {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenuList = () => setIsOpen(!isOpen);
-  const bgColor = location.pathname === '/' || location.pathname === '/test-start' ? 'rgba(140, 210, 156, 0.5)' : 'lightGreen';
+  const getBgColor = () => {
+    if (opacityPath.includes(location.pathname)) {
+      return 'rgba(100, 204, 128, 0.3)';
+    } else if (location.pathname === '/test') {
+      return 'rgba(17, 17, 17, 0.3)';
+    } else {
+      return 'lightGreen';
+    }
+  };
+  const bgColor = getBgColor();
 
   return (
     <Section width="lg" bgColor={bgColor} type={NAV}>

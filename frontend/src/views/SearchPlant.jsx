@@ -1,12 +1,15 @@
 import React, {useEffect, useState, useCallback} from 'react';
 import styled from 'styled-components';
 
-import Section from '../components/Section';
+import Section, {SECTION} from '../components/Section';
 import TagList, {ADD_FILTER} from '../components/TagList';
+import TestMain from '../components/TestMain';
 import ColorTags from '../components/SearchPlants/ColorTags';
 
 import {getAllTags} from '../api/plantsAPI';
 import {EMPTY, isEmptyArr, isEmptyStr, qsParse} from '../lib/handler';
+import Footer from '../components/Footer/Footer';
+import PlantList from '../components/SearchPlants/PlantList';
 
 const SPACE = ' ';
 
@@ -70,6 +73,14 @@ const SearchPlant = ({location: {search}}) => {
       </Section>
 
       <ColorTags tags={selectedTag} />
+
+      <PlantList filterTag={selectedTag} />
+
+      <Section bgColor="green" margin={200}>
+        <TestMain type={SECTION} />
+      </Section>
+
+      <Footer />
     </Wrapper>
   );
 };

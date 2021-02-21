@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {isEmptyArr} from '../../lib/handler';
 import Section from '../Section';
 import TagList, {DEL_FILTER} from '../TagList';
 
@@ -10,11 +11,13 @@ function ColorTags({tags}) {
 
   return (
     <Container length={colorTags.length}>
-      <Section width="lg">
-        <Wrapper>
-          <TagList tagData={colorTags} selected={tags} event={{type: DEL_FILTER}} />
-        </Wrapper>
-      </Section>
+      {!isEmptyArr(tags) && (
+        <Section width="lg">
+          <Wrapper>
+            <TagList tagData={colorTags} selected={tags} event={{type: DEL_FILTER}} />
+          </Wrapper>
+        </Section>
+      )}
     </Container>
   );
 }

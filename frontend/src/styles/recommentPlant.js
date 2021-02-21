@@ -1,15 +1,16 @@
 const xs = {
-  margin: 20,
-  padding: 10,
+  margin: 0,
+  mb: 8,
+  padding: 8,
 
   width: 150,
-  height: 220,
+  height: 221,
 
   titleSize: 10,
   descSize: 9,
 
-  titleLineHeight: 23,
-  textLineHeight: 20,
+  titleLineHeight: 15,
+  textLineHeight: 13,
 
   divSpace: 3.6,
   tagSize: 'xxs',
@@ -54,19 +55,20 @@ const md = {
 };
 
 const lg = {
-  margin: 30,
+  margin: 0,
+  mb: 36,
   padding: '21px 26',
 
-  width: 390,
+  width: 389,
   height: 572,
 
   titleSize: 26.5,
   descSize: 23,
 
-  titleLineHeight: 35,
-  textLineHeight: 30,
+  titleLineHeight: 38,
+  textLineHeight: 33,
 
-  divSpace: 8.3,
+  divSpace: 9.4,
   tagSize: 'lg',
 };
 

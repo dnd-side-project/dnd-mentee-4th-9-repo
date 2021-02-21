@@ -7,15 +7,15 @@ const margins = {
 };
 
 const paddings = {
-  xxs: '6px 11px',
+  xxs: '6px 6px',
   xs: '7px 14px',
   sm: '10px 19px',
-  lg: '12px 21px',
+  lg: '12px 19px',
   xl: '14px 28px',
 };
 
 const fontSizes = {
-  xxs: 9,
+  xxs: 8,
   xs: 14,
   sm: 21,
   lg: 23.2,

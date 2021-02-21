@@ -107,7 +107,8 @@ TagList.defaultProps = {
 
 const Tag = styled.li`
   cursor: pointer;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   border-radius: 74.2px;
 
   ${({selected, name, eventType, theme: {colors}}) => {
@@ -143,6 +144,7 @@ const Tags = styled.ul`
   }
 
   span {
+    display: flex;
     font-size: ${({desk}) => fontSizes[desk]}px;
     @media ${({theme}) => theme.devices.md} {
       font-size: ${({mobile}) => fontSizes[mobile]}px;

@@ -47,11 +47,18 @@ class App {
   }
 
   setMiddleWare() {
-    this.app.use(morgan('dev'));
+    if (process.env.NODE_ENV === 'production') {
+      this.app.use(morgan('combined'));
+      this.app.use(
+        cors({origin: 'https://www.seeat-plant.com', credentials: true})
+      );
+    } else {
+      this.app.use(morgan('dev'));
+      this.app.use(cors({origin: true, credentials: true}));
+    }
     this.app.use(express.json());
     this.app.use(express.urlencoded({extended: false}));
     this.app.use(express.static(path.join(__dirname, 'public')));
-    this.app.use(cors({origin: true, credentials: true}));
     this.app.use(cookieParser(process.env.SECRET_KEY));
     this.app.use(
       session({

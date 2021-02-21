@@ -256,18 +256,22 @@ const searchPlantTag = async (plantDTO) => {
   try {
     const findPlantsIds = await Plant.findAll({
       attributes: ['id'],
-      where: {
-        '$Tags.name$': {[Op.or]: plantDTO},
-      },
       include: [
         {
           model: Tag,
+          where: {
+            name: {
+              [Op.in] : plantDTO
+            },
+          },
           attributes: [],
           through: {
             attributes: [],
           },
         },
       ],
+      having: sequelize.literal(`COUNT(DISTINCT Tags.name) = ${plantDTO.length}`),
+      group: ['id'],
     });
     const plantIdArr = findPlantsIds
       .map((item) =>

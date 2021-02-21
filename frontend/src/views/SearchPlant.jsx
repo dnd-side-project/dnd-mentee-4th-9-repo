@@ -1,4 +1,5 @@
 import React, {useEffect, useState, useCallback} from 'react';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 import Section, {SECTION} from '../components/Section';
@@ -61,11 +62,17 @@ const SearchPlant = ({location: {search}}) => {
         </SearchInput>
       </Section>
 
-      {/* tag only */}
+      {/* tag only start */}
       <Section width="lg">
         <ChooseHeader>
           <img src={`${process.env.PUBLIC_URL}/images/filter.svg`} alt="choose keyword" />
           <h1>선호하는 키워드를 선택해보세요</h1>
+          {!isEmptyArr(selectedTag) && (
+            <DelAllTags to="/plants">
+              <img src={`${process.env.PUBLIC_URL}/images/cancle.svg`} alt="delete all tags" />
+              모두해제
+            </DelAllTags>
+          )}
         </ChooseHeader>
       </Section>
       <FilteringTags leftTags={leftTags} rightTags={rightTags} selectedTag={selectedTag} search={search} />
@@ -162,6 +169,30 @@ const ChooseHeader = styled.header`
       font-size: 14px;
       line-height: 21px;
       padding-left: 18px;
+    }
+  }
+`;
+
+const DelAllTags = styled(Link)`
+  position: absolute;
+  right: 0;
+  font-size: 24px;
+  color: ${({theme}) => theme.colors.lightBlack};
+
+  display: flex;
+  align-items: center;
+
+  img {
+    position: static !important;
+    margin-right: 14px !important;
+  }
+
+  @media ${({theme}) => theme.devices.md} {
+    font-size: 14px;
+
+    img {
+      transform: scale(0.5);
+      margin-right: 4.6px !important;
     }
   }
 `;

@@ -12,7 +12,7 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  h2, h3, li, p, button, span {
+  h2, h3, li, p, a, button, span {
     font-family: 'Noto Sans KR', sans-serif;
     letter-spacing: -0.05rem;
   }

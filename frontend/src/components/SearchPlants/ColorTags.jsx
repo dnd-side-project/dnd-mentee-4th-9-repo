@@ -1,20 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
-import {isEmptyArr} from '../../lib/handler';
 import Section from '../Section';
 import TagList, {DEL_FILTER} from '../TagList';
+import {getOriginTag, isEmptyArr} from '../../lib/handler';
 
 /* tags: [
   {
     id: number;
-  ty  pe: string;
-  name  : string; (required)
+    type: string;
+    name  : string; (required)
   }
 ]
 */
 function ColorTags({tags = []}) {
   const colorTags = tags.map((tag) => ({
-    name: tag,
+    name: getOriginTag(tag),
   }));
 
   return (

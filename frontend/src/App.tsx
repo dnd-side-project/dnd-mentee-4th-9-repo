@@ -21,6 +21,7 @@ const App = () => {
         <Route exact path={'/test'} component={Test} />
         <Route exact path={'/test/result/:id'} component={TestResult} />
         <Route exact path={'/plants'} component={SearchPlant} />
+        <Route exact path={'/search'} />
         <Route exact path={'/plants/detail/:id'} component={PlantsDetail} />
         <Route exact path={'/subscription'} component={Subscription} />
         <Route exact component={Error} />

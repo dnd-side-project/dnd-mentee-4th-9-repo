@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 
-import Section, {SIDE} from '../Section';
 import SubHead from '../../styles/SubHead';
 import Slider from '../Slider';
 
@@ -15,14 +14,12 @@ function PopularPlants() {
   return (
     <>
       {!isEmptyArr(plants) && (
-        <Section width="lg" margin={200} order={SIDE}>
-          <Wrapper>
-            <SubHead>요즘 뜨는 친구들</SubHead>
-            <Plants>
-              <Slider plants={topPlants} />
-            </Plants>
-          </Wrapper>
-        </Section>
+        <Wrapper>
+          <SubHead>요즘 뜨는 친구들</SubHead>
+          <Plants>
+            <Slider plants={topPlants} />
+          </Plants>
+        </Wrapper>
       )}
     </>
   );
@@ -51,11 +48,11 @@ const Wrapper = styled.div`
 
 const Plants = styled.ul`
   width: 100%;
-  margin-top: 100px;
+  margin-top: 54px;
   display: flex;
 
   @media ${({theme}) => theme.devices.md} {
-    margin-top: 22px;
+    margin-top: 25px;
   }
 `;
 

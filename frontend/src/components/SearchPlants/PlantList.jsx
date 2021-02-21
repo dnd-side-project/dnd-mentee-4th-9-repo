@@ -11,6 +11,8 @@ import {getAllPlants, getTagPlants} from '../../api/plantsAPI';
 import {EMPTY, isEmptyArr, getOriginTag} from '../../lib/handler';
 import theme from '../../styles/theme';
 
+const ALL_PLANTS_LEGNTH = 15;
+
 function PlantList({filterTag}) {
   const plants = useSearchPlants(filterTag);
   const matches = useMediaQuery(theme.devices.md);
@@ -18,7 +20,16 @@ function PlantList({filterTag}) {
   return (
     <Section width="lg">
       <ListHead>
-        <span>{plants.length}</span>개의 반려식물이 있어요
+        <span>{plants.length}개</span>
+        {plants.length === ALL_PLANTS_LEGNTH ? (
+          <>의 반려식물이 있어요</>
+        ) : (
+          <>
+            의 맞춤 반려식물을&nbsp;
+            <br />
+            추천해 드릴게요
+          </>
+        )}
       </ListHead>
       <Grid container spacing={matches ? 2 : 3}>
         {plants.map((plant) => (
@@ -65,9 +76,18 @@ function useSearchPlants(filterTag) {
 
 const ListHead = styled(TagsHead)`
   margin: 40px auto !important;
+  line-height: 30px;
+
+  br {
+    display: none;
+  }
 
   @media ${({theme}) => theme.devices.md} {
     margin: 25px auto !important;
+
+    br {
+      display: block;
+    }
   }
 `;
 

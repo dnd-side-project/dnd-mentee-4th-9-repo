@@ -28,7 +28,7 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-  padding: 20px 0 10px 0;
+  padding: 20px 0 0 0;
 
   li {
     margin-bottom: 20px !important;

@@ -235,6 +235,7 @@ const searchPlantName = async (plantDTO) => {
           },
         },
       ],
+      order: [[Tag, 'order', 'ASC']],
     });
     return result;
   } catch (error) {
@@ -281,6 +282,7 @@ const searchPlantTag = async (plantDTO) => {
           },
         },
       ],
+      order: [[Tag, 'order', 'ASC']],
     });
     return result;
   } catch (error) {

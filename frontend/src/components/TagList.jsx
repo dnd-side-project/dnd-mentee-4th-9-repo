@@ -44,8 +44,9 @@ function TagList({tagData, desk, mobile, isSimple, selected = [], event, plantId
 
     const {type, func} = event;
 
-    if (type === SEARCH) {
-      func(name);
+    if (type === SEARCH || type === MOVE) {
+      const tagName = type === MOVE ? getQsTag(name) : name;
+      func(tagName);
     } else if (includeStr(type, FILTER)) {
       const newTag = getQsTag(name);
       let qsTag = EMPTY;

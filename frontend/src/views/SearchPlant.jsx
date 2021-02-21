@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 import Section, {SECTION} from '../components/Section';
 import TagList, {ADD_FILTER} from '../components/TagList';
+import Nothing from '../components/Nothing';
 import TestMain from '../components/TestMain';
 import ColorTags from '../components/SearchPlants/ColorTags';
 
@@ -73,9 +74,9 @@ const SearchPlant = ({location: {search}}) => {
       </Section>
 
       <ColorTags tags={selectedTag} />
-
       <PlantList filterTag={selectedTag} />
 
+      <Nothing />
       <Section bgColor="green" margin={200}>
         <TestMain type={SECTION} />
       </Section>

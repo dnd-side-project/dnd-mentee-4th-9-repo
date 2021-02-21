@@ -4,7 +4,15 @@ import {isEmptyArr} from '../../lib/handler';
 import Section from '../Section';
 import TagList, {DEL_FILTER} from '../TagList';
 
-function ColorTags({tags}) {
+/* tags: [
+  {
+    id: number;
+  ty  pe: string;
+  name  : string; (required)
+  }
+]
+*/
+function ColorTags({tags = []}) {
   const colorTags = tags.map((tag) => ({
     name: tag,
   }));

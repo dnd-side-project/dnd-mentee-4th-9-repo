@@ -4,6 +4,18 @@ import Section from '../Section';
 import TagList, {ADD_FILTER} from '../TagList';
 import {isEmptyArr} from '../../lib/handler';
 
+/*
+leftTags, rightTags:
+[
+  {
+    id: number;
+    type: string;
+    name: string; (required)
+  }
+]
+selectedTag: string[];
+search: string;
+*/
 function FilteringTags({leftTags, rightTags, selectedTag, search}) {
   return (
     <Section width="lg" bgColor="lightGray">
@@ -28,6 +40,13 @@ function FilteringTags({leftTags, rightTags, selectedTag, search}) {
     </Section>
   );
 }
+
+FilteringTags.defaultProps = {
+  leftTags: [],
+  rightTags: [],
+  selectedTag: [],
+  search: '',
+};
 
 const KeywordGroup = styled.fieldset`
   ${({loading}) => loading && 'height: 404px'};

@@ -6,7 +6,9 @@ import tagList from '../styles/tagList';
 import {sliderTags, NO_DISPLAY_TAG} from '../const/tags';
 import {EMPTY, getQsTag, includeArr, includeStr} from '../lib/handler';
 
+// tag type
 export const [NORMAL, BUTTON] = ['normal', 'button'];
+// event type
 export const [FILTER, ADD_FILTER, DEL_FILTER, SEARCH, MOVE] = ['filter', 'add_filter', 'del_filter', 'search', 'move'];
 const AND = '+';
 

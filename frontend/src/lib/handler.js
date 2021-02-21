@@ -26,11 +26,7 @@ export const includeStr = (string = '', word) => {
 };
 
 export const isEmoji = (string = '') => {
-  const UNDEFINED = -1;
-  if (string.indexOf('💧') !== UNDEFINED) return true;
-  if (string.indexOf('⭐') !== UNDEFINED) return true;
-
-  return false;
+  return string.includes('💧') || string.includes('⭐');
 };
 
 export const getOriginTag = (tag = '') => {

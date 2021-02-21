@@ -13,6 +13,9 @@ import {EMPTY, isEmptyArr, getOriginTag} from '../../lib/handler';
 import theme from '../../styles/theme';
 import SubHead from '../../styles/SubHead';
 
+/*
+filterTag: string[];
+*/
 function PlantList({filterTag = []}) {
   const {isLoaded, plants = []} = useFiltering(filterTag);
   const sucess = isLoaded && !isEmptyArr(plants);

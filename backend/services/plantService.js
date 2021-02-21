@@ -17,10 +17,7 @@ const recentOrderPlants = async () => {
           },
         },
       ],
-      order: [
-        ['createdAt', 'DESC'],
-        [Tag, 'order', 'ASC'],
-      ],
+      order: [['createdAt', 'DESC']],
     });
     return result;
   } catch (error) {
@@ -42,10 +39,7 @@ const viewOrderPlants = async () => {
           },
         },
       ],
-      order: [
-        ['yesterDayViews', 'DESC'],
-        [Tag, 'order', 'ASC'],
-      ],
+      order: [['yesterDayViews', 'DESC']],
     });
     return result;
   } catch (error) {
@@ -67,10 +61,7 @@ const allOrderPlants = async () => {
           },
         },
       ],
-      order: [
-        ['createdAt', 'DESC'],
-        [Tag, 'order', 'ASC'],
-      ],
+      order: [['createdAt', 'DESC']],
     });
     return result;
   } catch (error) {
@@ -244,7 +235,6 @@ const searchPlantName = async (plantDTO) => {
           },
         },
       ],
-      order: [[Tag, 'order', 'ASC']],
     });
     return result;
   } catch (error) {
@@ -254,20 +244,25 @@ const searchPlantName = async (plantDTO) => {
 
 const searchPlantTag = async (plantDTO) => {
   try {
+    console.log(plantDTO)
     const findPlantsIds = await Plant.findAll({
       attributes: ['id'],
-      where: {
-        '$Tags.name$': {[Op.or]: plantDTO},
-      },
       include: [
         {
           model: Tag,
+          where: {
+            name: {
+              [Op.in] : plantDTO
+            },
+          },
           attributes: [],
           through: {
             attributes: [],
           },
         },
       ],
+      having: sequelize.literal(`COUNT(DISTINCT Tags.name) = ${plantDTO.length}`),
+      group: ['id'],
     });
     const plantIdArr = findPlantsIds
       .map((item) =>
@@ -291,7 +286,6 @@ const searchPlantTag = async (plantDTO) => {
           },
         },
       ],
-      order: [[Tag, 'order', 'ASC']],
     });
     return result;
   } catch (error) {

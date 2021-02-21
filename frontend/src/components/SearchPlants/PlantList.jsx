@@ -46,7 +46,7 @@ function PlantList({filterTag = []}) {
           <>
             <NothingHead>찾으시는 식물이 없어요</NothingHead>
             <Section width="lg">
-              <PopularPlants subHead="요즘 인기있는 식물" />
+              <PopularPlants />
             </Section>
           </>
         )

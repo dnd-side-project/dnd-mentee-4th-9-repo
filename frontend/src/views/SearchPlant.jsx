@@ -2,20 +2,22 @@ import React, {useEffect, useState, useCallback} from 'react';
 import styled from 'styled-components';
 
 import Section, {SECTION} from '../components/Section';
-import TagList, {ADD_FILTER} from '../components/TagList';
+import FilteringTags from '../components/SearchPlants/FilteringTags';
+import ColorTags from '../components/SearchPlants/ColorTags';
+import PlantList from '../components/SearchPlants/PlantList';
 import Nothing from '../components/Nothing';
 import TestMain from '../components/TestMain';
-import ColorTags from '../components/SearchPlants/ColorTags';
+import Footer from '../components/Footer/Footer';
 
 import {getAllTags} from '../api/plantsAPI';
 import {EMPTY, isEmptyArr, isEmptyStr, qsParse} from '../lib/handler';
-import Footer from '../components/Footer/Footer';
-import PlantList from '../components/SearchPlants/PlantList';
 
 const SPACE = ' ';
 
 const SearchPlant = ({location: {search}}) => {
   const [tagData, setTagData] = useState([]);
+  const middle = tagData.length / 2;
+  const [leftTags, rightTags] = [tagData.slice(0, middle), tagData.slice(middle)];
 
   const getTags = useCallback(async () => {
     const data = await getAllTags();
@@ -59,25 +61,16 @@ const SearchPlant = ({location: {search}}) => {
         </SearchInput>
       </Section>
 
+      {/* tag only */}
       <Section width="lg">
         <ChooseHeader>
           <img src={`${process.env.PUBLIC_URL}/images/filter.svg`} alt="choose keyword" />
           <h1>선호하는 키워드를 선택해보세요</h1>
         </ChooseHeader>
       </Section>
-
-      <Section width="lg" bgColor="lightGray" margin={40}>
-        <KeywordGroup>
-          {tagData.map(({type, tags}) => (
-            <KeywordField key={type}>
-              <h2>{type}</h2>
-              <TagList tagData={tags} selected={selectedTag} event={{type: ADD_FILTER}} query={search} />
-            </KeywordField>
-          ))}
-        </KeywordGroup>
-      </Section>
-
+      <FilteringTags leftTags={leftTags} rightTags={rightTags} selectedTag={selectedTag} search={search} />
       <ColorTags tags={selectedTag} />
+
       <PlantList filterTag={selectedTag} />
 
       <Nothing />
@@ -169,45 +162,6 @@ const ChooseHeader = styled.header`
       font-size: 14px;
       line-height: 21px;
       padding-left: 18px;
-    }
-  }
-`;
-
-const KeywordGroup = styled.fieldset`
-  height: 404px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-
-  @media ${({theme}) => theme.devices.md} {
-    height: auto;
-  }
-`;
-
-const KeywordField = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  height: 88px;
-
-  h2 {
-    width: 127px;
-    font-size: 28px;
-    line-height: 42px;
-    letter-spacing: -0.05em;
-    color: ${({theme}) => theme.colors.darkGray};
-  }
-
-  @media ${({theme}) => theme.devices.md} {
-    height: 31.5px;
-
-    h2 {
-      width: 65px;
-      font-size: 14px;
-      line-height: 21px;
-    }
-    & + & {
-      margin-top: 10px;
     }
   }
 `;

@@ -19,7 +19,7 @@ search: string;
 function FilteringTags({leftTags, rightTags, selectedTag, search}) {
   return (
     <Section width="lg" bgColor="lightGray">
-      <KeywordGroup loading={isEmptyArr(leftTags)}>
+      <KeywordGroup height={isEmptyArr(leftTags) ? '404px' : 'auto'}>
         <div>
           {leftTags.map(({type, tags}) => (
             <KeywordField key={type}>
@@ -49,7 +49,7 @@ FilteringTags.defaultProps = {
 };
 
 const KeywordGroup = styled.fieldset`
-  ${({loading}) => loading && 'height: 404px'};
+  height: ${({height}) => height};
   padding: 40px 0 22px 0;
   display: flex;
 

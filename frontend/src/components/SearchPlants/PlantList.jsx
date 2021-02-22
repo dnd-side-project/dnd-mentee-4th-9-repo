@@ -18,12 +18,12 @@ filterTag: string[];
 */
 function PlantList({filterTag = []}) {
   const {isLoaded, plants = []} = useFiltering(filterTag);
-  const sucess = isLoaded && !isEmptyArr(plants);
+  const success = isLoaded && !isEmptyArr(plants);
   const matches = useMediaQuery(theme.devices.md);
 
   return (
     <Section width="lg">
-      {sucess ? (
+      {success ? (
         <>
           {isEmptyArr(filterTag) ? (
             <ListHead>

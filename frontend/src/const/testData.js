@@ -29,7 +29,13 @@ export const testData = [
   },
   {
     id: 3,
-    question: '봄바람 휘날리며 흩날리는 벚꽃잎을🎵보러 가자는 친구에게 나는',
+    question: (
+      <>
+        봄바람 휘날리며 흩날리는 벚꽃잎을 🎵
+        <br />
+        보러 가자는 친구에게 나는
+      </>
+    ),
     answer: [
       {
         plantName: '몬스테라',

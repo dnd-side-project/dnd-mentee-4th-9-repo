@@ -11,12 +11,16 @@ import Button from '../styles/Button';
 import {getReactiveSize} from '../lib/calculate';
 import SubHead from '../styles/SubHead';
 import DescText from '../styles/DescText';
+import LottieImg from '../components/LottieImg';
+import * as testLoading from '../lottie/test_loading.json';
 import {getCuratingResult} from '../api/plantsAPI';
+import {FULL_SCREEN} from '../components/Section';
 
 function TestResult() {
   const location = useLocation();
   const history = useHistory();
   const [plantData, setPlantData] = useState();
+  const [loading, setLoading] = useState(true);
   const isShared = window.location.href.includes('?shared=true');
 
   const sharedUrl = `${window.location.href}${isShared ? '' : '?shared=true'}`;
@@ -45,12 +49,19 @@ function TestResult() {
 
     const data = await getCuratingResult(result);
     setPlantData(data);
+    setLoading(false);
   }, [location.pathname, location.state, history, isShared]);
 
   useEffect(() => {
     getResultPlant();
   }, [getResultPlant]);
 
+  if (loading)
+    return (
+      <Section type={FULL_SCREEN} width="lg">
+        <LottieImg lottieFile={testLoading.default} />
+      </Section>
+    );
   if (!plantData) return null;
 
   return (

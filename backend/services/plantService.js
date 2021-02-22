@@ -295,7 +295,10 @@ const searchPlantTag = async (plantDTO) => {
           },
         },
       ],
-      order: [[Tag, 'order', 'ASC']],
+      order: [
+        ['yesterDayViews', 'DESC'],
+        [Tag, 'order', 'ASC']
+      ],
     });
     return result;
   } catch (error) {

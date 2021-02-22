@@ -22,7 +22,7 @@ function Main() {
     <Section type={MAIN} width="md">
       <Wrapper className="flex-column">
         <LogoWrapper>
-          <img src={`${process.env.PUBLIC_URL}/images/logo_home.png`} alt="See-at logo" />
+          <img src={`${process.env.PUBLIC_URL}/images/logo_home.svg`} alt="See-at logo" />
           <h1>See-at</h1>
         </LogoWrapper>
         <h2>
@@ -133,7 +133,7 @@ const ScrollDown = styled.span`
   @media ${({theme}) => theme.devices.md} {
     bottom: 0;
     transform: translate(-50%, 85.4px);
-    
+
     img {
       transform: scale(0.5);
     }

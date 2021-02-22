@@ -7,7 +7,7 @@ function Corp({path}) {
     <Wrapper marginRight={100} path={path}>
       <LogoWrapper className="item-corp">
         <span className="logo">
-          <img src="/images/logo_footer.png" alt="See-at logo" />
+          <img src="/images/logo_footer.svg" alt="See-at logo" />
         </span>
         <h3>See-at</h3>
       </LogoWrapper>

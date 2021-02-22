@@ -1,19 +1,25 @@
 const margins = {
-  xl: 16,
-  sm: 12,
+  xxs: 6,
   xs: 8,
+  sm: 12,
+  lg: 13.3,
+  xl: 16,
 };
 
 const paddings = {
-  xl: '14px 28px',
-  sm: '10px 19px',
+  xxs: '6px 6px',
   xs: '7px 14px',
+  sm: '10px 19px',
+  lg: '12px 19px',
+  xl: '14px 28px',
 };
 
 const fontSizes = {
-  xl: 28,
-  sm: 21,
+  xxs: 8,
   xs: 14,
+  sm: 21,
+  lg: 23.2,
+  xl: 28,
 };
 
 const tagList = {

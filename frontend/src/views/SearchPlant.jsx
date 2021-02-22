@@ -1,16 +1,29 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
-import TagList from '../components/TagList';
+
+import Section, {SECTION} from '../components/Section';
+import FilteringTags from '../components/SearchPlants/FilteringTags';
+import ColorTags from '../components/SearchPlants/ColorTags';
+import PlantList from '../components/SearchPlants/PlantList';
+import Nothing from '../components/Nothing';
+import TestMain from '../components/TestMain';
+import Footer from '../components/Footer/Footer';
+
 import {getAllTags} from '../api/plantsAPI';
-import Section from '../components/Section';
+import {EMPTY, isEmptyArr, isEmptyStr, qsParse} from '../lib/handler';
 
-const SearchPlant = () => {
+const SPACE = ' ';
+
+const SearchPlant = ({location: {search}}) => {
   const [tagData, setTagData] = useState([]);
+  const middle = tagData.length / 2;
+  const [leftTags, rightTags] = [tagData.slice(0, middle), tagData.slice(middle)];
 
-  const getTags = async () => {
+  const getTags = useCallback(async () => {
     const data = await getAllTags();
     setTagData(formatTag(data));
-  };
+  }, []);
 
   const formatTag = (data) => {
     const types = data.map(({type}) => type);
@@ -28,10 +41,17 @@ const SearchPlant = () => {
 
   useEffect(() => {
     getTags();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [getTags]);
+
+  const qsTag = qsParse(search).tag;
+  const tagArr = isEmptyStr(qsTag) ? [] : qsTag.split(SPACE);
+  const selectedTag = isEmptyArr(tagArr) ? tagArr : tagArr.filter((tag) => tag !== EMPTY);
 
   if (!tagData) return null;
+
+  window.scrollTo({
+    top: 0,
+  });
 
   return (
     <Wrapper>
@@ -42,23 +62,30 @@ const SearchPlant = () => {
         </SearchInput>
       </Section>
 
+      {/* tag only start */}
       <Section width="lg">
         <ChooseHeader>
           <img src={`${process.env.PUBLIC_URL}/images/filter.svg`} alt="choose keyword" />
           <h1>선호하는 키워드를 선택해보세요</h1>
+          {!isEmptyArr(selectedTag) && (
+            <DelAllTags to="/plants">
+              <img src={`${process.env.PUBLIC_URL}/images/cancle.svg`} alt="delete all tags" />
+              모두해제
+            </DelAllTags>
+          )}
         </ChooseHeader>
       </Section>
+      <FilteringTags leftTags={leftTags} rightTags={rightTags} selectedTag={selectedTag} search={search} />
+      <ColorTags tags={selectedTag} />
 
-      <Section width="lg" bgColor="lightGray" margin={40}>
-        <KeywordGroup>
-          {tagData.map(({type, tags}) => (
-            <KeywordField key={type}>
-              <h2>{type}</h2>
-              <TagList tagData={tags} />
-            </KeywordField>
-          ))}
-        </KeywordGroup>
+      <PlantList filterTag={selectedTag} />
+
+      <Nothing />
+      <Section bgColor="green" margin={200}>
+        <TestMain type={SECTION} />
       </Section>
+
+      <Footer />
     </Wrapper>
   );
 };
@@ -146,41 +173,26 @@ const ChooseHeader = styled.header`
   }
 `;
 
-const KeywordGroup = styled.fieldset`
-  height: 404px;
+const DelAllTags = styled(Link)`
+  position: absolute;
+  right: 0;
+  font-size: 24px;
+  color: ${({theme}) => theme.colors.lightBlack};
+
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+  align-items: center;
 
-  @media ${({theme}) => theme.devices.md} {
-    height: auto;
-  }
-`;
-
-const KeywordField = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: baseline;
-  height: 88px;
-
-  h2 {
-    width: 127px;
-    font-size: 28px;
-    line-height: 42px;
-    letter-spacing: -0.05em;
-    color: ${({theme}) => theme.colors.darkGray};
+  img {
+    position: static !important;
+    margin-right: 14px !important;
   }
 
   @media ${({theme}) => theme.devices.md} {
-    height: 31.5px;
+    font-size: 14px;
 
-    h2 {
-      width: 65px;
-      font-size: 14px;
-      line-height: 21px;
-    }
-    & + & {
-      margin-top: 10px;
+    img {
+      transform: scale(0.5);
+      margin-right: 4.6px !important;
     }
   }
 `;

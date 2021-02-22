@@ -1,5 +1,5 @@
 import React from 'react';
-import Section, {SECTION} from '../components/Section';
+import Section, {SECTION, SIDE} from '../components/Section';
 import Main from '../components/Home/Main';
 import TestMain from '../components/TestMain';
 import PopularPlants from '../components/Home/PopularPlants';
@@ -13,7 +13,9 @@ function Home() {
       <Section bgColor="green" margin={200}>
         <TestMain type={SECTION} />
       </Section>
-      <PopularPlants />
+      <Section width="lg" margin={200} order={SIDE}>
+        <PopularPlants />
+      </Section>
       <KeywordSearch />
       <Footer />
     </>

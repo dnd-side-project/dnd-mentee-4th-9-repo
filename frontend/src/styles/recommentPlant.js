@@ -1,3 +1,21 @@
+const xs = {
+  margin: 0,
+  mb: 8,
+  padding: 8,
+
+  width: 150,
+  height: 221,
+
+  titleSize: 10,
+  descSize: 9,
+
+  titleLineHeight: 15,
+  textLineHeight: 13,
+
+  divSpace: 3.6,
+  tagSize: 'xxs',
+};
+
 // 홈/요즘 뜨는 친구들 (mobile)
 // 식물 상세 정보/키워드 검색, 친구 추천 (mobile)
 const sm = {
@@ -36,9 +54,29 @@ const md = {
   tagSize: 'sm',
 };
 
+const lg = {
+  margin: 0,
+  mb: 36,
+  padding: '21px 26',
+
+  width: 389,
+  height: 572,
+
+  titleSize: 26.5,
+  descSize: 23,
+
+  titleLineHeight: 38,
+  textLineHeight: 33,
+
+  divSpace: 9.4,
+  tagSize: 'lg',
+};
+
 const sizes = {
+  xs,
   sm,
   md,
+  lg,
 };
 
 export default sizes;

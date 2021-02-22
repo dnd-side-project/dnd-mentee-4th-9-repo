@@ -38,6 +38,7 @@ const zIndex = {
 const width = {
   sm: 400,
   md: 640,
+  md_list: 860,
   lg: 1230,
   footer: 920,
   padding: 20,

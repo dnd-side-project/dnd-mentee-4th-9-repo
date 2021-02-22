@@ -1,6 +1,6 @@
 export const mainTags = [
   {
-    name: '⭐️',
+    name: '⭐',
   },
   {
     name: '💧💧💧',

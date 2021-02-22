@@ -1,12 +1,16 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom';
 import styled, {css} from 'styled-components';
 
 import tagList from '../styles/tagList';
 import {sliderTags, NO_DISPLAY_TAG} from '../const/tags';
-import {includeArr} from '../lib/handler';
+import {EMPTY, getQsTag, includeArr, includeStr} from '../lib/handler';
 
+// tag type
 export const [NORMAL, BUTTON] = ['normal', 'button'];
-export const [FILTER, SEARCH] = ['filter', 'search'];
+// event type
+export const [FILTER, ADD_FILTER, DEL_FILTER, SEARCH, MOVE] = ['filter', 'add_filter', 'del_filter', 'search', 'move'];
+const AND = '+';
 
 const {margins, paddings, fontSizes} = tagList;
 
@@ -31,14 +35,42 @@ event: {
 plantId: number; (태그가 plant에 종속될 때 => AllKeywords)
 */
 
-function TagList({tagData, desk, mobile, isSimple, selected, event, plantId}) {
+function TagList({tagData, desk, mobile, isSimple, selected = [], event, plantId}) {
   const tags = isSimple ? tagData.filter((tag) => includeArr(sliderTags, tag.type)) : tagData;
+  const history = useHistory();
 
   const onClick = (name) => {
     if (!event) return;
 
     const {type, func} = event;
-    if (type === SEARCH) func(name);
+
+    if (type === SEARCH || type === MOVE) {
+      const tagName = type === MOVE ? getQsTag(name) : name;
+      func(tagName);
+    } else if (includeStr(type, FILTER)) {
+      const newTag = getQsTag(name);
+      let qsTag = EMPTY;
+      let resultTags = [...selected];
+
+      // selected tag array
+      if (type === ADD_FILTER) {
+        if (includeArr(selected, getQsTag(name))) return;
+        resultTags.push(newTag);
+      } else if (type === DEL_FILTER) {
+        resultTags = selected.filter((tag) => tag !== newTag);
+      }
+
+      // selected tag query string
+      resultTags.forEach((item, i) => {
+        qsTag = qsTag.concat(item);
+        if (i !== resultTags.length - 1) qsTag = qsTag.concat(AND);
+      });
+
+      history.push({
+        pathname: `/plants`,
+        search: `?tag=${qsTag}`,
+      });
+    }
   };
 
   const notDisplay = (name) => {
@@ -52,10 +84,12 @@ function TagList({tagData, desk, mobile, isSimple, selected, event, plantId}) {
     <Tags desk={desk} mobile={mobile}>
       {tags.map((tag) => {
         const {name} = tag;
+        const eventType = event ? event.type : EMPTY;
+
         if (notDisplay(name)) return true;
 
         return (
-          <Tag key={`${plantId}-${name}`} name={name} selected={selected} onClick={() => onClick(name)}>
+          <Tag key={`${plantId}-${name}`} name={name} selected={selected} eventType={eventType} onClick={() => onClick(name)}>
             <span>{name}</span>
           </Tag>
         );
@@ -69,18 +103,21 @@ TagList.defaultProps = {
   desk: 'xl',
   mobile: 'xs',
   isSimple: false,
-  selected: '',
+  selected: EMPTY,
   event: null,
   plantId: -1,
 };
 
 const Tag = styled.li`
   cursor: pointer;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   border-radius: 74.2px;
 
-  ${({selected, name, theme: {colors}}) => {
-    if (selected === name) {
+  ${({selected, name, eventType, theme: {colors}}) => {
+    const comparedName = includeStr(eventType, FILTER) ? getQsTag(name) : name;
+
+    if (includeArr(selected, comparedName)) {
       return css`
         border: 1px solid ${colors.lightGreen};
         color: white;
@@ -110,6 +147,7 @@ const Tags = styled.ul`
   }
 
   span {
+    display: flex;
     font-size: ${({desk}) => fontSizes[desk]}px;
     @media ${({theme}) => theme.devices.md} {
       font-size: ${({mobile}) => fontSizes[mobile]}px;

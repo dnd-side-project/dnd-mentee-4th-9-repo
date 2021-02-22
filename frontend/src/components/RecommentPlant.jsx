@@ -22,12 +22,12 @@ plant {
 desk: string (recommentPlant/sizes)
 mobile: string (recommentPlant/sizes)
 */
-function RecommendPlant({plant, desk, mobile, isSimple}) {
+function RecommendPlant({plant, desk, mobile}) {
   const {id, thumbnailPath = '', name, description, Tags} = plant;
 
   return (
     <Link to={`/plants/detail/${id}`}>
-      <Wrapper desk={desk} mobile={mobile} isSimple={isSimple} className="card-wrapper">
+      <Wrapper className="card-wrapper" desk={desk} mobile={mobile}>
         <Img imgUrl={thumbnailPath} />
         <TextWrapper desk={desk} mobile={mobile}>
           <Title desk={desk} mobile={mobile}>
@@ -36,7 +36,7 @@ function RecommendPlant({plant, desk, mobile, isSimple}) {
           <Description desk={desk} mobile={mobile}>
             {description}
           </Description>
-          <TagList tagData={Tags} desk={sizes[desk].tagSize} mobile={sizes[mobile].tagSize} isSimple={isSimple} />
+          <TagList tagData={Tags} desk={sizes[desk].tagSize} mobile={sizes[mobile].tagSize} isSimple />
         </TextWrapper>
       </Wrapper>
     </Link>
@@ -46,21 +46,18 @@ function RecommendPlant({plant, desk, mobile, isSimple}) {
 RecommendPlant.defaultProps = {
   desk: 'md',
   mobile: 'sm',
-  isSimple: false,
 };
 
 const Img = styled.img`
   content: url(${({imgUrl}) => imgUrl});
-  border-radius: 45px 45px 0 0;
-
-  @media ${({theme}) => theme.devices.md} {
-    border-radius: 30px 30px 0 0;
-  }
+  border-radius: inherit;
+  border-bottom-right-radius: 0 !important;
 `;
 
 const Wrapper = styled.div`
   display: inline-block;
   margin: ${({desk}) => `0 ${sizes[desk].margin}px ${sizes[desk].margin}px 0`};
+  ${({desk}) => sizes[desk].mb && `margin-bottom: ${sizes[desk].mb}px`};
   height: ${({desk}) => sizes[desk].height}px;
 
   border-radius: 45px 45px 45px 0px;
@@ -74,9 +71,10 @@ const Wrapper = styled.div`
 
   @media ${({theme}) => theme.devices.md} {
     margin: ${({mobile}) => `0 ${sizes[mobile].margin}px ${sizes[mobile].margin}px 0`};
+    ${({mobile}) => sizes[mobile].mb && `margin-bottom: ${sizes[mobile].mb}px`};
     height: ${({mobile}) => sizes[mobile].height}px;
 
-    border-radius: 30px 30px 30px 0px;
+    border-radius: 19.1px 19.1px 19.1px 0px;
     box-shadow: 0px 14px 25px 0px rgba(0, 0, 0, 0.05);
 
     ${Img} {

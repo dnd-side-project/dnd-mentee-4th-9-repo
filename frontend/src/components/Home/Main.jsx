@@ -49,6 +49,7 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   * {
     color: white;
     text-align: center;
@@ -63,10 +64,12 @@ const Wrapper = styled.div`
 
   p {
     margin-top: ${margins['28'].lg}px;
-    line-height: ${lineHeights['36'].lg}px;
-    font-size: ${({theme}) => theme.fontSizes['24'].lg}px;
-    font-weight: ${({theme}) => theme.fontWeights.regular};
     opacity: 0.8;
+
+    font-family: 'Iropke Batang';
+    font-size: ${({theme}) => theme.fontSizes['24'].lg}px;
+    font-weight: ${({theme}) => theme.fontWeights.medium};
+    line-height: ${lineHeights['36'].lg}px;
   }
 
   @media ${({theme}) => theme.devices.md} {

@@ -2,7 +2,7 @@ import styled, {css} from 'styled-components';
 
 const SubHead = styled.h2`
   font-family: 'Iropke Batang', Batang, Serif;
-  font-size: 36px;
+  font-size: ${({theme}) => theme.fontSizes['40'].lg}px;
   font-weight: ${({theme}) => theme.fontWeights.medium};
   color: ${({theme, color}) => theme.colors[color]};
 
@@ -18,7 +18,7 @@ const SubHead = styled.h2`
   }}
 
   @media ${({theme}) => theme.devices.md} {
-    font-size: 20px;
+    font-size: ${({theme}) => theme.fontSizes['40'].md}px;
   }
 `;
 

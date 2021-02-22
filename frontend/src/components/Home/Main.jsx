@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Section, {MAIN} from '../Section';
-import {getReactiveSize} from '../../lib/calculate';
+import {getReactiveSize, getVW} from '../../lib/calculate';
 
 const title = getReactiveSize(85);
 const lineHeights = {
@@ -37,15 +37,16 @@ function Main() {
           <br />
           See-at 에서 나만을 위한 반려식물을 찾아보세요
         </p>
+        <ScrollDown>
+          <img src={`${process.env.PUBLIC_URL}/images/arrow.png`} alt="scroll down arrow" />
+        </ScrollDown>
       </Wrapper>
-      <ScrollDown>
-        <img src={`${process.env.PUBLIC_URL}/images/arrow.png`} alt="scroll down arrow" />
-      </ScrollDown>
     </Section>
   );
 }
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -119,15 +120,22 @@ const LogoWrapper = styled.div`
 const ScrollDown = styled.span`
   position: absolute;
   left: 50%;
-  bottom: 100px;
-  transform: translateX(-50%);
+  bottom: 0;
+  transform: translate(-50%, 196px);
+
   display: flex;
   justify-content: center;
 
+  @media ${({theme}) => theme.devices.lg} {
+    transform: ${({theme}) => `translate(-50%, ${getVW(196, theme.size.lg)})`};
+  }
+
   @media ${({theme}) => theme.devices.md} {
-    bottom: 127px;
+    bottom: 0;
+    transform: translate(-50%, 85.4px);
+    
     img {
-      width: 50%;
+      transform: scale(0.5);
     }
   }
 `;

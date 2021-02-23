@@ -159,7 +159,38 @@ const detailPlant = async (plantDTO) => {
       return count > 4;
     };
 
-    const recommendPlants = allPlants.filter((plant) => isRecommended(plant));
+    /*
+      @params: Plants : Plant[]
+    */
+    const orderPlants = (Plants) => {
+      Plants.map((Plant) => {
+        const tags = Plant.get({
+          plain: true,
+        })['Tags'];
+
+        const count = tags
+          .map((tag) => tag.name)
+          .filter((item) => recommendTag.includes(item)).length;
+
+        Plant.matchedCount = count;
+      });
+      //객체 정렬
+      const order = (prev, curr) => {
+        return prev.matchedCount > curr.matchedCount
+          ? -1
+          : prev.matchedCount < curr.matchedCount
+          ? 1
+          : 0;
+      };
+
+      Plants.sort(order);
+
+      return Plants;
+    };
+
+    const recommendPlants = orderPlants(
+      allPlants.filter((plant) => isRecommended(plant))
+    );
 
     const detailResult = baseResult.get({
       plain: true,
@@ -202,6 +233,7 @@ const detailPlant = async (plantDTO) => {
         where: {id: plantDTO},
       }
     );
+
     return detailResult;
   } catch (error) {
     console.error(error);
@@ -261,7 +293,7 @@ const searchPlantTag = async (plantDTO) => {
           model: Tag,
           where: {
             name: {
-              [Op.in] : plantDTO
+              [Op.in]: plantDTO,
             },
           },
           attributes: [],
@@ -270,7 +302,9 @@ const searchPlantTag = async (plantDTO) => {
           },
         },
       ],
-      having: sequelize.literal(`COUNT(DISTINCT Tags.name) = ${plantDTO.length}`),
+      having: sequelize.literal(
+        `COUNT(DISTINCT Tags.name) = ${plantDTO.length}`
+      ),
       group: ['id'],
     });
     const plantIdArr = findPlantsIds
@@ -295,7 +329,10 @@ const searchPlantTag = async (plantDTO) => {
           },
         },
       ],
-      order: [[Tag, 'order', 'ASC']],
+      order: [
+        ['yesterDayViews', 'DESC'],
+        [Tag, 'order', 'ASC']
+      ],
     });
     return result;
   } catch (error) {

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, {css} from 'styled-components';
+import {includeArr} from '../lib/handler';
 
 export const [FULL_SCREEN, MAIN, SECTION, NAV, MIDDLE, SIDE] = ['full', 'main', 'section', 'nav', 'middle', 'side'];
 
@@ -41,6 +42,7 @@ export const Container = styled.section`
 
   width: 100%;
   height: ${({height}) => height};
+  ${({type}) => includeArr([FULL_SCREEN, MAIN], type) && 'overflow-y: hidden'};
   padding: 0 ${({theme}) => theme.width.padding}px;
 
   display: flex;

@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const {decrypt, encrypt} = require('./util/check');
 const path = require('path');
 const dotenv = require('dotenv');
 const passport = require('passport');
@@ -83,6 +84,18 @@ class App {
   }
 
   setRouting() {
+    this.app.use((req, res, next) => {
+      const CLIENT_BODY_KEY = decrypt(req.body.api);
+      const CLIENT_HEADER_KEY = decrypt(req.query.api);
+      if (
+        CLIENT_BODY_KEY === process.env.API_KEY ||
+        CLIENT_HEADER_KEY === process.env.API_KEY
+      ) {
+        next();
+      } else {
+        next(error);
+      }
+    });
     this.app.use('/', indexRouter);
     this.app.use('/auth', authRouter);
     this.app.use('/plants', plantsRouter);

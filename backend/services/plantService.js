@@ -261,7 +261,7 @@ const searchPlantTag = async (plantDTO) => {
           model: Tag,
           where: {
             name: {
-              [Op.in] : plantDTO
+              [Op.in]: plantDTO,
             },
           },
           attributes: [],
@@ -270,7 +270,9 @@ const searchPlantTag = async (plantDTO) => {
           },
         },
       ],
-      having: sequelize.literal(`COUNT(DISTINCT Tags.name) = ${plantDTO.length}`),
+      having: sequelize.literal(
+        `COUNT(DISTINCT Tags.name) = ${plantDTO.length}`
+      ),
       group: ['id'],
     });
     const plantIdArr = findPlantsIds

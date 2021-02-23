@@ -243,7 +243,7 @@ const detailPlant = async (plantDTO) => {
 const getCuratingResult = async (plantDTO) => {
   try {
     const result = await Plant.findOne({
-      attributes: ['id', 'name', 'description', 'ment', 'imagePath'],
+      attributes: ['id', 'name', 'testDescription', 'ment', 'imagePath'],
       where: {name: plantDTO},
       include: [
         {

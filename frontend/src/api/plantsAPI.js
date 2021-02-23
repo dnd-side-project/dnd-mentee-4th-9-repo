@@ -5,8 +5,7 @@ export const getPlantDetail = (plantId) => {
 };
 
 export const getCuratingResult = (result) => {
-  // return get('/plants/curating', {params: {result}}); // origin
-  return get('/plants/curating', {params: {result: '몬스테라'}}); // test
+  return get('/plants/curating', {params: {result}});
 };
 
 export const getAllTags = () => {
@@ -19,4 +18,8 @@ export const getAllPlants = (order) => {
 
 export const getTagPlants = (params) => {
   return post(`/plants/encyclopedia/tag`, params);
+};
+
+export const getSearchKeywordPlants = (keyword) => {
+  return post(`/plants/encyclopedia/keyword`, {keyword});
 };

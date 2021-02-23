@@ -45,7 +45,7 @@ function TestQuestion() {
       <NavigatorWrapper optionLength={testData[currentId].answer.length}>
         <Navigation>
           <Progress percent={currentId + 1}>
-            <Path src={`${process.env.PUBLIC_URL}/images/logo_home.png`} alt="navigator icon" />
+            <Path src={`${process.env.PUBLIC_URL}/images/logo_home.svg`} alt="navigator icon" />
           </Progress>
         </Navigation>
         <PathId>

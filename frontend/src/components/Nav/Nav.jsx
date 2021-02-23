@@ -1,22 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState} from 'react';
 import styled, {css} from 'styled-components';
+import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Section, {NAV} from '../Section';
 import {useLocation, Link} from 'react-router-dom';
+import theme from '../../styles/theme';
 
-const menuList = [
-  {name: '테스트', path: '/test-start'},
-  {name: '식물도감', path: '/plants'},
-  {name: '정기구독', path: '/subscription'},
-];
+const menuList = [{name: '테스트', path: '/test-start'}, {name: '식물도감', path: '/plants'}, {name: '정기구독'}];
 
 const opacityPath = ['/', '/test-start'];
 
 function Nav() {
   const location = useLocation();
   const [isOpen, setIsOpen] = useState(false);
+  const matches = useMediaQuery(theme.devices.md);
 
   const toggleMenuList = () => setIsOpen(!isOpen);
+  const closeMenuList = () => setIsOpen(false);
+  const disableMenu = (path) => {
+    !path && alert('정기 구독 서비스는 추후 제공될 예정입니다.');
+  };
   const getBgColor = () => {
     if (opacityPath.includes(location.pathname)) {
       return 'rgba(100, 204, 128, 0.3)';
@@ -29,23 +32,39 @@ function Nav() {
   const bgColor = getBgColor();
 
   return (
-    <Section width="lg" bgColor={bgColor} type={NAV}>
-      <LeftWrapper to="/">
-        <LogoImage src={`${process.env.PUBLIC_URL}/images/logo_nav.svg`} alt="See-at logo" />
-      </LeftWrapper>
-      <RightWrapper>
+    <>
+      <Section width="lg" bgColor={bgColor} type={NAV}>
+        <LeftWrapper to="/">
+          <LogoImage src={`${process.env.PUBLIC_URL}/images/logo_nav.svg`} alt="See-at logo" />
+        </LeftWrapper>
+        <RightWrapper>
+          {!matches && (
+            <MenuWrapper isOpen={isOpen}>
+              {menuList.map(({name, path}) => (
+                <MenuList isOpen={isOpen} key={name}>
+                  <Menu to={path} onClick={() => disableMenu(path)} $isCurrentMenu={path === location.pathname}>
+                    {name}
+                  </Menu>
+                </MenuList>
+              ))}
+            </MenuWrapper>
+          )}
+          <MenuBar onClick={toggleMenuList} imgUrl={`${process.env.PUBLIC_URL}/images/hamburger${isOpen ? '_green' : ''}.svg`} />
+        </RightWrapper>
+      </Section>
+      {matches && (
         <MenuWrapper isOpen={isOpen}>
           {menuList.map(({name, path}) => (
-            <MenuList isOpen={isOpen} key={name} onClick={toggleMenuList}>
-              <Menu to={path} $isCurrentMenu={path === location.pathname}>
+            <MenuList isOpen={isOpen} key={name} onClick={closeMenuList}>
+              <Menu to={path} onClick={() => disableMenu(path)} $isCurrentMenu={path === location.pathname}>
                 {name}
               </Menu>
             </MenuList>
           ))}
+          <MenuBar onClick={closeMenuList} imgUrl={`${process.env.PUBLIC_URL}/images/close_btn.svg`} />
         </MenuWrapper>
-        <MenuBar onClick={toggleMenuList} imgUrl={`${process.env.PUBLIC_URL}/images/hamburger.svg`} />
-      </RightWrapper>
-    </Section>
+      )}
+    </>
   );
 }
 
@@ -81,15 +100,28 @@ const RightWrapper = styled.ul`
 const MenuWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  z-index: 1000;
   @media ${({theme}) => theme.devices.md} {
     ${({isOpen}) => {
-      if (!isOpen) return;
+      if (!isOpen) {
+        return css`
+          display: none;
+        `;
+      }
       return css`
         flex-direction: column;
-        width: 100px;
-        position: relative;
-        top: 115px;
-        right: -40px;
+        width: 120px;
+        height: 100%;
+        position: fixed;
+        right: 0;
+        background-color: rgba(255, 255, 255, 0.9);
+        box-shadow: -10px 0px 30px 0px rgba(0, 0, 0, 0.05);
+        padding-top: 56px;
+        ${MenuBar} {
+          position: absolute;
+          bottom: 23.5px;
+          right: 19.5px;
+        }
       `;
     }}
   }
@@ -106,14 +138,13 @@ const MenuList = styled.li`
     ${({isOpen}) => {
       if (!isOpen) return;
       return css`
-        display: block;
-        height: 56px;
-        padding: 10px;
+        display: flex;
+        justify-content: flex-end;
+        padding: 6.5px 20px;
         margin: 0;
         line-height: 36px;
-        background-color: ${({theme}) => theme.colors.lightGreen};
-        &:hover {
-          background-color: rgba(140, 210, 156, 0.7);
+        :first-child {
+          padding-top: 10px;
         }
       `;
     }}
@@ -125,17 +156,21 @@ const Menu = styled(Link)`
   font-size: 16px;
   line-height: 24px;
   color: ${({theme}) => theme.colors.white};
+
+  @media ${({theme}) => theme.devices.md} {
+    color: ${({theme}) => theme.colors.green};
+  }
 `;
 
 const MenuBar = styled.a`
   display: none;
-
   &:before {
     content: url(${({imgUrl}) => imgUrl});
   }
 
   @media ${({theme}) => theme.devices.md} {
     display: block;
+    z-index: 2000;
   }
 `;
 

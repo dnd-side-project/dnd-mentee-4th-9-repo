@@ -66,13 +66,12 @@ function TestResult() {
 
   return (
     <>
-      <PlantMain name={plantData.name} type="result" imgPath={plantData.imagePath} />
+      <PlantMain name={plantData.name} testDesc={plantData.testDescription} type="result" imgPath={plantData.imagePath} />
 
       <div className="save-result">
         <Section>
           <Description marginBottom="20">
-            <SubHead iropke={true}>{plantData.description}</SubHead>
-            <DescText>{plantData.ment}</DescText>
+            <SubHead iropke={true}>{plantData.description}</SubHead> <DescText>{plantData.ment}</DescText>
           </Description>
           <Description marginTop="60" marginBottom="30">
             <SubHead iropke={true}>#{plantData.name} #키워드</SubHead>

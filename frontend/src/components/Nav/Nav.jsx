@@ -6,7 +6,11 @@ import Section, {NAV} from '../Section';
 import {useLocation, Link} from 'react-router-dom';
 import theme from '../../styles/theme';
 
-const menuList = [{name: '테스트', path: '/test-start'}, {name: '식물도감', path: '/plants'}, {name: '정기구독'}];
+const menuList = [
+  {name: '테스트', path: '/test-start'},
+  {name: '식물도감', path: '/plants'},
+  {name: '정기구독', path: ''},
+];
 
 const opacityPath = ['/', '/test-start'];
 
@@ -17,8 +21,10 @@ function Nav() {
 
   const toggleMenuList = () => setIsOpen(!isOpen);
   const closeMenuList = () => setIsOpen(false);
-  const disableMenu = (path) => {
-    !path && alert('정기 구독 서비스는 추후 제공될 예정입니다.');
+  const disableMenu = (evt, path) => {
+    if (path) return;
+    evt.preventDefault();
+    alert('아직 서비스 준비중이에요!');
   };
   const getBgColor = () => {
     if (opacityPath.includes(location.pathname)) {
@@ -42,7 +48,7 @@ function Nav() {
             <MenuWrapper isOpen={isOpen}>
               {menuList.map(({name, path}) => (
                 <MenuList isOpen={isOpen} key={name}>
-                  <Menu to={path} onClick={() => disableMenu(path)} $isCurrentMenu={path === location.pathname}>
+                  <Menu to={path} onClick={(evt) => disableMenu(evt, path)} $isCurrentMenu={path === location.pathname}>
                     {name}
                   </Menu>
                 </MenuList>
@@ -56,7 +62,7 @@ function Nav() {
         <MenuWrapper isOpen={isOpen}>
           {menuList.map(({name, path}) => (
             <MenuList isOpen={isOpen} key={name} onClick={closeMenuList}>
-              <Menu to={path} onClick={() => disableMenu(path)} $isCurrentMenu={path === location.pathname}>
+              <Menu to={path} onClick={(evt) => disableMenu(evt, path)} $isCurrentMenu={path === location.pathname}>
                 {name}
               </Menu>
             </MenuList>

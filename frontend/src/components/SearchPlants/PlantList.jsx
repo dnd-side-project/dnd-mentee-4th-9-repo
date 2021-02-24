@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import Section from '../Section';
 import RecommentPlant from '../RecommentPlant';
 import {TagsHead} from '../PlantsDetail/Feature';
-import PopularPlants from '../Home/PopularPlants';
 
 import {getAllPlants, getTagPlants} from '../../api/plantsAPI';
 import {EMPTY, isEmptyArr, getOriginTag} from '../../lib/handler';

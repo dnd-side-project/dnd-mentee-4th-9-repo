@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Section from '../Section';
 import LottiePlayer from '../LottiePlayer';
 import SubHead from '../../styles/SubHead';
 import PopularPlants from '../Home/PopularPlants';
@@ -13,9 +12,7 @@ function NoResult() {
       <LottieWrapper>
         <LottiePlayer filename="no_result" />
       </LottieWrapper>
-      <Section width="lg">
-        <PopularPlants />
-      </Section>
+      <PopularPlants />
     </>
   );
 }
@@ -34,7 +31,9 @@ const LottieWrapper = styled.div`
   justify-content: center;
 
   lottie-player {
+    margin-bottom: 10px;
     width: 720px;
+
     @media ${({theme}) => theme.devices.md} {
       width: 320px;
     }

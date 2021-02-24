@@ -6,8 +6,6 @@ import Button from '../styles/Button';
 import {FULL_SCREEN, SECTION} from './Section';
 
 import {getReactiveSize} from '../lib/calculate';
-import LottieImg from './LottieImg';
-import * as testMain from '../lottie/test_main.json';
 
 const styles = {
   // btn text color, ima margin top, img min width(only main page)
@@ -33,7 +31,7 @@ function TestMain({type = FULL_SCREEN}) {
       <h2>나와 잘 맞는 식물 친구는?</h2>
 
       <LottieWrapper type={type} mt={mt} min={minWidth}>
-        <LottieImg lottieFile={testMain.default} />
+        <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_niw6lugu.json" background="transparent" speed="1" loop autoplay></lottie-player>
       </LottieWrapper>
 
       <Button onClick={onClick} borderRadius={5} fontWeight="bold" color={btnTextColor}>
@@ -46,6 +44,7 @@ function TestMain({type = FULL_SCREEN}) {
 const marginBottom = getReactiveSize(20);
 
 const Wrapper = styled.div`
+  overflow-x: hidden;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -59,22 +58,22 @@ const Wrapper = styled.div`
 
   p {
     margin-bottom: ${marginBottom.lg}px;
-    font-size: ${({theme}) => theme.fontSizes['32'].lg}px;
+    font-size: 24px;
     font-weight: ${({theme}) => theme.fontWeights.regular};
   }
 
   h2 {
     font-family: 'Iropke Batang', Batang, Serif;
     font-size: ${({theme}) => theme.fontSizes['40'].lg}px;
-    font-weight: ${({theme}) => theme.fontWeights.bold};
+    font-weight: ${({theme}) => theme.fontWeights.medium};
   }
 
   @media ${({theme}) => theme.devices.md} {
     p {
       margin-bottom: ${marginBottom.md}px;
-      font-size: ${({theme}) => theme.fontSizes['32'].md}px;
-      font-weight: ${({theme}) => theme.fontWeights.regular};
+      font-size: 13px;
     }
+
     h2 {
       font-size: ${({theme}) => theme.fontSizes['40'].md}px;
       font-weight: ${({theme}) => theme.fontWeights.medium};
@@ -83,16 +82,16 @@ const Wrapper = styled.div`
 `;
 
 const LottieWrapper = styled.div`
-  margin-top: ${({mt}) => mt}px;
-  width: ${({type}) => (type === FULL_SCREEN ? 594 : 482)}px;
+  margin-top: ${({type}) => (type === FULL_SCREEN ? 23 : 55)}px;
+  width: ${({type}) => (type === FULL_SCREEN ? 792.8 : 733)}px;
 
-  svg {
+  lottie-player {
     width: 100%;
   }
 
   @media ${({theme}) => theme.devices.md} {
-    margin-top: ${({mt}) => mt - 40}px;
-    width: ${({min}) => (min ? min : 278)}px;
+    margin-top: ${({type}) => (type === FULL_SCREEN ? 32 : 23)}px;
+    width: min(${({type}) => (type === FULL_SCREEN ? 360 : 248)}px, 100%);
   }
 `;
 

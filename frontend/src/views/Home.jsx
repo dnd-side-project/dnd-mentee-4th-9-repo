@@ -19,7 +19,7 @@ function Home() {
   return (
     <>
       <Main />
-      <Section bgColor="green" margin={testMG}>
+      <Section width="lg" bgColor="green" margin={testMG}>
         <TestMain type={SECTION} />
       </Section>
       <Section width="lg" margin={commonMG} order={SIDE}>

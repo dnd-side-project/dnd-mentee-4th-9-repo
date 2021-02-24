@@ -19,3 +19,7 @@ export const getAllPlants = (order) => {
 export const getTagPlants = (params) => {
   return post(`/plants/encyclopedia/tag`, params);
 };
+
+export const getSearchKeywordPlants = (keyword) => {
+  return post(`/plants/encyclopedia/keyword`, {keyword});
+};

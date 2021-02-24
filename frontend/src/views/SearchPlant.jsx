@@ -6,6 +6,7 @@ import Section, {SECTION} from '../components/Section';
 import FilteringTags from '../components/SearchPlants/FilteringTags';
 import ColorTags from '../components/SearchPlants/ColorTags';
 import PlantList from '../components/SearchPlants/PlantList';
+import SearchResultPlant from '../components/SearchPlants/SearchResultPlant';
 import Nothing from '../components/Nothing';
 import TestMain from '../components/TestMain';
 import Footer from '../components/Footer/Footer';
@@ -17,6 +18,7 @@ const SPACE = ' ';
 
 const SearchPlant = ({location: {search}}) => {
   const [tagData, setTagData] = useState([]);
+  const [keywordInfo, setKeywordInfo] = useState({keyword: '', pressEnter: false});
   const middle = tagData.length / 2;
   const [leftTags, rightTags] = [tagData.slice(0, middle), tagData.slice(middle)];
 
@@ -46,6 +48,10 @@ const SearchPlant = ({location: {search}}) => {
   const qsTag = qsParse(search).tag;
   const tagArr = isEmptyStr(qsTag) ? [] : qsTag.split(SPACE);
   const selectedTag = isEmptyArr(tagArr) ? tagArr : tagArr.filter((tag) => tag !== EMPTY);
+  const inputKeyword = ({target: {value}}) => setKeywordInfo({...keywordInfo, keyword: value});
+  const searchKeyword = async ({key}) => {
+    setKeywordInfo({...keywordInfo, pressEnter: key === 'Enter'});
+  };
 
   if (!tagData) return null;
 
@@ -58,27 +64,36 @@ const SearchPlant = ({location: {search}}) => {
       <Section width="lg" bgColor="lightGreen">
         <SearchInput>
           <img src={`${process.env.PUBLIC_URL}/images/search-black.svg`} alt="search-plant" />
-          <input type="text" placeholder="어떤 식물 친구를 찾으시나요?" />
+          <input type="text" placeholder="어떤 식물 친구를 찾으시나요?" value={keywordInfo.keyword} onChange={inputKeyword} onKeyDown={searchKeyword} />
         </SearchInput>
       </Section>
 
       {/* tag only start */}
-      <Section width="lg">
-        <ChooseHeader>
-          <img src={`${process.env.PUBLIC_URL}/images/filter.svg`} alt="choose keyword" />
-          <h1>선호하는 키워드를 선택해보세요</h1>
-          {!isEmptyArr(selectedTag) && (
-            <DelAllTags to="/plants">
-              <img src={`${process.env.PUBLIC_URL}/images/cancle.svg`} alt="delete all tags" />
-              모두해제
-            </DelAllTags>
-          )}
-        </ChooseHeader>
-      </Section>
-      <FilteringTags leftTags={leftTags} rightTags={rightTags} selectedTag={selectedTag} search={search} />
-      <ColorTags tags={selectedTag} />
+      {!keywordInfo.keyword && (
+        <>
+          <Section width="lg">
+            <ChooseHeader>
+              <img src={`${process.env.PUBLIC_URL}/images/filter.svg`} alt="choose keyword" />
+              <h1>선호하는 키워드를 선택해보세요</h1>
+              {!isEmptyArr(selectedTag) && (
+                <DelAllTags to="/plants">
+                  <img src={`${process.env.PUBLIC_URL}/images/cancle.svg`} alt="delete all tags" />
+                  모두해제
+                </DelAllTags>
+              )}
+            </ChooseHeader>
+          </Section>
+          <FilteringTags leftTags={leftTags} rightTags={rightTags} selectedTag={selectedTag} search={search} />
+          <ColorTags tags={selectedTag} />
+        </>
+      )}
+      {!keywordInfo.pressEnter && <PlantList filterTag={selectedTag} />}
 
-      <PlantList filterTag={selectedTag} />
+      {keywordInfo.keyword && (
+        <>
+          <SearchResultPlant keyword={keywordInfo.keyword} pressEnter={keywordInfo.pressEnter} />
+        </>
+      )}
 
       <Nothing />
       <Section bgColor="green" margin={200}>

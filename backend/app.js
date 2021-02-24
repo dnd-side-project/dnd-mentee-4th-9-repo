@@ -54,7 +54,7 @@ class App {
       );
     } else {
       this.app.use(morgan('dev'));
-      this.app.use(cors({origin: true, credentials: true}));
+      this.app.use(cors({origin: "*", credentials: true}));
     }
     this.app.use(express.json());
     this.app.use(express.urlencoded({extended: false}));

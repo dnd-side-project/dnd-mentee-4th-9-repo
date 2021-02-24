@@ -22,6 +22,9 @@ module.exports = class Plant extends Sequelize.Model {
           //한문장 요약
           type: Sequelize.STRING(200),
         },
+        testDescription: {
+          type: Sequelize.STRING(200)
+        },
         ment: {
           //멘트
           type: Sequelize.TEXT,

@@ -59,7 +59,9 @@ function TestResult() {
   if (loading)
     return (
       <Section type={FULL_SCREEN} width="lg">
-        <LottieImg lottieFile={testLoading.default} />
+        <LottieWrapper>
+          <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_xt4jx9sg.json" background="transparent" speed="2" loop autoplay></lottie-player>
+        </LottieWrapper>
       </Section>
     );
   if (!plantData) return null;
@@ -115,6 +117,18 @@ function TestResult() {
     </>
   );
 }
+
+const LottieWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+
+  lottie-player {
+    width: 480px;
+    @media ${({theme}) => theme.devices.md} {
+      width: min(240px, 100%);
+    }
+  }
+`;
 
 const Description = styled.div`
   display: flex;

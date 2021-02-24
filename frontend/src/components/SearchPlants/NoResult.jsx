@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import Section from '../Section';
+import LottiePlayer from '../LottiePlayer';
 import SubHead from '../../styles/SubHead';
 import PopularPlants from '../Home/PopularPlants';
 
@@ -10,7 +11,7 @@ function NoResult() {
     <>
       <NothingHead>찾으시는 식물이 없어요</NothingHead>
       <LottieWrapper>
-        <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_j0kbw3hw.json" background="transparent" speed="1" loop autoplay></lottie-player>
+        <LottiePlayer src="https://assets8.lottiefiles.com/packages/lf20_j0kbw3hw.json" />
       </LottieWrapper>
       <Section width="lg">
         <PopularPlants />

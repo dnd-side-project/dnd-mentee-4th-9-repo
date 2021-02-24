@@ -11,10 +11,9 @@ import Button from '../styles/Button';
 import {getReactiveSize} from '../lib/calculate';
 import SubHead from '../styles/SubHead';
 import DescText from '../styles/DescText';
-import LottieImg from '../components/LottieImg';
-import * as testLoading from '../lottie/test_loading.json';
 import {getCuratingResult} from '../api/plantsAPI';
 import {FULL_SCREEN} from '../components/Section';
+import LottiePlayer from '../components/LottiePlayer';
 
 function TestResult() {
   const location = useLocation();
@@ -60,7 +59,7 @@ function TestResult() {
     return (
       <Section type={FULL_SCREEN} width="lg">
         <LottieWrapper>
-          <lottie-player src="https://assets5.lottiefiles.com/packages/lf20_xt4jx9sg.json" background="transparent" speed="2" loop autoplay></lottie-player>
+          <LottiePlayer src="https://assets5.lottiefiles.com/packages/lf20_xt4jx9sg.json" />
         </LottieWrapper>
       </Section>
     );

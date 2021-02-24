@@ -3,8 +3,9 @@ import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 
 import Button from '../styles/Button';
-import {FULL_SCREEN, SECTION} from './Section';
+import LottiePlayer from './LottiePlayer';
 
+import {FULL_SCREEN, SECTION} from './Section';
 import {getReactiveSize} from '../lib/calculate';
 
 const styles = {
@@ -31,7 +32,7 @@ function TestMain({type = FULL_SCREEN}) {
       <h2>나와 잘 맞는 식물 친구는?</h2>
 
       <LottieWrapper type={type} mt={mt} min={minWidth}>
-        <lottie-player src="https://assets8.lottiefiles.com/packages/lf20_niw6lugu.json" background="transparent" speed="1" loop autoplay></lottie-player>
+        <LottiePlayer src="https://assets8.lottiefiles.com/packages/lf20_niw6lugu.json" />
       </LottieWrapper>
 
       <Button onClick={onClick} borderRadius={5} fontWeight="bold" color={btnTextColor}>

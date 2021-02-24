@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
+import {Link} from 'react-router-dom';
 import {useLocation, useHistory} from 'react-router-dom';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import html2canvas from 'html2canvas';
@@ -101,10 +102,12 @@ function TestResult() {
         </ResultButton>
       </Section>
 
-      <Section bgImage={true} margin="134" column={true}>
-        <Logo src={`${process.env.PUBLIC_URL}/images/logo_nav.svg`} alt="See-at logo" />
-        <Title>지금, 더 많은 친구를 만나보세요</Title>
-      </Section>
+      <Link to="/">
+        <Section bgImage={true} margin="134" column={true}>
+          <Logo src={`${process.env.PUBLIC_URL}/images/logo_nav.svg`} alt="See-at logo" />
+          <Title>지금, 더 많은 친구를 만나보세요</Title>
+        </Section>
+      </Link>
 
       <Section margin="100" column={true}>
         <ResultButton onClick={returnTest} borderColor="lightGreen" bgColor="white" color="lightGreen" fontSize="32" icon="reset">

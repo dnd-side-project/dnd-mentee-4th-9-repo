@@ -9,7 +9,7 @@ import {FULL_SCREEN, SECTION} from './Section';
 import {getReactiveSize} from '../lib/calculate';
 
 const styles = {
-  // btn text color, ima margin top, img min width(only main page)
+  // ima margin top, img min width(only main page)
   [FULL_SCREEN]: ['green', 93],
   [SECTION]: ['lightGreen', 60, 200],
 };
@@ -18,7 +18,7 @@ const styles = {
 type: string ("full", "section")
 */
 function TestMain({type = FULL_SCREEN}) {
-  const [btnTextColor, mt, minWidth] = styles[type];
+  const [mt, minWidth] = styles[type];
   const history = useHistory();
 
   const onClick = () => {
@@ -35,7 +35,7 @@ function TestMain({type = FULL_SCREEN}) {
         <LottiePlayer src="https://assets8.lottiefiles.com/packages/lf20_niw6lugu.json" />
       </LottieWrapper>
 
-      <Button onClick={onClick} borderRadius={5} fontWeight="bold" color={btnTextColor}>
+      <Button onClick={onClick} borderRadius={5} fontWeight="bold" color="green">
         테스트 GO!
       </Button>
     </Wrapper>

@@ -32,7 +32,7 @@ function TestMain({type = FULL_SCREEN}) {
       <h2>나와 잘 맞는 식물 친구는?</h2>
 
       <LottieWrapper type={type} mt={mt} min={minWidth}>
-        <LottiePlayer src="https://assets8.lottiefiles.com/packages/lf20_niw6lugu.json" />
+        <LottiePlayer filename="test_start" />
       </LottieWrapper>
 
       <Button onClick={onClick} borderRadius={5} fontWeight="bold" color="green">

@@ -11,7 +11,7 @@ function NoResult() {
     <>
       <NothingHead>찾으시는 식물이 없어요</NothingHead>
       <LottieWrapper>
-        <LottiePlayer src="https://assets8.lottiefiles.com/packages/lf20_j0kbw3hw.json" />
+        <LottiePlayer filename="no_result" />
       </LottieWrapper>
       <Section width="lg">
         <PopularPlants />

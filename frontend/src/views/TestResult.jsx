@@ -60,7 +60,7 @@ function TestResult() {
     return (
       <Section type={FULL_SCREEN} width="lg">
         <LottieWrapper>
-          <LottiePlayer src="https://assets5.lottiefiles.com/packages/lf20_xt4jx9sg.json" />
+          <LottiePlayer src="test_result" />
         </LottieWrapper>
       </Section>
     );

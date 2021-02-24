@@ -60,7 +60,7 @@ function TestResult() {
     return (
       <Section type={FULL_SCREEN} width="lg">
         <LottieWrapper>
-          <LottiePlayer src="test_result" />
+          <LottiePlayer filename="test_loading" />
         </LottieWrapper>
       </Section>
     );

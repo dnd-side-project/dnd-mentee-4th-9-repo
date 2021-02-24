@@ -66,7 +66,7 @@ function TestResult() {
 
   return (
     <>
-      <PlantMain name={plantData.name} type="result" imgPath={plantData.imagePath} />
+      <PlantMain name={plantData.name} testDesc={plantData.testDescription} type="result" imgPath={plantData.imagePath} />
 
       <div className="save-result">
         <Section>

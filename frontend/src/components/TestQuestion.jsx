@@ -85,6 +85,7 @@ const QuestionWrapper = styled.div`
     color: ${({theme}) => theme.colors.white};
     font-size: ${({theme}) => theme.fontSizes['32'].lg}px;
     font-weight: ${({theme}) => theme.fontWeights.medium};
+    line-height: 54px;
   }
 
   @media ${({theme}) => theme.devices.md} {
@@ -201,6 +202,7 @@ const Progress = styled.span`
   background-color: ${({theme}) => theme.colors.white};
   border-radius: 20px;
   height: ${() => getReactiveSize(12).lg}px;
+  transition: all 0.5s ease-in-out;
 
   @media ${({theme}) => theme.devices.md} {
     height: ${() => getReactiveSize(12).md}px;

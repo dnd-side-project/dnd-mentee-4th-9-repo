@@ -63,9 +63,6 @@ const KeywordGroup = styled.fieldset`
 
   @media ${({theme}) => theme.devices.md} {
     padding: 20px 0 10px 0;
-    .right-tags {
-      margin-top: 10px;
-    }
   }
 `;
 
@@ -93,18 +90,12 @@ const KeywordField = styled.div`
       font-size: 14px;
       line-height: 21px;
     }
-    & + & {
-      margin-top: 10px;
-    }
 
     @media (max-width: 359px) {
       flex-direction: column;
 
       h2 {
         margin-bottom: 5px;
-      }
-      & + & {
-        margin-top: 0;
       }
     }
   }

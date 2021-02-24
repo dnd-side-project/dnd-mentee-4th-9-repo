@@ -9,6 +9,9 @@ import Slider from '../Slider';
 
 import {getTagPlants} from '../../api/plantsAPI';
 import {isEmptyStr} from '../../lib/handler';
+import {getReactiveSize} from '../../lib/calculate';
+
+const margin = getReactiveSize(16);
 
 /*
 tag: {
@@ -41,16 +44,19 @@ function AllKeywords({plantId, name = '', keywords = []}) {
 
       <SliderWrapper>{!isEmptyStr(selected) && <Slider plants={plants} />}</SliderWrapper>
 
-      {isEmptyStr(selected) ? (
-        <StyledBtn iconSize={36} borderColor="lightGreen" color="lightGreen">
-          <img src={`${process.env.PUBLIC_URL}/images/search.svg`} alt="search" />
-          다른 키워드로 검색
-        </StyledBtn>
-      ) : (
-        <StyledBtn bgColor="lightGreen" borderColor="lightGreen" color="white">
-          <span>선택한 키워드 전체보기</span>
-        </StyledBtn>
-      )}
+      <BtnWrapper>
+        {isEmptyStr(selected) ? (
+          <Button iconSize={36} borderColor="lightGreen" color="lightGreen">
+            <img src={`${process.env.PUBLIC_URL}/images/search.svg`} alt="search" />
+            다른 키워드로 검색
+          </Button>
+        ) : (
+          <Button bgColor="lightGreen" borderColor="lightGreen" color="white" className="selected">
+            <span>선택한 키워드 전체보기</span>
+            <img src={`${process.env.PUBLIC_URL}/images/search_arrow.svg`} alt="search arrow" />
+          </Button>
+        )}
+      </BtnWrapper>
     </Section>
   );
 }
@@ -105,8 +111,33 @@ const SliderWrapper = styled.div`
   }
 `;
 
-const StyledBtn = styled(Button)`
-  margin: 0 auto;
+const BtnWrapper = styled.div`
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+
+  button {
+    cursor: default;
+  }
+
+  @media ${({theme}) => theme.devices.md} {
+    margin-bottom: 0;
+  }
+
+  .selected {
+    img {
+      position: relative;
+      top: 2.5px;
+      margin: 0 0 0 ${margin.lg}px;
+      width: 15px;
+
+      @media ${({theme}) => theme.devices.md} {
+        top: 1.3px;
+        margin: 0 0 0 ${margin.md}px;
+        transform: scale(0.5);
+      }
+    }
+  }
 `;
 
 export default AllKeywords;

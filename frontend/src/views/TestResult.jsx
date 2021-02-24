@@ -41,7 +41,7 @@ function TestResult() {
   };
 
   const getResultPlant = useCallback(async () => {
-    const result = isShared ? location.pathname.split('/')[2] : location.state;
+    const result = isShared ? location.pathname.split('/')[3] : location.state;
     if (!result) {
       history.replace('/test');
       return;

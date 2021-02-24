@@ -85,12 +85,8 @@ class App {
 
   setRouting() {
     this.app.use((req, res, next) => {
-      const CLIENT_BODY_KEY = decrypt(req.body.api);
-      const CLIENT_HEADER_KEY = decrypt(req.query.api);
-      if (
-        CLIENT_BODY_KEY === process.env.API_KEY ||
-        CLIENT_HEADER_KEY === process.env.API_KEY
-      ) {
+      const CLIENT_KEY = decrypt(req.header('api-key'));
+      if (CLIENT_KEY === process.env.API_KEY) {
         next();
       } else {
         next(error);

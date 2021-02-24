@@ -5,7 +5,7 @@ export const getPlantDetail = (plantId) => {
 };
 
 export const getCuratingResult = (result) => {
-  return get('/plants/curating', {params: {result}});
+  return get(`/plants/curating?result=${result}`);
 };
 
 export const getAllTags = () => {

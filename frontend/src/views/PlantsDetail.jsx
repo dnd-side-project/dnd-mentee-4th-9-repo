@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
+import {useHistory} from 'react-router-dom';
 
 import Section, {SECTION} from '../components/Section';
 import PlantMain from '../components/PlantsDetail/PlantMain';
@@ -54,11 +55,18 @@ function PlantsDetail({
 
 function usePlantInfo(id) {
   const [plant, setPlant] = useState({});
+  const history = useHistory();
 
   const getPlantInfo = useCallback(async () => {
     const plantInfo = await getPlantDetail(id);
-    setPlant(plantInfo);
-  }, [id]);
+
+    if (plantInfo) {
+      setPlant(plantInfo);
+    } else {
+      history.push('/error');
+      return;
+    }
+  }, [id, history]);
 
   useEffect(() => {
     getPlantInfo();

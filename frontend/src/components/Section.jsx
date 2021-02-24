@@ -51,10 +51,17 @@ export const Container = styled.section`
   background-color: ${({theme, bgColor}) => theme.colors[bgColor] || bgColor};
 
   ${({type}) => {
-    if (type !== NAV) return;
-    return css`
-      position: absolute;
-    `;
+    if (type !== NAV) {
+      return css`
+        position: relative;
+        z-index: 0;
+      `;
+    } else {
+      return css`
+        position: absolute;
+        z-index: 100;
+      `;
+    }
   }}
 `;
 

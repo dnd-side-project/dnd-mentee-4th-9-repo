@@ -67,6 +67,7 @@ function Nav() {
       {/* mobile */}
       {isOpen && matches && (
         <MenuWrapper isOpen={isOpen}>
+          <img onClick={toggleMenuList} src={`${process.env.PUBLIC_URL}/images/hamburger_green.svg`} alt="open hamburger icon" />
           {menuList.map(({name, path}) => (
             <MenuList isOpen={isOpen} key={name} onClick={closeMenuList}>
               <Menu to={path} onClick={(evt) => disableMenu(evt, path)} $isCurrentMenu={path === location.pathname}>
@@ -134,6 +135,11 @@ const MenuWrapper = styled.div`
           position: absolute;
           bottom: 23.5px;
           right: 19.5px;
+        }
+        img {
+          position: absolute;
+          top: 16px;
+          right: 20px;
         }
       `;
     }}

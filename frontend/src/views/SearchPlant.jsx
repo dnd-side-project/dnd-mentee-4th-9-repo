@@ -1,12 +1,11 @@
 import React, {useEffect, useState, useCallback} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 
 import Section, {SECTION} from '../components/Section';
 import FilteringTags from '../components/SearchPlants/FilteringTags';
 import ColorTags from '../components/SearchPlants/ColorTags';
 import PlantList from '../components/SearchPlants/PlantList';
-import SearchResultPlant from '../components/SearchPlants/SearchResultPlant';
 import Nothing from '../components/Nothing';
 import TestMain from '../components/TestMain';
 import Footer from '../components/Footer/Footer';
@@ -17,8 +16,8 @@ import {EMPTY, isEmptyArr, isEmptyStr, qsParse} from '../lib/handler';
 const SPACE = ' ';
 
 const SearchPlant = ({location: {search}}) => {
+  const history = useHistory();
   const [tagData, setTagData] = useState([]);
-  const [keywordInfo, setKeywordInfo] = useState({keyword: '', pressEnter: false});
   const middle = tagData.length / 2;
   const [leftTags, rightTags] = [tagData.slice(0, middle), tagData.slice(middle)];
 
@@ -48,9 +47,14 @@ const SearchPlant = ({location: {search}}) => {
   const qsTag = qsParse(search).tag;
   const tagArr = isEmptyStr(qsTag) ? [] : qsTag.split(SPACE);
   const selectedTag = isEmptyArr(tagArr) ? tagArr : tagArr.filter((tag) => tag !== EMPTY);
+
+  const [keywordInfo, setKeywordInfo] = useState({keyword: '', pressEnter: false});
   const inputKeyword = ({target: {value}}) => setKeywordInfo({...keywordInfo, keyword: value});
   const searchKeyword = async ({key}) => {
-    setKeywordInfo({...keywordInfo, pressEnter: key === 'Enter'});
+    if (key === 'Enter') {
+      setKeywordInfo({...keywordInfo, pressEnter: key === 'Enter'});
+      history.push({pathname: '/search', search: `?keyword=${keywordInfo.keyword}`, state: {pressEnter: keywordInfo.pressEnter}});
+    }
   };
 
   if (!tagData) return null;
@@ -87,13 +91,7 @@ const SearchPlant = ({location: {search}}) => {
           <ColorTags tags={selectedTag} />
         </>
       )}
-      {!keywordInfo.pressEnter && <PlantList filterTag={selectedTag} />}
-
-      {keywordInfo.keyword && (
-        <>
-          <SearchResultPlant keyword={keywordInfo.keyword} pressEnter={keywordInfo.pressEnter} />
-        </>
-      )}
+      <PlantList filterTag={selectedTag} isSearch={keywordInfo.keyword} />
 
       <Nothing />
       <Section bgColor="green" margin={200}>

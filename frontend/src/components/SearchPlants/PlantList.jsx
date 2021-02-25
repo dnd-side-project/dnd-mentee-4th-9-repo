@@ -16,7 +16,7 @@ import SubHead from '../../styles/SubHead';
 /*
 filterTag: string[];
 */
-function PlantList({filterTag = []}) {
+function PlantList({filterTag = [], isSearch = false}) {
   const {isLoaded, plants = []} = useFiltering(filterTag);
   const success = isLoaded && !isEmptyArr(plants);
   const matches = useMediaQuery(theme.devices.md);
@@ -25,7 +25,7 @@ function PlantList({filterTag = []}) {
     <Section width="lg">
       {success ? (
         <>
-          {isEmptyArr(filterTag) ? (
+          {isSearch || isEmptyArr(filterTag) ? (
             <ListHead>
               <span>{plants.length}개</span>의 반려식물이 있어요
             </ListHead>

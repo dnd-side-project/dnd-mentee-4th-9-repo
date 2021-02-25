@@ -9,6 +9,7 @@ import Error from './views/Error';
 import Nav from './components/Nav/Nav';
 import ScrollTop from './components/ScrollTop';
 import SearchPlant from './views/SearchPlant';
+import SearchResult from './views/SearchResult';
 
 const App = () => {
   return (
@@ -21,7 +22,7 @@ const App = () => {
         <Route exact path={'/test'} component={Test} />
         <Route exact path={'/test/result/:id'} component={TestResult} />
         <Route exact path={'/plants'} component={SearchPlant} />
-        <Route exact path={'/search'} />
+        <Route exact path={'/search'} component={SearchResult} />
         <Route exact path={'/plants/detail/:id'} component={PlantsDetail} />
         <Route exact path={'/subscription'} component={Subscription} />
         <Route exact component={Error} />

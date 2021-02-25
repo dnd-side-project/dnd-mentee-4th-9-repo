@@ -15,8 +15,8 @@ import NoResult from './NoResult';
 /*
 filterTag: string[];
 */
-function PlantList({filterTag = []}) {
-  const {isLoaded, plants = []} = useFiltering(filterTag);
+function PlantList({filterTag = [], isSearch = false}) {
+  const {isLoaded, plants = []} = useFiltering(filterTag, isSearch);
   const success = isLoaded && !isEmptyArr(plants);
   const matches = useMediaQuery(theme.devices.md);
 
@@ -24,7 +24,7 @@ function PlantList({filterTag = []}) {
     <Section width="lg">
       {success ? (
         <>
-          {isEmptyArr(filterTag) ? (
+          {isSearch || isEmptyArr(filterTag) ? (
             <ListHead>
               <span>{plants.length}개</span>의 반려식물이 있어요
             </ListHead>
@@ -50,7 +50,7 @@ function PlantList({filterTag = []}) {
   );
 }
 
-function useFiltering(filterTag) {
+function useFiltering(filterTag, isSearch) {
   const [plantsInfo, setInfo] = useState({
     isLoaded: false,
     plants: [],
@@ -77,12 +77,12 @@ function useFiltering(filterTag) {
   }, [filterTag]);
 
   useEffect(() => {
-    if (isEmptyArr(filterTag)) {
+    if (isSearch || isEmptyArr(filterTag)) {
       _getAllPlants();
     } else {
       _getTagPlants();
     }
-  }, [_getTagPlants, filterTag]);
+  }, [_getTagPlants, filterTag, isSearch]);
 
   return {isLoaded, plants};
 }

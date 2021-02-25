@@ -58,7 +58,7 @@ const SearchPlant = ({location: {search}}) => {
 
   return (
     <>
-      <Meta title="식물 도감 | See-at" />
+      <Meta title="식물도감 | See-at" />
       <Wrapper>
         <Section width="lg" bgColor="lightGreen">
           <SearchInput>

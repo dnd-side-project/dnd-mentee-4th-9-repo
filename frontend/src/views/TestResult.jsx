@@ -69,7 +69,7 @@ function TestResult() {
 
   return (
     <>
-      <Meta title="나와 잘 맞는 식물 친구는? | See-at" description={plantData.testDescription} image={plantData.imagePath} />
+      {plantData && <Meta title="나와 잘 맞는 식물 친구는? | See-at" description={plantData.testDescription} image={plantData.imagePath} />}
 
       <PlantMain name={plantData.name} testDesc={plantData.testDescription} type="result" imgPath={plantData.imagePath} />
 

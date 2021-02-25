@@ -15,7 +15,7 @@ import DescText from '../styles/DescText';
 import Friends from '../components/PlantsDetail/Friends';
 
 import {getPlantDetail} from '../api/plantsAPI';
-import {isEmptyArr} from '../lib/handler';
+import {isEmptyArr, isEmptyStr} from '../lib/handler';
 import Meta from '../components/Meta';
 
 function PlantsDetail({
@@ -24,7 +24,7 @@ function PlantsDetail({
   },
 }) {
   const plant = usePlantInfo(id);
-  const {name, feature, ment = '', warning, description, imagePath, Tags, allTags, recommendPlants} = plant;
+  const {name = '', feature, ment = '', warning, description, imagePath, Tags, allTags, recommendPlants} = plant;
 
   const star = !isEmptyArr(allTags) && allTags[0];
 
@@ -34,7 +34,7 @@ function PlantsDetail({
 
   return (
     <>
-      <Meta title={`${name} | See-at`} />
+      {!isEmptyStr(name) && <Meta title={`${name} | See-at`} />}
       <PlantMain name={name} description={description} imgPath={imagePath} star={star} />
       <Section width="lg">
         <DescText>{ment}</DescText>

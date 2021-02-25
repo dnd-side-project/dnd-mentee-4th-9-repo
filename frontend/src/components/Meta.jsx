@@ -10,10 +10,10 @@ const Meta = ({title = 'See-at 나만의 작은 친구', description = '반려�
   return (
     <Helmet>
       <title>{title}</title>
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta name="description" content={description} />
-      {image && <meta property="og:image" content={image} />}
+      <meta property="og:title" content={title} data-react-helmet="true" />
+      <meta property="og:description" content={description} data-react-helmet="true" />
+      <meta name="description" content={description} data-react-helmet="true" />
+      {image && <meta property="og:image" content={image} data-react-helmet="true" />}
     </Helmet>
   );
 };

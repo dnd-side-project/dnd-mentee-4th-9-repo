@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useCallback} from 'react';
-import {Link, useHistory} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
 import Section, {SECTION} from '../components/Section';
@@ -12,11 +12,12 @@ import Footer from '../components/Footer/Footer';
 
 import {getAllTags} from '../api/plantsAPI';
 import {EMPTY, isEmptyArr, isEmptyStr, qsParse} from '../lib/handler';
+import {useKeywordInfo} from '../lib/hooks';
 
 const SPACE = ' ';
 
 const SearchPlant = ({location: {search}}) => {
-  const history = useHistory();
+  const [keywordInfo, inputKeyword, searchKeyword] = useKeywordInfo();
   const [tagData, setTagData] = useState([]);
   const middle = tagData.length / 2;
   const [leftTags, rightTags] = [tagData.slice(0, middle), tagData.slice(middle)];
@@ -47,15 +48,6 @@ const SearchPlant = ({location: {search}}) => {
   const qsTag = qsParse(search).tag;
   const tagArr = isEmptyStr(qsTag) ? [] : qsTag.split(SPACE);
   const selectedTag = isEmptyArr(tagArr) ? tagArr : tagArr.filter((tag) => tag !== EMPTY);
-
-  const [keywordInfo, setKeywordInfo] = useState({keyword: '', pressEnter: false});
-  const inputKeyword = ({target: {value}}) => setKeywordInfo({...keywordInfo, keyword: value});
-  const searchKeyword = async ({key}) => {
-    if (key === 'Enter') {
-      setKeywordInfo({...keywordInfo, pressEnter: key === 'Enter'});
-      history.push({pathname: '/search', search: `?keyword=${keywordInfo.keyword}`, state: {pressEnter: keywordInfo.pressEnter}});
-    }
-  };
 
   if (!tagData) return null;
 

@@ -1,5 +1,4 @@
-import React, {useState} from 'react';
-import {useLocation, useHistory} from 'react-router-dom';
+import React from 'react';
 import styled from 'styled-components';
 
 import Section, {SECTION} from '../components/Section';
@@ -7,20 +6,10 @@ import SearchResultPlant from '../components/SearchPlants/SearchResultPlant';
 import Nothing from '../components/Nothing';
 import TestMain from '../components/TestMain';
 import Footer from '../components/Footer/Footer';
+import {useKeywordInfo} from '../lib/hooks';
 
 const SearchResult = () => {
-  const history = useHistory();
-  const location = useLocation();
-  const params = new URLSearchParams(location.search);
-  const [keywordInfo, setKeywordInfo] = useState({keyword: params.get('keyword'), pressEnter: location.state.pressEnter});
-
-  const inputKeyword = ({target: {value}}) => setKeywordInfo({...keywordInfo, keyword: value});
-  const searchKeyword = async ({key}) => {
-    if (key === 'Enter') {
-      setKeywordInfo({...keywordInfo, pressEnter: key === 'Enter'});
-      history.push({pathname: '/search', search: `?keyword=${keywordInfo.keyword}`, state: {pressEnter: keywordInfo.pressEnter}});
-    }
-  };
+  const [keywordInfo, inputKeyword, searchKeyword] = useKeywordInfo();
 
   return (
     <Wrapper>

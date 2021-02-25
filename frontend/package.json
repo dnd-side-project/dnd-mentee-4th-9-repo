@@ -39,6 +39,19 @@
       "react-app/jest"
     ]
   },
+  "reactSnap": {
+    "include" : [
+      "/",
+      "/test",
+      "/test-start",
+      "/test/result/:id",
+      "/plants",
+      "/search",
+      "/plants/detail/:id",
+      "/subscription",
+      "/error"
+    ]
+  },
   "browserslist": {
     "production": [
       ">0.2%",

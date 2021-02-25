@@ -12,7 +12,7 @@ import theme from '../../styles/theme';
 import SubHead from '../../styles/SubHead';
 import {getSearchKeywordPlants} from '../../api/plantsAPI';
 
-function PlantList({keyword, pressEnter}) {
+function SearchResultPlant({keyword, pressEnter = true}) {
   const matches = useMediaQuery(theme.devices.md);
   const [plantsInfo, setInfo] = useState({
     isLoaded: false,
@@ -91,4 +91,4 @@ const ListHead = styled(TagsHead)`
   }
 `;
 
-export default PlantList;
+export default SearchResultPlant;

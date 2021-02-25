@@ -3,15 +3,19 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-import {ThemeProvider} from 'styled-components';
 import theme from './styles/theme';
 import GlobalStyle from './styles/GlobalStyle';
+
+import {ThemeProvider} from 'styled-components';
+import {HelmetProvider} from 'react-helmet-async';
 
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobalStyle />
-      <App />
+      <HelmetProvider>
+        <App />
+      </HelmetProvider>
       <GlobalStyle />
     </ThemeProvider>
   </React.StrictMode>,

@@ -270,7 +270,7 @@ const searchPlantName = async (plantDTO) => {
       include: [
         {
           model: Tag,
-          attributes: ['id', 'name'],
+          attributes: ['id', 'name', 'type'],
           through: {
             attributes: [],
           },

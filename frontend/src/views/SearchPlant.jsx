@@ -55,10 +55,6 @@ const SearchPlant = ({location: {search}}) => {
 
   if (!tagData) return null;
 
-  window.scrollTo({
-    top: 0,
-  });
-
   return (
     <Wrapper>
       <Section width="lg" bgColor="lightGreen">

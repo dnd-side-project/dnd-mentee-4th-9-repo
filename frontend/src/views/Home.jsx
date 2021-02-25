@@ -16,10 +16,14 @@ function Home() {
   const isMobile = useMediaQuery(theme.devices.md);
   const [testMG, commonMG] = isMobile ? [COMMON_MG, COMMON_MG] : [170, 200];
 
+  window.scrollTo({
+    top: 0,
+  });
+
   return (
     <>
       <Main />
-      <Section bgColor="green" margin={testMG}>
+      <Section width="lg" bgColor="green" margin={testMG}>
         <TestMain type={SECTION} />
       </Section>
       <Section width="lg" margin={commonMG} order={SIDE}>

@@ -1,16 +1,19 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import FooterItem from '../../styles/FooterItem';
 
 function Corp({path}) {
   return (
     <Wrapper marginRight={100} path={path}>
-      <LogoWrapper className="item-corp">
-        <span className="logo">
-          <img src="/images/logo_footer.svg" alt="See-at logo" />
-        </span>
-        <h3>See-at</h3>
-      </LogoWrapper>
+      <Link to="/">
+        <LogoWrapper className="item-corp">
+          <span className="logo">
+            <img src="/images/logo_footer.svg" alt="See-at logo" />
+          </span>
+          <h3>See-at</h3>
+        </LogoWrapper>
+      </Link>
       <p>© 2021. SeeAt Corp. all right reserved.</p>
     </Wrapper>
   );

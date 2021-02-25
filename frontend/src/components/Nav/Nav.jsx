@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled, {css} from 'styled-components';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Section, {NAV} from '../Section';
@@ -37,13 +37,19 @@ function Nav() {
   };
   const bgColor = getBgColor();
 
+  useEffect(() => {
+    if (!matches) closeMenuList();
+  }, [matches]);
+
   return (
     <>
       <Section width="lg" bgColor={bgColor} type={NAV}>
         <LeftWrapper to="/">
           <LogoImage src={`${process.env.PUBLIC_URL}/images/logo_nav.svg`} alt="See-at logo" />
         </LeftWrapper>
+
         <RightWrapper>
+          {/* desktop */}
           {!matches && (
             <MenuWrapper isOpen={isOpen}>
               {menuList.map(({name, path}) => (
@@ -58,7 +64,8 @@ function Nav() {
           <MenuBar onClick={toggleMenuList} imgUrl={`${process.env.PUBLIC_URL}/images/hamburger${isOpen ? '_green' : ''}.svg`} />
         </RightWrapper>
       </Section>
-      {matches && (
+      {/* mobile */}
+      {isOpen && matches && (
         <MenuWrapper isOpen={isOpen}>
           <img onClick={toggleMenuList} src={`${process.env.PUBLIC_URL}/images/hamburger_green.svg`} alt="open hamburger icon" />
           {menuList.map(({name, path}) => (
@@ -175,6 +182,7 @@ const Menu = styled(Link)`
 `;
 
 const MenuBar = styled.a`
+  cursor: pointer;
   display: none;
   &:before {
     content: url(${({imgUrl}) => imgUrl});

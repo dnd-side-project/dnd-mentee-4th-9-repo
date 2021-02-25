@@ -16,6 +16,9 @@ function KeywordSearch() {
   const event = {
     type: MOVE,
     func: (tag) => {
+      window.scrollTo({
+        top: 0,
+      });
       history.push({
         pathname: '/plants',
         search: `?tag=${tag}`,

@@ -6,12 +6,11 @@ import Grid from '@material-ui/core/Grid';
 import Section from '../Section';
 import RecommentPlant from '../RecommentPlant';
 import {TagsHead} from '../PlantsDetail/Feature';
-import PopularPlants from '../Home/PopularPlants';
 
 import {getAllPlants, getTagPlants} from '../../api/plantsAPI';
 import {EMPTY, isEmptyArr, getOriginTag} from '../../lib/handler';
 import theme from '../../styles/theme';
-import SubHead from '../../styles/SubHead';
+import NoResult from './NoResult';
 
 /*
 filterTag: string[];
@@ -45,14 +44,7 @@ function PlantList({filterTag = []}) {
           </Grid>
         </>
       ) : (
-        isLoaded && (
-          <>
-            <NothingHead>찾으시는 식물이 없어요</NothingHead>
-            <Section width="lg">
-              <PopularPlants />
-            </Section>
-          </>
-        )
+        isLoaded && <NoResult />
       )}
     </Section>
   );
@@ -94,18 +86,6 @@ function useFiltering(filterTag) {
 
   return {isLoaded, plants};
 }
-
-const NothingHead = styled(SubHead)`
-  text-align: center;
-
-  margin-top: 40px;
-  margin-bottom: 100px;
-
-  @media ${({theme}) => theme.devices.md} {
-    margin-top: 25px;
-    margin-bottom: 100px;
-  }
-`;
 
 const ListHead = styled(TagsHead)`
   margin: 40px auto !important;

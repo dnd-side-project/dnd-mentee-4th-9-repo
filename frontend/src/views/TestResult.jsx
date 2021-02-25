@@ -1,4 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
+import {Link} from 'react-router-dom';
 import {useLocation, useHistory} from 'react-router-dom';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import html2canvas from 'html2canvas';
@@ -11,10 +12,9 @@ import Button from '../styles/Button';
 import {getReactiveSize} from '../lib/calculate';
 import SubHead from '../styles/SubHead';
 import DescText from '../styles/DescText';
-import LottieImg from '../components/LottieImg';
-import * as testLoading from '../lottie/test_loading.json';
 import {getCuratingResult} from '../api/plantsAPI';
 import {FULL_SCREEN} from '../components/Section';
+import LottiePlayer from '../components/LottiePlayer';
 
 function TestResult() {
   const location = useLocation();
@@ -41,7 +41,7 @@ function TestResult() {
   };
 
   const getResultPlant = useCallback(async () => {
-    const result = isShared ? location.pathname.split('/')[2] : location.state;
+    const result = isShared ? location.pathname.split('/')[3] : location.state;
     if (!result) {
       history.replace('/test');
       return;
@@ -59,7 +59,9 @@ function TestResult() {
   if (loading)
     return (
       <Section type={FULL_SCREEN} width="lg">
-        <LottieImg lottieFile={testLoading.default} />
+        <LottieWrapper>
+          <LottiePlayer filename="test_loading" />
+        </LottieWrapper>
       </Section>
     );
   if (!plantData) return null;
@@ -100,10 +102,12 @@ function TestResult() {
         </ResultButton>
       </Section>
 
-      <Section bgImage={true} margin="134" column={true}>
-        <Logo src={`${process.env.PUBLIC_URL}/images/logo_nav.svg`} alt="See-at logo" />
-        <Title>지금, 더 많은 친구를 만나보세요</Title>
-      </Section>
+      <Link to="/">
+        <Section bgImage={true} margin="134" column={true}>
+          <Logo src={`${process.env.PUBLIC_URL}/images/logo_nav.svg`} alt="See-at logo" />
+          <Title>지금, 더 많은 친구를 만나보세요</Title>
+        </Section>
+      </Link>
 
       <Section margin="100" column={true}>
         <ResultButton onClick={returnTest} borderColor="lightGreen" bgColor="white" color="lightGreen" fontSize="32" icon="reset">
@@ -115,6 +119,18 @@ function TestResult() {
     </>
   );
 }
+
+const LottieWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+
+  lottie-player {
+    width: 480px;
+    @media ${({theme}) => theme.devices.md} {
+      width: min(240px, 100%);
+    }
+  }
+`;
 
 const Description = styled.div`
   display: flex;

@@ -4,7 +4,7 @@ import TestMain from '../components/TestMain';
 
 function TestStart() {
   return (
-    <Section type={FULL_SCREEN} bgColor="green">
+    <Section width="lg" type={FULL_SCREEN} bgColor="green">
       <TestMain type={FULL_SCREEN} />
     </Section>
   );

@@ -9,6 +9,13 @@ const router = express.Router();
  *     tags:
  *       - tags
  *     description: 모든 식물 태그 리스트를 조회
+ *     parameters:
+ *       - name: api-key
+ *         description: API 키를 넣어 호출해야 합니다.
+ *         required: true
+ *         in: header
+ *         type: string
+ *         example: 28308fa3aca32470631c27377bbc3f43:a17bf428d90e22d3232e8e95bc4c5b1f
  *     produces:
  *       - application/json
  *     responses:
@@ -27,6 +34,12 @@ router.get('/', getListTags);
  *     produces:
  *       - application/json
  *     parameters:
+  *       - name: api-key
+ *         description: API 키를 넣어 호출해야 합니다.
+ *         required: true
+ *         in: header
+ *         type: string
+ *         example: 28308fa3aca32470631c27377bbc3f43:a17bf428d90e22d3232e8e95bc4c5b1f
  *       - name: keyword
  *         description: 검색하고자 하는 태그를 쿼리스트링으로 입력합니다.
  *         in: query

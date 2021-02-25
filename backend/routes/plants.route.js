@@ -18,6 +18,12 @@ const router = express.Router();
  *     produces:
  *       - application/json
  *     parameters:
+ *       - name: api-key
+ *         description: API 키를 넣어 호출해야 합니다.
+ *         required: true
+ *         in: header
+ *         type: string
+ *         example: 28308fa3aca32470631c27377bbc3f43:a17bf428d90e22d3232e8e95bc4c5b1f
  *       - name: order
  *         description: recent / view 두가지. recent는 최신순 view는 인기순
  *         in: query
@@ -26,6 +32,8 @@ const router = express.Router();
  *     responses:
  *       200:
  *         description: 식물의 정보에 대한 배열을 반환합니다.
+ *       401:
+ *         description: 잘못된 API 키 응답
  */
 router.get('/', getListPlants); //쿼리스트링. /plants?order=recent});
 
@@ -42,6 +50,12 @@ router.get('/', getListPlants); //쿼리스트링. /plants?order=recent});
  *     consumes:
  *       - application/json
  *     parameters:
+ *       - name: api-key
+ *         description: API 키를 넣어 호출해야 합니다.
+ *         required: true
+ *         in: header
+ *         type: string
+ *         example: 28308fa3aca32470631c27377bbc3f43:a17bf428d90e22d3232e8e95bc4c5b1f
  *       - name: result
  *         description: 큐레이팅 결과 식물의 이름을 result 쿼리스트링에 전달
  *         in: query
@@ -60,6 +74,13 @@ router.get('/curating', curatingResult);
  *     tags:
  *       - plants
  *     description: 식물 이름 검색 내용을 반환
+ *     parameters:
+ *       - name: api-key
+ *         description: API 키를 넣어 호출해야 합니다.
+ *         required: true
+ *         in: header
+ *         type: string
+ *         example: 28308fa3aca32470631c27377bbc3f43:a17bf428d90e22d3232e8e95bc4c5b1f
  *     produces:
  *       - application/json
  *     consumes:
@@ -87,6 +108,13 @@ router.post('/encyclopedia/keyword', searchByPlantName);
  *     tags:
  *       - plants
  *     description: 태그 검색 내용을 반환
+ *     parameters:
+ *       - name: api-key
+ *         description: API 키를 넣어 호출해야 합니다.
+ *         required: true
+ *         in: header
+ *         type: string
+ *         example: 28308fa3aca32470631c27377bbc3f43:a17bf428d90e22d3232e8e95bc4c5b1f
  *     produces:
  *       - application/json
  *     consumes:
@@ -117,6 +145,12 @@ router.post('/encyclopedia/tag', searchByPlantTag);
  *     produces:
  *       - application/json
  *     parameters:
+ *       - name: api-key
+ *         description: API 키를 넣어 호출해야 합니다.
+ *         required: true
+ *         in: header
+ *         type: string
+ *         example: 28308fa3aca32470631c27377bbc3f43:a17bf428d90e22d3232e8e95bc4c5b1f
  *       - name: plantId
  *         in: path
  *         description: 식물의 id를 path parameter로 주입한다.

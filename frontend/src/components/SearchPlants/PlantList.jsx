@@ -17,7 +17,7 @@ import SubHead from '../../styles/SubHead';
 filterTag: string[];
 */
 function PlantList({filterTag = [], isSearch = false}) {
-  const {isLoaded, plants = []} = useFiltering(filterTag);
+  const {isLoaded, plants = []} = useFiltering(filterTag, isSearch);
   const success = isLoaded && !isEmptyArr(plants);
   const matches = useMediaQuery(theme.devices.md);
 
@@ -58,7 +58,7 @@ function PlantList({filterTag = [], isSearch = false}) {
   );
 }
 
-function useFiltering(filterTag) {
+function useFiltering(filterTag, isSearch) {
   const [plantsInfo, setInfo] = useState({
     isLoaded: false,
     plants: [],
@@ -85,12 +85,12 @@ function useFiltering(filterTag) {
   }, [filterTag]);
 
   useEffect(() => {
-    if (isEmptyArr(filterTag)) {
+    if (isSearch || isEmptyArr(filterTag)) {
       _getAllPlants();
     } else {
       _getTagPlants();
     }
-  }, [_getTagPlants, filterTag]);
+  }, [_getTagPlants, filterTag, isSearch]);
 
   return {isLoaded, plants};
 }

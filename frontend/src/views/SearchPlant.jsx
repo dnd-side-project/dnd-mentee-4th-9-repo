@@ -11,43 +11,25 @@ import TestMain from '../components/TestMain';
 import Footer from '../components/Footer/Footer';
 
 import {getAllTags} from '../api/plantsAPI';
-import {EMPTY, isEmptyArr, isEmptyStr, qsParse} from '../lib/handler';
+import {EMPTY, isEmptyArr, isEmptyStr, qsParse, formatTag} from '../lib/handler';
 import {useKeywordInfo} from '../lib/hooks';
 
 const SPACE = ' ';
 
 const SearchPlant = ({location: {search}}) => {
   const [keywordInfo, inputKeyword, searchKeyword] = useKeywordInfo();
-  const [tagData, setTagData] = useState([]);
+  const tagData = useTagData([]);
+
   const middle = tagData.length / 2;
   const [leftTags, rightTags] = [tagData.slice(0, middle), tagData.slice(middle)];
-
-  const getTags = useCallback(async () => {
-    const data = await getAllTags();
-    setTagData(formatTag(data));
-  }, []);
-
-  const formatTag = (data) => {
-    const types = data.map(({type}) => type);
-    const tagByType = (typeValue) => data.filter(({type}) => type === typeValue);
-
-    return data
-      .filter(({type}, index) => !types.includes(type, index + 1))
-      .map(({type}) => {
-        return {
-          type,
-          tags: [].concat(tagByType(type)),
-        };
-      });
-  };
-
-  useEffect(() => {
-    getTags();
-  }, [getTags]);
-
   const qsTag = qsParse(search).tag;
   const tagArr = isEmptyStr(qsTag) ? [] : qsTag.split(SPACE);
   const selectedTag = isEmptyArr(tagArr) ? tagArr : tagArr.filter((tag) => tag !== EMPTY);
+
+  const [isSearch, setIsSearch] = useState(false);
+
+  const setSearching = () => setIsSearch(true);
+  const setNotSearching = () => setIsSearch(false);
 
   if (!tagData) return null;
 
@@ -60,7 +42,7 @@ const SearchPlant = ({location: {search}}) => {
       <Section width="lg" bgColor="lightGreen">
         <SearchInput>
           <img src={`${process.env.PUBLIC_URL}/images/search-black.svg`} alt="search-plant" />
-          <input type="text" placeholder="어떤 식물 친구를 찾으시나요?" value={keywordInfo.keyword} onChange={inputKeyword} onKeyDown={searchKeyword} />
+          <input type="text" placeholder="어떤 식물 친구를 찾으시나요?" value={keywordInfo.keyword} onFocus={setSearching} onBlur={setNotSearching} onChange={inputKeyword} onKeyDown={searchKeyword} />
         </SearchInput>
       </Section>
 
@@ -83,7 +65,7 @@ const SearchPlant = ({location: {search}}) => {
           <ColorTags tags={selectedTag} />
         </>
       )}
-      <PlantList filterTag={selectedTag} isSearch={keywordInfo.keyword} />
+      <PlantList filterTag={selectedTag} isSearch={keywordInfo.keyword && isSearch} />
 
       <Nothing />
       <Section bgColor="green" margin={200}>
@@ -94,6 +76,29 @@ const SearchPlant = ({location: {search}}) => {
     </Wrapper>
   );
 };
+
+const useTagData = (initData) => {
+  const [tagData, setTagData] = useState(initData);
+  const getTags = useCallback(async () => {
+    const data = await getAllTags();
+    setTagData(formatTag(data));
+  }, []);
+
+  useEffect(() => {
+    getTags();
+  }, [getTags]);
+
+  return tagData;
+};
+
+// const useIsSearch = (initData) => {
+//   const [isSearch, setIsSearch] = useState(initData);
+
+//   const isSearching = () => setIsSearch(true);
+//   const isNotSearching = () => setIsSearch(false);
+
+//   return [isSearch, ];
+// }
 
 const Wrapper = styled.div`
   margin-top: 0;

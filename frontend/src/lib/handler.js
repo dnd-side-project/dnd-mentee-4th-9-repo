@@ -36,3 +36,18 @@ export const getOriginTag = (tag = '') => {
 export const getQsTag = (tag = '') => {
   return tag.replace('#', EMPTY);
 };
+
+/* object */
+export const formatTag = (data) => {
+  const types = data.map(({type}) => type);
+  const tagByType = (typeValue) => data.filter(({type}) => type === typeValue);
+
+  return data
+    .filter(({type}, index) => !types.includes(type, index + 1))
+    .map(({type}) => {
+      return {
+        type,
+        tags: [].concat(tagByType(type)),
+      };
+    });
+};

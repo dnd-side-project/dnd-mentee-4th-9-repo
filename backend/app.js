@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const { checkApiKey } = require('./util/key.check');
 const path = require('path');
 const dotenv = require('dotenv');
 const passport = require('passport');
@@ -84,10 +85,10 @@ class App {
 
   setRouting() {
     this.app.use('/', indexRouter);
-    this.app.use('/auth', authRouter);
-    this.app.use('/plants', plantsRouter);
-    this.app.use('/tags', tagsRouter);
-    this.app.use(swaggerDoc);
+    this.app.use('/auth', authRouter); //미사용중인 경로는 모두 api key 체크 배제.
+    this.app.use('/plants', checkApiKey, plantsRouter);
+    this.app.use('/tags', checkApiKey, tagsRouter);
+    this.app.use(swaggerDoc); // swagger 문서는 api key 체크 미반영 -> 개발 편의성
     this.app.use((req, res, next) => {
       const error = new Error(`${req.method} ${req.url} 라우터가 없습니다.`);
       error.status = 404;

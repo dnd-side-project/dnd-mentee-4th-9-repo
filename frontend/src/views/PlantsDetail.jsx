@@ -16,6 +16,7 @@ import Friends from '../components/PlantsDetail/Friends';
 
 import {getPlantDetail} from '../api/plantsAPI';
 import {isEmptyArr} from '../lib/handler';
+import Meta from '../components/Meta';
 
 function PlantsDetail({
   match: {
@@ -33,8 +34,8 @@ function PlantsDetail({
 
   return (
     <>
+      <Meta title={`${name} | See-at`} />
       <PlantMain name={name} description={description} imgPath={imagePath} star={star} />
-
       <Section width="lg">
         <DescText>{ment}</DescText>
       </Section>

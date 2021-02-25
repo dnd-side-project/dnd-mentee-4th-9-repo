@@ -1,16 +1,20 @@
 import React from 'react';
 import styled from 'styled-components';
+import Meta from '../components/Meta';
 import Section, {FULL_SCREEN} from '../components/Section';
 import SubHead from '../styles/SubHead';
 
 function Error() {
   return (
-    <Section type={FULL_SCREEN}>
-      <Wrapper>
-        <SubHead color="green">앗! 잘못된 페이지예요 😥</SubHead>
-        <ErrorText>404 ERROR</ErrorText>
-      </Wrapper>
-    </Section>
+    <>
+      <Meta title="에러 페이지 | See-at" />
+      <Section type={FULL_SCREEN}>
+        <Wrapper>
+          <SubHead color="green">앗! 잘못된 페이지예요 😥</SubHead>
+          <ErrorText>404 ERROR</ErrorText>
+        </Wrapper>
+      </Section>
+    </>
   );
 }
 

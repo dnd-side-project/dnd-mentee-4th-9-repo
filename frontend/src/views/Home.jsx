@@ -9,6 +9,7 @@ import KeywordSearch from '../components/Home/KeywordSearch';
 import Footer from '../components/Footer/Footer';
 
 import theme from '../styles/theme';
+import Meta from '../components/Meta';
 
 const COMMON_MG = 100;
 
@@ -22,6 +23,7 @@ function Home() {
 
   return (
     <>
+      <Meta />
       <Main />
       <Section width="lg" bgColor="green" margin={testMG}>
         <TestMain type={SECTION} />

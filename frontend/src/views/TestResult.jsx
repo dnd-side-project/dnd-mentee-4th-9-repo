@@ -15,6 +15,7 @@ import DescText from '../styles/DescText';
 import {getCuratingResult} from '../api/plantsAPI';
 import {FULL_SCREEN} from '../components/Section';
 import LottiePlayer from '../components/LottiePlayer';
+import Meta from '../components/Meta';
 
 function TestResult() {
   const location = useLocation();
@@ -41,7 +42,7 @@ function TestResult() {
   };
 
   const getResultPlant = useCallback(async () => {
-    const result = isShared ? location.pathname.split('/')[2] : location.state;
+    const result = isShared ? location.pathname.split('/')[3] : location.state;
     if (!result) {
       history.replace('/test');
       return;
@@ -68,6 +69,8 @@ function TestResult() {
 
   return (
     <>
+      <Meta title="나와 잘 맞는 식물 친구는? | See-at" description={plantData.testDescription} image={plantData.imagePath} />
+
       <PlantMain name={plantData.name} testDesc={plantData.testDescription} type="result" imgPath={plantData.imagePath} />
 
       <div className="save-result">

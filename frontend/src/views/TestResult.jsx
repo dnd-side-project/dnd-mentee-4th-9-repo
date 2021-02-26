@@ -40,6 +40,12 @@ function TestResult() {
     });
   };
 
+  const isLoaded = useCallback(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 10000);
+  }, []);
+
   const getResultPlant = useCallback(async () => {
     const result = isShared ? location.pathname.split('/')[3] : location.state;
     if (!result) {
@@ -49,12 +55,15 @@ function TestResult() {
 
     const data = await getCuratingResult(result);
     setPlantData(data);
-    setLoading(false);
-  }, [location.pathname, location.state, history, isShared]);
+    isLoaded();
+  }, [history, isLoaded, isShared, location.pathname, location.state]);
 
   useEffect(() => {
     getResultPlant();
-  }, [getResultPlant]);
+    return () => {
+      clearTimeout(isLoaded);
+    };
+  }, [getResultPlant, isLoaded]);
 
   if (loading)
     return (

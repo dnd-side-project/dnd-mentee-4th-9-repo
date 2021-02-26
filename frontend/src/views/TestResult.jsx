@@ -16,6 +16,8 @@ import {getCuratingResult} from '../api/plantsAPI';
 import {FULL_SCREEN} from '../components/Section';
 import LottiePlayer from '../components/LottiePlayer';
 
+const LOADING_DELAY = 5000;
+
 function TestResult() {
   const isShared = window.location.href.includes('?shared=true');
 
@@ -46,7 +48,7 @@ function TestResult() {
   const isLoaded = useCallback(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 10000);
+    }, LOADING_DELAY);
   }, []);
 
   const getResultPlant = useCallback(async () => {
@@ -71,7 +73,7 @@ function TestResult() {
     return (
       <Section type={FULL_SCREEN} width="lg">
         <LottieWrapper>
-          <LottiePlayer filename="test_loading" />
+          <LottiePlayer filename="test_loading" speed="2" />
         </LottieWrapper>
       </Section>
     );

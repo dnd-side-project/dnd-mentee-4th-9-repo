@@ -16,8 +16,8 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [10.x, 12.x, 14.x, 15.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+        node-version: [10.x, 12.x, 14.x]
+        # 현재 Seeat Backedn는 Node 14 버전의 Container를 통해 구동되고있음. Node 10.x, 12.x, 14.x 에 대해서 테스트
 
     steps:
     - uses: actions/checkout@v2

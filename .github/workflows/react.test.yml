@@ -23,6 +23,6 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
-    - run: touch ./frontend/.env && echo REACT_APP_BASE_URL="https://api.seeat-plant.com" >> .env
+    - run: touch ./frontend/.env && echo REACT_APP_BASE_URL="https://api.seeat-plant.com" >> ./frontend/.env
     - run: cd ./frontend && yarn install
     - run: cd ./frontend && npm test

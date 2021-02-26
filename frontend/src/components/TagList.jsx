@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom';
 import styled, {css} from 'styled-components';
 
 import tagList from '../styles/tagList';
-import {sliderTags, NO_DISPLAY_TAG} from '../const/tags';
+import {sliderTags} from '../const/tags';
 import {EMPTY, getQsTag, includeArr, includeStr} from '../lib/handler';
 
 // tag type
@@ -73,20 +73,11 @@ function TagList({tagData, desk, mobile, isSimple, selected = [], event, plantId
     }
   };
 
-  const notDisplay = (name) => {
-    if (!event) {
-      if (isSimple && name === NO_DISPLAY_TAG) return true;
-    }
-    return false;
-  };
-
   return (
     <Tags desk={desk} mobile={mobile}>
       {tags.map((tag) => {
         const {name} = tag;
         const eventType = event ? event.type : EMPTY;
-
-        if (notDisplay(name)) return true;
 
         return (
           <Tag key={`${plantId}-${name}`} name={name} selected={selected} eventType={eventType} onClick={() => onClick(name)}>

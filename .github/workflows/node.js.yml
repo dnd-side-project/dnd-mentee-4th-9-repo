@@ -26,4 +26,4 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
     - run: cd ./backend && npm ci
-    - run: npm test
+    - run: cd ./backend && npm test

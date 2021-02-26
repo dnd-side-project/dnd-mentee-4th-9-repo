@@ -26,6 +26,7 @@ pipeline {
         stage('deploy') {
             steps {
                 dir('frontend'){
+                sh "aws s3 rm s3://dnd-4th-9-see-at/* --recursive"
                 sh "aws s3 sync ./build s3://dnd-4th-9-see-at --profile default"
                 sh "aws cloudfront create-invalidation --distribution-id E2P190XS1LK5MX --paths '/*' --profile default"
                 echo 'deploy done.'

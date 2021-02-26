@@ -272,7 +272,7 @@ const reset = async () => {
       order: 3,
     },
     {
-      name: '#큰', // id : 6
+      name: '#큰크기', // id : 6
       type: '크기',
       order: 3,
     },

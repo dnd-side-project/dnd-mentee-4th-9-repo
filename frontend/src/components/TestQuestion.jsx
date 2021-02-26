@@ -189,10 +189,13 @@ const PathId = styled.div`
   }
 
   @media ${({theme}) => theme.devices.md} {
-    width: min(320px, 100%);
-    font-size: 12px;
-    line-height: 15px;
     margin-top: 6px;
+    width: min(320px, 100%);
+    line-height: 15px;
+
+    p {
+      font-size: 12px;
+    }
   }
 `;
 

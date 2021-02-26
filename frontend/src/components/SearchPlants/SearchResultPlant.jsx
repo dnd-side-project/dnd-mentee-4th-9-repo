@@ -6,11 +6,10 @@ import Grid from '@material-ui/core/Grid';
 import Section from '../Section';
 import RecommentPlant from '../RecommentPlant';
 import {TagsHead} from '../PlantsDetail/Feature';
-import PopularPlants from '../Home/PopularPlants';
 
 import theme from '../../styles/theme';
-import SubHead from '../../styles/SubHead';
 import {getSearchKeywordPlants} from '../../api/plantsAPI';
+import NoResult from './NoResult';
 
 function SearchResultPlant({keyword, pressEnter = true}) {
   const matches = useMediaQuery(theme.devices.md);
@@ -49,30 +48,13 @@ function SearchResultPlant({keyword, pressEnter = true}) {
               </Grid>
             </>
           ) : (
-            <>
-              <NothingHead>찾으시는 식물이 없어요</NothingHead>
-              <Section width="lg">
-                <PopularPlants />
-              </Section>
-            </>
+            <NoResult />
           )}
         </Section>
       )}
     </>
   );
 }
-
-const NothingHead = styled(SubHead)`
-  text-align: center;
-
-  margin-top: 40px;
-  margin-bottom: 100px;
-
-  @media ${({theme}) => theme.devices.md} {
-    margin-top: 25px;
-    margin-bottom: 100px;
-  }
-`;
 
 const ListHead = styled(TagsHead)`
   margin: 40px auto !important;

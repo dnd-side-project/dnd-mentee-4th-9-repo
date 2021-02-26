@@ -24,4 +24,4 @@ export const mainTags = [
 
 export const sliderTags = ['물주기', '난이도'];
 
-export const NO_DISPLAY_TAG = '#잎도촉촉히';
+export const NO_DISPLAY_TAG = '#잎촉촉';

@@ -16,18 +16,23 @@ import {getCuratingResult} from '../api/plantsAPI';
 import {FULL_SCREEN} from '../components/Section';
 import LottiePlayer from '../components/LottiePlayer';
 
+const LOADING_DELAY = 5000;
+
 function TestResult() {
+  const isShared = window.location.href.includes('?shared=true');
+
   const location = useLocation();
   const history = useHistory();
+
   const [plantData, setPlantData] = useState();
-  const [loading, setLoading] = useState(true);
-  const isShared = window.location.href.includes('?shared=true');
+  const [loading, setLoading] = useState(!isShared);
 
   const sharedUrl = `${window.location.href}${isShared ? '' : '?shared=true'}`;
   const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${sharedUrl}&src=sdkpreparse`;
 
   const returnTest = () => history.push('/test');
   const goToDetailPage = (id) => history.push(`/plants/detail/${id}`);
+
   const shareKakao = () => alert('카카오톡 공유 기능은 추후 제공 예정입니다.');
   const copyUrl = () => alert('결과 주소가 복사되었습니다.\n주소를 공유해 보세요!');
   const saveImage = () => {
@@ -40,8 +45,15 @@ function TestResult() {
     });
   };
 
+  const isLoaded = useCallback(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, LOADING_DELAY);
+  }, []);
+
   const getResultPlant = useCallback(async () => {
-    const result = isShared ? location.pathname.split('/')[3] : location.state;
+    const {pathname, state} = location;
+    const result = isShared ? pathname.split('/')[3] : state;
     if (!result) {
       history.replace('/test');
       return;
@@ -49,18 +61,19 @@ function TestResult() {
 
     const data = await getCuratingResult(result);
     setPlantData(data);
-    setLoading(false);
-  }, [location.pathname, location.state, history, isShared]);
+    if (!isShared) isLoaded();
+  }, [history, isLoaded, isShared, location]);
 
   useEffect(() => {
     getResultPlant();
-  }, [getResultPlant]);
+    return () => clearTimeout(isLoaded);
+  }, [getResultPlant, isLoaded, isShared]);
 
   if (loading)
     return (
       <Section type={FULL_SCREEN} width="lg">
         <LottieWrapper>
-          <LottiePlayer filename="test_loading" />
+          <LottiePlayer filename="test_loading" speed="2" />
         </LottieWrapper>
       </Section>
     );

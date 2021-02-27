@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 
 import Section, {SIDE} from '../Section';
@@ -8,7 +9,7 @@ import Button from '../../styles/Button';
 import Slider from '../Slider';
 
 import {getTagPlants} from '../../api/plantsAPI';
-import {isEmptyStr} from '../../lib/handler';
+import {isEmptyStr, getQsTag} from '../../lib/handler';
 import {getReactiveSize} from '../../lib/calculate';
 
 const margin = getReactiveSize(16);
@@ -28,10 +29,21 @@ keywords: tag[]
 */
 function AllKeywords({plantId, name = '', keywords = []}) {
   const {plants, selected, onKeywordClick} = useKeywordPlants(plantId);
+  const history = useHistory();
 
   const event = {
     type: 'search',
     func: onKeywordClick,
+  };
+
+  const allKeywordsSearch = () => {
+    window.scrollTo({
+      top: 0,
+    });
+    history.push({
+      pathname: '/plants',
+      search: `?tag=${getQsTag(selected)}`,
+    });
   };
 
   return (
@@ -51,7 +63,7 @@ function AllKeywords({plantId, name = '', keywords = []}) {
             다른 키워드로 검색
           </Button>
         ) : (
-          <Button bgColor="lightGreen" borderColor="lightGreen" color="white" className="selected">
+          <Button onClick={allKeywordsSearch} bgColor="lightGreen" borderColor="lightGreen" color="white" className="selected">
             <span>선택한 키워드 전체보기</span>
             <img src={`${process.env.PUBLIC_URL}/images/search_arrow.svg`} alt="search arrow" />
           </Button>
@@ -115,10 +127,6 @@ const BtnWrapper = styled.div`
   margin-bottom: 10px;
   display: flex;
   justify-content: center;
-
-  button {
-    cursor: default;
-  }
 
   @media ${({theme}) => theme.devices.md} {
     margin-bottom: 0;

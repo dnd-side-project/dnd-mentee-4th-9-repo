@@ -6,3 +6,5 @@ const env = process.env;
 
 export const BASE_URL = env.REACT_APP_BASE_URL;
 export const API_KEY = env.REACT_APP_API_KEY;
+
+export const KAKAO_KEY = env.REACT_APP_KAKAO_JS_KEY;

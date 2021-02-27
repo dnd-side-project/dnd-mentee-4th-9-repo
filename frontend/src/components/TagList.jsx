@@ -144,6 +144,10 @@ const Tags = styled.ul`
       font-size: ${({mobile}) => fontSizes[mobile]}px;
     }
   }
+
+  li:last-child {
+    margin-right: 0;
+  }
 `;
 
 export default React.memo(TagList);

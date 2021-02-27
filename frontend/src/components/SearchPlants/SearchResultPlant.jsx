@@ -37,7 +37,9 @@ function SearchResultPlant({keyword, pressEnter = true}) {
           {plantData.length ? (
             <>
               <ListHead>
-                <span>{plantData.length}개</span>의 반려식물이 있어요
+                <span>{plantData.length}개</span>의 맞춤 반려 식물을&nbsp;
+                <br />
+                추천해 드릴게요
               </ListHead>
               <Grid container spacing={matches ? 2 : 3}>
                 {plantData.map((plant) => (
@@ -57,8 +59,8 @@ function SearchResultPlant({keyword, pressEnter = true}) {
 }
 
 const ListHead = styled(TagsHead)`
-  margin: 40px auto !important;
-  line-height: 30px;
+  margin: 60px auto 40px auto !important;
+  line-height: 54px;
 
   br {
     display: none;
@@ -66,6 +68,7 @@ const ListHead = styled(TagsHead)`
 
   @media ${({theme}) => theme.devices.md} {
     margin: 25px auto !important;
+    line-height: 30px;
 
     br {
       display: block;

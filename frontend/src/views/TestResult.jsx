@@ -15,6 +15,7 @@ import DescText from '../styles/DescText';
 import {getCuratingResult} from '../api/plantsAPI';
 import {FULL_SCREEN} from '../components/Section';
 import LottiePlayer from '../components/LottiePlayer';
+import {shareKakao} from '../lib/share';
 
 const LOADING_DELAY = 5000;
 
@@ -33,7 +34,6 @@ function TestResult() {
   const returnTest = () => history.push('/test');
   const goToDetailPage = (id) => history.push(`/plants/detail/${id}`);
 
-  const shareKakao = () => alert('카카오톡 공유 기능은 추후 제공 예정입니다.');
   const copyUrl = () => alert('결과 주소가 복사되었습니다.\n주소를 공유해 보세요!');
   const saveImage = () => {
     html2canvas(document.body, {allowTaint: true, useCORS: true}).then((canvas) => {
@@ -43,6 +43,11 @@ function TestResult() {
       a.download = fileName.normalize('NFC');
       a.click();
     });
+  };
+
+  const onKakaoClick = () => {
+    const {name, testDescription, imagePath} = plantData;
+    shareKakao(`${testDescription}, ${name}`, imagePath);
   };
 
   const isLoaded = useCallback(() => {
@@ -105,7 +110,7 @@ function TestResult() {
           <a href={facebookUrl} target="_blank" rel="noreferrer">
             <img src={`${process.env.PUBLIC_URL}/images/fb.svg`} alt="facebook share" />
           </a>
-          <img onClick={shareKakao} src={`${process.env.PUBLIC_URL}/images/kt.svg`} alt="kakaotalk share" />
+          <img onClick={onKakaoClick} src={`${process.env.PUBLIC_URL}/images/kt.svg`} alt="kakaotalk share" />
           <CopyToClipboard text={sharedUrl} onCopy={copyUrl}>
             <img src={`${process.env.PUBLIC_URL}/images/url.svg`} alt="url share" />
           </CopyToClipboard>

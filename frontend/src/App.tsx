@@ -1,3 +1,4 @@
+import {useEffect} from 'react';
 import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import Home from './views/Home';
 import TestStart from './views/TestStart';
@@ -10,8 +11,13 @@ import Nav from './components/Nav/Nav';
 import ScrollTop from './components/ScrollTop';
 import SearchPlant from './views/SearchPlant';
 import SearchResult from './views/SearchResult';
+import initialize from './lib/initialize';
 
 const App = () => {
+  useEffect(() => {
+    initialize();
+  }, []);
+
   return (
     <BrowserRouter>
       <Nav />

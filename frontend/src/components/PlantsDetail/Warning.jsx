@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
+import {pick} from 'cox-postposition';
 
 import Section from '../Section';
 import WarningCard from './WarningCard';
 import {TagsHead} from './Feature';
+
 
 /* 
 name: string
@@ -16,7 +18,7 @@ function Warning({name = '', warning = ''}) {
     <div>
       <Section width="lg" margin={100} bgColor="lightGray">
         <WarningHead>
-          <span>{name}</span>를 대할 때 주의할 점은?
+          <span>{name}</span>{pick(name, '를')} 대할 때 주의할 점은?
         </WarningHead>
         <Warnings>
           {warnings.map((warning, i) => (

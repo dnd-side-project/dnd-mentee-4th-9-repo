@@ -3793,6 +3793,11 @@ cosmiconfig@^7.0.0:
     path-type "^4.0.0"
     yaml "^1.10.0"
 
+cox-postposition@^1.4.1:
+  version "1.4.1"
+  resolved "https://registry.yarnpkg.com/cox-postposition/-/cox-postposition-1.4.1.tgz#658b6e7dda6707e9e6db1c45fc47514cfd638e0f"
+  integrity sha512-TNXGxd7l49ogBp0VMVDHhId2wk2NTpzcR2xg+rjHzB25YSs91gEDko0WmV9xPNLZzPnqdeBcrVHbHJzo3EfnNQ==
+
 create-ecdh@^4.0.0:
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/create-ecdh/-/create-ecdh-4.0.4.tgz"

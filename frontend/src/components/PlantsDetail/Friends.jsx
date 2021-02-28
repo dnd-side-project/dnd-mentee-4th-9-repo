@@ -1,4 +1,5 @@
 import React from 'react';
+import {pick} from 'cox-postposition'
 import Section, {SIDE} from '../Section';
 import {TagsHead} from './Feature';
 import Slider from '../Slider';
@@ -27,7 +28,7 @@ function Friends({name = '', plants}) {
   return (
     <Section margin={100} width="lg" order={SIDE}>
       <TagsHead>
-        <span>{name}</span>와 비슷한 친구 추천
+        <span>{name}</span>{pick(name, '와')} 비슷한 친구 추천
       </TagsHead>
       <Slider plants={plants} />
     </Section>

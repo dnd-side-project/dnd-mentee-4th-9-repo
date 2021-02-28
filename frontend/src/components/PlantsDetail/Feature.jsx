@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import {pick} from 'cox-postposition';
 import Section, {SIDE} from '../Section';
 import SubHead from '../../styles/SubHead';
 import FeatureCard from './FeatureCard';
@@ -14,7 +15,7 @@ function Feature({name = '', feature = ''}) {
     <Section width="lg" margin={100} bgColor="lightGray" order={SIDE}>
       <div>
         <TagsHead>
-          <span>{name}</span>는 이런 반전 매력도 있어요
+          <span>{name}</span>{pick(name, '는')} 이런 반전 매력도 있어요
         </TagsHead>
         <Features>
           {features.map((feature, i) => (

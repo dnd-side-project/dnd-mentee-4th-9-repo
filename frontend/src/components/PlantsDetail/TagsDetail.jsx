@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Grid from '@material-ui/core/Grid';
+import {pick} from 'cox-postposition';
 
 import Section from '../Section';
 import {TagsHead} from './Feature';
@@ -32,7 +33,7 @@ function TagsDetail({name = '', tags = []}) {
     <Section width="lg" margin={100}>
       <div>
         <DetailsHead>
-          <span>{name}</span>는 어떤 친구인가요?
+          <span>{name}</span>{pick(name, '는')} 어떤 친구인가요?
         </DetailsHead>
         <Grid container spacing={matches ? 2 : 3}>
           {tags.map(

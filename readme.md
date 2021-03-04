@@ -1,5 +1,8 @@
 # 🌱 9조
 
+![GitHub top language](https://img.shields.io/github/languages/top/dnd-side-project/dnd-mentee-4th-9-repo) ![GitHub release (latest by date)](https://img.shields.io/github/v/release/dnd-side-project/dnd-mentee-4th-9-repo) ![GitHub](https://img.shields.io/github/license/dnd-side-project/dnd-mentee-4th-9-repo)
+![GitHub closed issues](https://img.shields.io/github/issues-closed-raw/dnd-side-project/dnd-mentee-4th-9-repo) ![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed-raw/dnd-side-project/dnd-mentee-4th-9-repo)
+
 ## 🛠 빌드 현황
 
 [![Build Status](http://3.34.87.77:8080/job/Deploying%20Backend%20-%20express%20REST%20API/badge/icon?subject=Backend%20Build)](http://3.34.87.77:8080/job/Deploying%20Backend%20-%20express%20REST%20API/)

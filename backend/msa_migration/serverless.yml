@@ -1,0 +1,70 @@
+service: dnd-4th-9-seeat-msa-api
+
+provider:
+  name: aws
+  runtime: python3.7
+  memorySiz: 1024
+  timeout: 30 # api gateway의 최대 타임아웃시간은 30초.
+  stage: ${opt:stage, self:custom.defaultStage}
+  stackName: ${self:service}-${self:provider.stage}
+  versionFunctions: true
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "logs:*"
+        - "lambda:*"
+        - "cloudwatch:*"
+      Resource: "*"
+  environment:
+    DB_HOST: "3.34.87.77"
+    DB_USER: "root"
+    DB_PORT: 3306
+    DB_TABLE: "dnd"
+    DB_PASSWORD: "j112189"
+
+package:
+  individually: true
+  exclude:
+    - node_modules/**
+
+custom:
+  defaultStage: dev
+  regionAbbr:
+    ap-northeast-2: an2
+  pythonRequirements:
+    dockerizePip: true
+    useDownloadCache: false
+    useStaticCache: false
+
+resources:
+  Description: "backend api"
+
+functions:
+  plants:
+    handler: plants.handler
+    events:
+      - http:
+          path: plants
+          method: get
+          cors: true
+          private: false
+#          headers:
+#            - api-key
+          allowCredentials: false
+#  plants_curating:
+#    handler: plants_curating.hanlder
+#    events:
+#      - http:
+#          path: plants/curating
+#          method: get
+#          cors: true
+##          private: true
+##          headers:
+##            - api-key
+##          allowCredentials: true
+  # TODO: add more api endpoint.
+
+plugins:
+#  - serverless-add-api-key
+#  - serverless-domain-manager
+  - serverless-python-requirements

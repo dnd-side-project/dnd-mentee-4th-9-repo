@@ -1,5 +1,5 @@
 import pymysql
-from log import logger
+from libs.log import logger
 
 __db_conn = None
 

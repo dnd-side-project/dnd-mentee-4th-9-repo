@@ -61,3 +61,7 @@ Temporary Items
 
 # ignore serverless output
 .serverless
+
+# ingore files related with python
+__pycache__/
+.idea/
